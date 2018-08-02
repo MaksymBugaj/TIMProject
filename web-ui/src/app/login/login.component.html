@@ -1,3 +1,84 @@
-<p>
-  login works!
-</p>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h1 class="text-center">Logowanie</h1>
+    </div>
+  </div>
+  <div class="container">
+    <form 
+    class="form-Login" 
+    #formRef="ngForm" 
+    (ngSubmit)="login(formRef)">
+      <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+          <div class="form-group">
+            <label for="email">E-Mail</label>
+            <div class="input-group">
+              <input 
+              type="email" 
+              class="form-control" 
+              name="email" 
+              id="email" 
+              #emailRef="ngModel"
+              [(ngModel)]="loginData.email"
+              placeholder="Podaj adres e-mail" 
+              required 
+              pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$">
+            </div>          
+            <div class="error form-control" *ngIf="formRef.submitted && emailRef.errors?.required">
+              To pole jest obowiązkowe
+            </div>
+            <div class="error form-control" *ngIf="formRef.submitted && emailRef.errors?.pattern">
+              Błędny E-Mail
+            </div>
+          </div>
+        </div>
+        <div class="col-md-2"></div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+          <div class="form-group">
+            <label for="password">Hasło</label>
+            <div class="input-group">
+              <input 
+              type="password" 
+              class="form-control" 
+              name="password" 
+              id="password" 
+              #passwordRef="ngModel"
+              [(ngModel)]="loginData.password"
+              placeholder="Podaj Hasło" 
+              required 
+              minlength="6"
+              pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$">
+            </div>
+            <div class="error form-control" *ngIf="formRef.submitted && passwordRef.errors?.required">
+              To pole jest obowiązkowe
+            </div>
+            <div class="error form-control" *ngIf="formRef.submitted && passwordRef.errors?.pattern">
+              Błędny format hasła. Upewnij się że ma przynajmniej jedną literę wielką oraz jedną cyfrę.
+            </div>
+            <div class="error form-control" *ngIf="formRef.submitted && passwordRef.errors?.minlength">
+              Hasło zbyt krótkie
+            </div>
+          </div>
+        </div>
+        <div class="col-md-2"></div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+          <button type="submit" class="btn btn-primary">Zaloguj</button> 
+          <button class="btn btn-secondary">Zarejestruj się</button>
+        </div>
+        <div class="col-md-2"></div>
+      </div>
+
+    </form>
+  </div>
+
+</div>

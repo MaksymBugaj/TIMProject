@@ -7,9 +7,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
+  loginData: any = {};
+
   constructor() { }
 
   ngOnInit() {
   }
 
+  login(form)
+  {
+    console.log(form.value);
+    
+  }
 }

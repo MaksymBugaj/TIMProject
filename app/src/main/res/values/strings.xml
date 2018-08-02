@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">TIMProject</string>
+    <string name="welcome_text">Opis</string>
+    <string name="login_class">Login</string>
 </resources>

@@ -1,3 +1,143 @@
-<p>
-  register works!
-</p>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h1 class="text-center">Rejestracja</h1>
+    </div>
+  </div>
+  <div class="container">
+    <form class="form-register" #formRef="ngForm" (ngSubmit)="register(formRef)" autocomplete="off"> 
+      <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+          <div class="form-group">
+            <label for="firstName">Imię</label>
+            <div class="input-group">
+              <input type="firstName" class="form-control" name="firstName" id="firstName" #firstNameRef="ngModel" [(ngModel)]="registerData.firstName"
+                placeholder="Podaj swoje imię" required pattern="[a-ząćęłńóśżźA-ZĄĆĘŁŃÓŚŻŹ]+">
+            </div>
+            <div class="error form-control" *ngIf="formRef.submitted && firstNameRef.errors?.required">
+              To pole jest obowiązkowe
+            </div>
+            <div class="error form-control" *ngIf="formRef.submitted && firstNameRef.errors?.pattern">
+              Imię posiada tylko litery
+            </div>
+          </div>
+        </div>
+        <div class="col-md-2"></div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+          <div class="form-group">
+            <label for="lastName">Nazwisko</label>
+            <div class="input-group">
+              <input type="lastName" class="form-control" name="lastName" id="lastName" #lastNameRef="ngModel" [(ngModel)]="registerData.lastName"
+                placeholder="Podaj swoje Nazwisko" required pattern="[a-ząćęłńóśżźA-ZĄĆĘŁŃÓŚŻŹ]+">
+            </div>
+            <div class="error form-control" *ngIf="formRef.submitted && lastNameRef.errors?.required">
+              To pole jest obowiązkowe
+            </div>
+            <div class="error form-control" *ngIf="formRef.submitted && lastNameRef.errors?.pattern">
+              Nazwisko posiada tylko litery
+            </div>
+          </div>
+        </div>
+        <div class="col-md-2"></div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+          <div class="form-group">
+            <label for="birthDate">Data urodzenia</label>
+            <div class="input-group">
+              <input type="date" class="form-control" name="birthDate" id="birthDate" #birthDateRef="ngModel" [(ngModel)]="registerData.birthDate"
+                required>
+            </div>
+            <div class="error form-control" *ngIf="formRef.submitted && birthDateRef.errors?.required">
+              To pole jest obowiązkowe
+            </div>
+          </div>
+        </div>
+        <div class="col-md-2"></div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+          <div class="form-group">
+            <label for="sex">Płeć</label>
+            <div class="radio-group text-center">
+              <label for="male" class="form-check-label">
+                <input type="radio" class="form-control" name="sex" id="male" #sexRef="ngModel" value="male" [(ngModel)]="registerData.sex"
+                  required> Mężczyzna
+              </label>
+              <label for="female" class="form-check-label">
+                <input type="radio" class="form-control" name="sex" id="female" #sexRef="ngModel" value="female" [(ngModel)]="registerData.sex"
+                  required> Kobieta
+              </label>
+            </div>
+            <div class="error form-control" *ngIf="formRef.submitted && sexRef.errors?.required">
+              To pole jest obowiązkowe
+            </div>
+          </div>
+        </div>
+        <div class="col-md-2"></div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+          <div class="form-group">
+            <label for="email">E-Mail</label>
+            <div class="input-group">
+              <input type="email" class="form-control" name="email" id="email" #emailRef="ngModel" [(ngModel)]="registerData.email" placeholder="Podaj adres e-mail"
+                required pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$">
+            </div>
+            <div class="error form-control" *ngIf="formRef.submitted && emailRef.errors?.required">
+              To pole jest obowiązkowe
+            </div>
+            <div class="error form-control" *ngIf="formRef.submitted && emailRef.errors?.pattern">
+              Błędny E-Mail
+            </div>
+          </div>
+        </div>
+        <div class="col-md-2"></div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+          <div class="form-group">
+            <label for="password">Hasło</label>
+            <div class="input-group">
+              <input type="password" class="form-control" name="password" id="password" #passwordRef="ngModel" [(ngModel)]="registerData.password"
+                placeholder="Podaj Hasło" required minlength="6" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$">
+            </div>
+            <div class="error form-control" *ngIf="formRef.submitted && passwordRef.errors?.required">
+              To pole jest obowiązkowe
+            </div>
+            <div class="error form-control" *ngIf="formRef.submitted && passwordRef.errors?.pattern">
+              Błędny format hasła. Upewnij się że ma przynajmniej jedną literę wielką oraz jedną cyfrę.
+            </div>
+            <div class="error form-control" *ngIf="formRef.submitted && passwordRef.errors?.minlength">
+              Hasło zbyt krótkie
+            </div>
+          </div>
+        </div>
+        <div class="col-md-2"></div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+          <button type="submit" class="btn btn-primary">Zarejestruj</button>
+          <button class="btn btn-secondary" routerLink="/login">Zaloguj się</button>
+        </div>
+        <div class="col-md-2"></div>
+      </div>
+
+    </form>
+  </div>
+</div>

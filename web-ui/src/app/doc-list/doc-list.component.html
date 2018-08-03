@@ -1,3 +1,20 @@
-<p>
-  doc-list works!
-</p>
+<div class="container">
+  <h1 class="text-center m-4">Lista lekarzy</h1>
+  <div class="row">
+    <div class="col-md-2">
+      <button routerLink="/home" type="button" class="btn btn-secondary">Powrót</button>
+    </div>
+    <div class="col-md-8">
+      <div class="list-group">
+        <a class="list-group-item list-group-item-action flex-column align-items-start" *ngFor="let doc of docList">
+          <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1">{{doc.firstName}} {{doc.lastName}}</h5>
+          </div>
+          <p class="mb-1">{{doc.special}}</p>
+          <small>{{doc.desc}}</small>
+        </a>
+      </div>
+    </div>
+    <div class="col-md-2"></div>
+  </div>
+</div>

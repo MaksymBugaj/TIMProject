@@ -7,9 +7,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EditProfileComponent implements OnInit {
 
+  editData: any = {};
+
   constructor() { }
 
   ngOnInit() {
   }
 
+  edit(form)
+  {
+    console.log(form.value);
+    
+  }
 }

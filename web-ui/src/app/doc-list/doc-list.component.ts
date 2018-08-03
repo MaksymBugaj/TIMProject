@@ -7,6 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DocListComponent implements OnInit {
 
+  docList: any = [
+    {firstName: "Marcin", lastName: "Borowski", special: "Okulista", desc:"KRÓTKI OPIS LEKARZA 1"},
+    {firstName: "Maksym", lastName: "Bugaj", special: "Dentysta", desc:"KRÓTKI OPIS LEKARZA 2"},
+    {firstName: "Mariusz", lastName: "Byler", special: "Ogólny", desc:"KRÓTKI OPIS LEKARZA 3"}
+  ]
+
   constructor() { }
 
   ngOnInit() {

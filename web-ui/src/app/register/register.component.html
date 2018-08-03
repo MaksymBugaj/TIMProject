@@ -69,12 +69,12 @@
           <div class="form-group">
             <label for="sex">Płeć</label>
             <div class="radio-group text-center">
-              <label for="male" class="form-check-label">
-                <input type="radio" class="form-control" name="sex" id="male" #sexRef="ngModel" value="male" [(ngModel)]="registerData.sex"
+              <label for="male" class="form-check-label mr-2">
+                <input type="radio" class="form-control radio" name="sex" id="male" #sexRef="ngModel" value="male" [(ngModel)]="registerData.sex"
                   required> Mężczyzna
               </label>
-              <label for="female" class="form-check-label">
-                <input type="radio" class="form-control" name="sex" id="female" #sexRef="ngModel" value="female" [(ngModel)]="registerData.sex"
+              <label for="female" class="form-check-label ml-2">
+                <input type="radio" class="form-control radio" name="sex" id="female" #sexRef="ngModel" value="female" [(ngModel)]="registerData.sex"
                   required> Kobieta
               </label>
             </div>
@@ -132,8 +132,8 @@
       <div class="row">
         <div class="col-md-2"></div>
         <div class="col-md-8">
-          <button type="submit" class="btn btn-primary">Zarejestruj</button>
-          <button class="btn btn-secondary" routerLink="/login">Zaloguj się</button>
+          <button type="submit" class="btn btn-primary mr-2">Zarejestruj</button>
+          <button class="btn btn-secondary ml-2" routerLink="/login">Zaloguj się</button>
         </div>
         <div class="col-md-2"></div>
       </div>

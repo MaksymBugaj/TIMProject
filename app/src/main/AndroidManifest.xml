@@ -18,9 +18,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Login.LoginActivity" android:parentActivityName=".MainActivity" />
-        <activity android:name=".Login.CreateAccount" android:parentActivityName=".Login.LoginActivity"/>
-        <activity android:name=".Login.AfterLogin.AfterLogin" android:parentActivityName=".Login.LoginActivity"></activity>
+        <activity
+            android:name=".Login.LoginActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".Login.CreateAccount"
+            android:parentActivityName=".Login.LoginActivity" />
+        <activity
+            android:name=".Login.AfterLogin.AfterLogin"
+            android:parentActivityName=".Login.LoginActivity" />
+        <activity android:name=".Calendar.CalendarActivity"></activity>
     </application>
 
 </manifest>

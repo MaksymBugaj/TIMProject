@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Button;
 
+import com.example.maksy.timproject.Calendar.CalendarActivity;
 import com.example.maksy.timproject.Login.AfterLogin.AfterLogin;
 import com.example.maksy.timproject.R;
 
@@ -63,7 +64,12 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     @OnClick(R.id.appCompatButtonLogin)
-    public void onLoginButtonClick(){
+    public void onLoginButtonClick() {
         startActivity(new Intent(this, AfterLogin.class));
+    }
+
+    @OnClick(R.id.textViewLinkRegister)
+    public void onNoAccountClick() {
+        startActivity(new Intent(this, CalendarActivity.class));
     }
 }

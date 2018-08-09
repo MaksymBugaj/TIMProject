@@ -8,5 +8,5 @@
     <string name="text_login">Login</string>
     <string name="text_not_member">No account yet? Create new account</string>
     <string name="activity_calendar_welcome_text">Choose suitable date</string>
-    <string name="popup_available_termins">Available date</string>
+    <string name="popup_available_termins">Available dates</string>
 </resources>

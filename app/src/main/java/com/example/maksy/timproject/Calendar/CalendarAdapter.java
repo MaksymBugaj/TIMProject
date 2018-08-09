@@ -2,6 +2,7 @@ package com.example.maksy.timproject.Calendar;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -9,15 +10,21 @@ import android.widget.TextView;
 import com.example.maksy.timproject.R;
 
 public class CalendarAdapter extends RecyclerView.Adapter<CalendarAdapter.MyViewHolder> {
+
+    public CalendarAdapter() {
+    }
+
     @NonNull
     @Override
     public CalendarAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        return null;
+        View itemView = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.recycler_date_row,viewGroup,false);
+        return new CalendarAdapter.MyViewHolder(itemView);
     }
 
     @Override
     public void onBindViewHolder(@NonNull CalendarAdapter.MyViewHolder myViewHolder, int i) {
-
+myViewHolder.mDoctorName.setText("Krzysztof");
+myViewHolder.mDoctorHours.setText("10:00-15:00");
     }
 
     @Override

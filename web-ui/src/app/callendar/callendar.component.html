@@ -79,6 +79,7 @@
     [events]="events"
     [refresh]="refresh"
     [locale]="locale"
+    (hourSegmentClicked)="timeClicked($event.date)"
     (eventClicked)="handleEvent('Clicked', $event.event)"
     (eventTimesChanged)="eventTimesChanged($event)">
   </mwl-calendar-day-view>
@@ -104,7 +105,6 @@
       <th>Kolor aktywny</th>
       <th>Kolor zakończony</th>
       <th>Rozpoczęcie</th>
-      <th>Zakończenie</th>
       <th>Usuń</th>
     </tr>
   </thead>
@@ -136,17 +136,6 @@
           type="text"
           mwlFlatpickr
           [(ngModel)]="event.start"
-          (ngModelChange)="refresh.next()"
-          dateFormat="Y-m-dTH:i"
-          altFormat="F j, Y H:i"
-          placeholder="Not set">
-      </td>
-      <td>
-        <input
-          class="form-control"
-          type="text"
-          mwlFlatpickr
-          [(ngModel)]="event.end"
           (ngModelChange)="refresh.next()"
           dateFormat="Y-m-dTH:i"
           altFormat="F j, Y H:i"

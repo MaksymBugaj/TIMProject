@@ -73,6 +73,9 @@ export class CallendarComponent {
   events: CalendarEvent[] = [];
   activeDayIsOpen: boolean = false;
 
+  clickedDate: Date = new Date();
+
+
   constructor(private modal: NgbModal) { }
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
@@ -82,14 +85,21 @@ export class CallendarComponent {
     }
   }
 
+  timeClicked( time: Date ): void {
+    if (time.getHours() >= 8 && time.getHours() <= 18) {
+      this.clickedDate = time;
+      this.view = 'month';
+    }
+    else {
+      alert("Wybrano złą godzinę. Proszę wybrać godzinę między 8:00 a 19:00");
+    }
+  }
+
   eventTimesChanged({
     event,
     newStart,
-    newEnd
   }: CalendarEventTimesChangedEvent): void {
     event.start = newStart;
-    event.end = newEnd;
-    this.handleEvent('Dropped or resized', event);
     this.refresh.next();
   }
 
@@ -102,8 +112,7 @@ export class CallendarComponent {
   addEvent(): void {
     this.events.push({
       title: 'New event',
-      start: startOfDay(new Date()),
-      end: endOfDay(new Date()),
+      start: this.clickedDate,
       color: colors.red,
       draggable: true,
       resizable: {

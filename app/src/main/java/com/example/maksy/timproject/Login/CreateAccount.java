@@ -15,6 +15,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.Unbinder;
 
 
 public class CreateAccount extends AppCompatActivity {
@@ -36,6 +37,7 @@ public class CreateAccount extends AppCompatActivity {
     TextInputEditText passwordConfirm;
 
     private FirebaseHelper firebaseHelper;
+    private Unbinder unbinder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +45,7 @@ public class CreateAccount extends AppCompatActivity {
         setContentView(R.layout.activity_create_account);
 
         ButterKnife.bind(this);
-
+        unbinder = ButterKnife.bind(this);
 
     }
 
@@ -105,8 +107,14 @@ public class CreateAccount extends AppCompatActivity {
 
         String initFirebase = "users";
         firebaseHelper = new FirebaseHelper(initFirebase);
-        firebaseHelper.createUser(editName, editSurname, editEmail, editPhone,editLogin, editPassword);
+        firebaseHelper.createUser(editName, editSurname, editEmail, editPhone, editLogin, editPassword);
         Toast.makeText(getApplicationContext(), "Account created!", Toast.LENGTH_SHORT).show();
-        startActivity(new Intent(getApplicationContext(),LoginActivity.class));
+        startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unbinder.unbind();
     }
 }

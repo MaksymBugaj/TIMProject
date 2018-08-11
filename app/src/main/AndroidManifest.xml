@@ -27,8 +27,8 @@
         <activity
             android:name=".Login.AfterLogin.AfterLogin"
             android:parentActivityName=".Login.LoginActivity" />
-        <activity android:name=".Calendar.CalendarActivity" />
-        <activity android:name=".Calendar.CalendarChooseDate"></activity>
+        <activity android:name=".Calendar.CalendarActivity" android:parentActivityName=".Login.AfterLogin.AfterLogin"/>
+        <activity android:name=".Calendar.CalendarChooseDate" android:parentActivityName=".Calendar.CalendarActivity"></activity>
     </application>
 
 </manifest>

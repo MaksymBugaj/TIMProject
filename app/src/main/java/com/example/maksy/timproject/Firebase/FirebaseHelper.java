@@ -29,4 +29,8 @@ public class FirebaseHelper {
         mDatabaseReference.child(userId).setValue(user);
 
     }
+
+    public void getDataFromFirebase(){
+
+    }
 }

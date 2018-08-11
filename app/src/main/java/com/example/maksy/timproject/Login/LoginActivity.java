@@ -70,6 +70,6 @@ public class LoginActivity extends AppCompatActivity {
 
     @OnClick(R.id.textViewLinkRegister)
     public void onNoAccountClick() {
-        startActivity(new Intent(this, CalendarActivity.class));
+        startActivity(new Intent(this, CreateAccount.class));
     }
 }

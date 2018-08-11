@@ -2,27 +2,41 @@ package com.example.maksy.timproject.User;
 
 public class User {
 
-    private long id;
+    private String id;
     private String name;
     private String surname;
     private String email;
     private String phone;
+    private String login;
+    private String password;
     private boolean doctor;
 
-    public User(long id, String name, String surname, String email, String phone, boolean doctor) {
+    public User(){}
+
+    public User(String id, String name, String surname, String email, String phone, String login, String password, boolean doctor) {
         this.id = id;
         this.name = name;
         this.surname = surname;
         this.email = email;
         this.phone = phone;
+        this.login = login;
+        this.password = password;
         this.doctor = doctor;
     }
 
-    public long getId() {
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public String getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -64,5 +78,13 @@ public class User {
 
     public void setDoctor(boolean doctor) {
         this.doctor = doctor;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

@@ -15,5 +15,9 @@
     <string name="text_not_member">No account yet? Create new account</string>
     <string name="activity_calendar_welcome_text">Choose suitable date</string>
     <string name="popup_available_termins">Available dates</string>
-    <string name="calendar">Calendar</string>
+    <string name="calendar">Available dates</string>
+    <string name="after_login_welcome">Choose option</string>
+    <string name="visits">My Visists</string>
+    <string name="doctors">Doctors</string>
+    <string name="available_doctors">Available Doctors</string>
 </resources>

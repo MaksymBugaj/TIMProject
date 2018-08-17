@@ -30,7 +30,7 @@ public class AfterLogin extends AppCompatActivity {
 
         ButterKnife.bind(this);
         unbinder = ButterKnife.bind(this);
-        welcomeText.setText("DUPA");
+        welcomeText.setText(R.string.after_login_welcome);
     }
 
     @OnClick(R.id.afterLoginCalendarButton)

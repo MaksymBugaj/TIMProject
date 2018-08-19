@@ -4,5 +4,9 @@
         android:id="@+id/loginclass"
         android:title="@string/login_class"></item>
 
+    <item
+        android:id="@+id/retrofit_example"
+        android:title="@string/login_class"></item>
+
 
 </menu>

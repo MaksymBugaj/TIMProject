@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.maksy.timproject">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -20,18 +22,25 @@
         </activity>
         <activity
             android:name=".Login.LoginActivity"
-            android:screenOrientation="portrait"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Login.CreateAccount"
-            android:screenOrientation="portrait"
-            android:parentActivityName=".Login.LoginActivity" />
+            android:parentActivityName=".Login.LoginActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Login.AfterLogin.AfterLogin"
-            android:screenOrientation="portrait"
-            android:parentActivityName=".Login.LoginActivity" />
-        <activity android:name=".Calendar.CalendarActivity" android:parentActivityName=".Login.AfterLogin.AfterLogin" android:screenOrientation="portrait"/>
-        <activity android:name=".Calendar.CalendarChooseDate" android:parentActivityName=".Calendar.CalendarActivity" android:screenOrientation="portrait"></activity>
+            android:parentActivityName=".Login.LoginActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Calendar.CalendarActivity"
+            android:parentActivityName=".Login.AfterLogin.AfterLogin"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Calendar.CalendarChooseDate"
+            android:parentActivityName=".Calendar.CalendarActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".API.APIExample"></activity>
     </application>
 
 </manifest>

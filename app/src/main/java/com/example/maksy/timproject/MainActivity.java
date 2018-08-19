@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.maksy.timproject.API.APIExample;
 import com.example.maksy.timproject.Login.LoginActivity;
 
 public class MainActivity extends AppCompatActivity {
@@ -24,6 +25,10 @@ public class MainActivity extends AppCompatActivity {
             case R.id.loginclass:
                 Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
                 startActivity(intent);
+                return true;
+            case R.id.retrofit_example:
+                Intent intent1 = new Intent(getApplicationContext(),APIExample.class);
+                startActivity(intent1);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

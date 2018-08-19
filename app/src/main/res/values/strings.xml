@@ -20,4 +20,5 @@
     <string name="visits">My Visists</string>
     <string name="doctors">Doctors</string>
     <string name="available_doctors">Available Doctors</string>
+    <string name="retrofit">Retrofit</string>
 </resources>

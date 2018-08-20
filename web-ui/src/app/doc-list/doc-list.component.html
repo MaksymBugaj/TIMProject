@@ -6,7 +6,7 @@
     </div>
     <div class="col-md-8">
       <div class="list-group">
-        <a class="list-group-item list-group-item-action flex-column align-items-start" *ngFor="let doc of docList">
+        <a class="list-group-item list-group-item-action flex-column align-items-start" *ngFor="let doc of docList | search:'firstName,lastName,special': query">
           <div class="d-flex w-100 justify-content-between">
             <h5 class="mb-1">{{doc.firstName}} {{doc.lastName}}</h5>
           </div>
@@ -15,6 +15,9 @@
         </a>
       </div>
     </div>
-    <div class="col-md-2"></div>
+    <div class="col-md-2">
+      <label for="search">Wyszukaj lekarza</label>
+      <input type="text" class="form-control" name="search" id="search" placeholder="" [(ngModel)]="query">
+    </div>
   </div>
 </div>

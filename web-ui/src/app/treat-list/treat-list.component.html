@@ -1,20 +1,23 @@
 <div class="container">
-    <h1 class="text-center m-4">Lista zabiegów</h1>
-    <div class="row">
-      <div class="col-md-2">
-        <button routerLink="/home" type="button" class="btn btn-secondary">Powrót</button>
+  <h1 class="text-center m-4">Lista zabiegów</h1>
+  <div class="row">
+    <div class="col-md-2">
+      <button routerLink="/home" type="button" class="btn btn-secondary">Powrót</button>
+    </div>
+    <div class="col-md-8">
+      <div class="list-group">
+        <a class="list-group-item list-group-item-action flex-column align-items-start" *ngFor="let treat of treatList | search:'name,docName': query">
+          <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1">{{treat.name}}</h5>
+          </div>
+          <p class="mb-1">{{treat.docName}}</p>
+          <small>{{treat.desc}}</small>
+        </a>
       </div>
-      <div class="col-md-8">
-        <div class="list-group">
-          <a class="list-group-item list-group-item-action flex-column align-items-start" *ngFor="let treat of treatList">
-            <div class="d-flex w-100 justify-content-between">
-              <h5 class="mb-1">{{treat.name}}</h5>
-            </div>
-            <p class="mb-1">{{treat.docName}}</p>
-            <small>{{treat.desc}}</small>
-          </a>
-        </div>
-      </div>
-      <div class="col-md-2"></div>
+    </div>
+    <div class="col-md-2">
+      <label for="search">Wyszukaj zabieg</label>
+      <input type="text" class="form-control" name="search" id="search" placeholder="" [(ngModel)]="query">
     </div>
   </div>
+</div>

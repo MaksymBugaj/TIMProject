@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TreatListComponent implements OnInit {
 
+  query: any;
+  
   treatList: any = [
     {name: "Sprawdzenie jakości widzenia", docName:"Marcin Borowski", desc:"KRÓTKI OPIS ZABIEGU 1"},
     {name: "Przegląd zębów", docName:"Maksym Bugaj", desc:"KRÓTKI OPIS ZABIEGU 2"},

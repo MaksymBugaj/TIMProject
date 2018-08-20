@@ -18,6 +18,7 @@ import { TreatListComponent } from './treat-list/treat-list.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { CalendarModule } from 'angular-calendar';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap/modal/modal.module';
+import { SearchPipe } from './search.pipe';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap/modal/modal.module';
     CallendarComponent,
     DocListComponent,
     TreatListComponent,
-    EditProfileComponent
+    EditProfileComponent,
+    SearchPipe
   ],
   imports: [
     BrowserModule,

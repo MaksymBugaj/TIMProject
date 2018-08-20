@@ -6,11 +6,11 @@
 
     <item
         android:id="@+id/retrofit_example"
-        android:title="@string/login_class"></item>
+        android:title="retrofit example"></item>
 
     <item
         android:id="@+id/retrofit_example_2"
-        android:title="@string/login_class"></item>
+        android:title="heroku example"></item>
 
 
 </menu>

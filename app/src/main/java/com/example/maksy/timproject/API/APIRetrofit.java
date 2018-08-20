@@ -5,10 +5,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.maksy.timproject.R;
 
+import java.io.IOException;
+
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -22,19 +26,54 @@ public class APIRetrofit extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_apiretrofit);
 
-        final EditText name = (EditText) findViewById(R.id.retro_test_text);
+        final TextView name = (TextView) findViewById(R.id.retro_test_text);
 
-        Button button = (Button) findViewById(R.id.retro_test_button);
+        final Button button = (Button) findViewById(R.id.retro_test_button);
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://timproject.herokuapp.com/")
+                .build();
+
+        final HerokuService service = retrofit.create(HerokuService.class);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                TestUser testUser = new TestUser(name.getText().toString());
+                //TestUser testUser = new TestUser(name.getText().toString());
 
-                sendNetworkRequest(testUser);
+              //  sendNetworkRequest(testUser);
+                Call<ResponseBody> call = service.hello();
+                call.enqueue(new Callback<ResponseBody>() {
+                    @Override
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                      if(response.body() != null){
+                          try {
+                              name.setText(response.body().string());
+                          } catch (IOException e) {
+                              e.printStackTrace();
+                              name.setText(e.getMessage());
+                          }
+                      } else {
+                          name.setText("nodupa");
+                      }
+                    }
 
+                    @Override
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                        t.printStackTrace();
+                        name.setText(t.getMessage());
+                    }
+                });
             }
         });
 
+    }
+
+    private void testHeroku(){
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://tranquil-inlet-32487.herokuapp.com/")
+                .build();
+
+        final HerokuService service = retrofit.create(HerokuService.class);
     }
 
     private void sendNetworkRequest(TestUser testUser){

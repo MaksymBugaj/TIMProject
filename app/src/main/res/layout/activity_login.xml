@@ -23,7 +23,7 @@
             android:layout_marginTop="40dp">
 
             <android.support.design.widget.TextInputEditText
-                android:id="@+id/textInputEditTextEmail"
+                android:id="@+id/textInputLoginEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/hint_login"
@@ -39,7 +39,7 @@
             android:layout_marginTop="20dp">
 
             <android.support.design.widget.TextInputEditText
-                android:id="@+id/textInputEditTextPassword"
+                android:id="@+id/textInputLoginPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/hint_password"

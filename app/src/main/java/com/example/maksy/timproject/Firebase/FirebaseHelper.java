@@ -5,9 +5,11 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.widget.Toast;
 
+import com.example.maksy.timproject.Login.AfterLogin.AfterLogin;
 import com.example.maksy.timproject.Login.CreateAccount;
 import com.example.maksy.timproject.Login.LoginActivity;
 import com.example.maksy.timproject.MainActivity;
+import com.example.maksy.timproject.R;
 import com.example.maksy.timproject.User.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -62,5 +64,20 @@ public class FirebaseHelper {
 
     public void getDataFromFirebase() {
 
+    }
+
+    public void loginToAccount(String email, String password){
+        auth.signInWithEmailAndPassword(email,password)
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (!task.isSuccessful()) {
+                            // there was an error
+                            Toast.makeText(context.getApplicationContext(), "Authentication failed", Toast.LENGTH_LONG).show();
+                        } else {
+                            context.startActivity(new Intent(context, AfterLogin.class));
+                        }
+                    }
+                });
     }
 }

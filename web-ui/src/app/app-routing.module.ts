@@ -7,6 +7,7 @@ import { CallendarComponent } from './callendar/callendar.component';
 import { DocListComponent } from './doc-list/doc-list.component';
 import { TreatListComponent } from './treat-list/treat-list.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
+import { CallendarDocComponent } from './callendar-doc/callendar-doc.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -14,6 +15,7 @@ const routes: Routes = [
   {path: 'register', component: RegisterComponent},
   {path: 'home', component: HomeComponent},
   {path: 'callendar', component: CallendarComponent},
+  {path: 'callendarDoc', component: CallendarDocComponent},
   {path: 'docList', component: DocListComponent},
   {path: 'treatList', component: TreatListComponent},
   {path: 'editProfile', component: EditProfileComponent},

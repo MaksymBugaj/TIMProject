@@ -19,6 +19,7 @@ import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { CalendarModule } from 'angular-calendar';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap/modal/modal.module';
 import { SearchPipe } from './search.pipe';
+import { CallendarDocComponent } from './callendar-doc/callendar-doc.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { SearchPipe } from './search.pipe';
     DocListComponent,
     TreatListComponent,
     EditProfileComponent,
-    SearchPipe
+    SearchPipe,
+    CallendarDocComponent
   ],
   imports: [
     BrowserModule,

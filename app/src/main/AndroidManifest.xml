@@ -40,7 +40,8 @@
             android:name=".Calendar.CalendarChooseDate"
             android:parentActivityName=".Calendar.CalendarActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".API.APIExample"></activity>
+        <activity android:name=".API.APIExample" />
+        <activity android:name=".API.APIRetrofit"></activity>
     </application>
 
 </manifest>

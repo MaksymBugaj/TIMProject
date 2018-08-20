@@ -47,10 +47,10 @@ const colors: any = {
 };
 
 @Component({
-  selector: 'app-callendar',
+  selector: 'app-callendar-doc',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: './callendar.component.html',
-  styleUrls: ['./callendar.component.css'],
+  templateUrl: './callendar-doc.component.html',
+  styleUrls: ['./callendar-doc.component.css'],
   providers: [
     {
       provide: CalendarDateFormatter,
@@ -58,7 +58,7 @@ const colors: any = {
     },
   ]
 })
-export class CallendarComponent {
+export class CallendarDocComponent {
 
   view: string = 'month';
   locale: string = 'pl';

@@ -58,6 +58,21 @@
     </div>
   </div>
 </div>
+<div class="row text-center">
+  <div class="col-md-4"></div>
+  <div class="col-md-4 m-1">
+    <h5>Wybierz Zabieg</h5>
+    <div class="btn-group">
+      <select class="btn btn-primary" id="treatName" name="treatName" #treatNameRef="ngModel" [(ngModel)]="choosenTreat">
+        <option [value]="">Wybierz zabieg</option>
+        <option [value]="treat.name" *ngFor="let treat of treatments | async">
+          {{treat.name}}
+        </option>
+      </select>
+    </div>
+  </div>
+  <div class="col-md-4"></div>
+</div>
 <br>
 <div [ngSwitch]="view">
   <mwl-calendar-month-view

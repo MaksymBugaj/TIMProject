@@ -113,12 +113,7 @@ export class CallendarDocComponent {
     this.events.push({
       title: 'New event',
       start: this.clickedDate,
-      color: colors.red,
-      draggable: true,
-      resizable: {
-        beforeStart: true,
-        afterEnd: true
-      }
+      color: colors.red
     });
     this.refresh.next();
   }

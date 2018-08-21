@@ -8,17 +8,18 @@ import { DocListComponent } from './doc-list/doc-list.component';
 import { TreatListComponent } from './treat-list/treat-list.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { CallendarDocComponent } from './callendar-doc/callendar-doc.component';
+import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
-  {path: '', redirectTo: '/login', pathMatch: 'full' },
+  {path: '', redirectTo: '/home', pathMatch: 'full' },
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
-  {path: 'home', component: HomeComponent},
-  {path: 'callendar', component: CallendarComponent},
-  {path: 'callendarDoc', component: CallendarDocComponent},
-  {path: 'docList', component: DocListComponent},
-  {path: 'treatList', component: TreatListComponent},
-  {path: 'editProfile', component: EditProfileComponent},
+  {path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
+  {path: 'callendar', component: CallendarComponent, canActivate: [AuthGuard]},
+  {path: 'callendarDoc', component: CallendarDocComponent, canActivate: [AuthGuard]},
+  {path: 'docList', component: DocListComponent, canActivate: [AuthGuard]},
+  {path: 'treatList', component: TreatListComponent, canActivate: [AuthGuard]},
+  {path: 'editProfile', component: EditProfileComponent, canActivate: [AuthGuard]},
 ]
 
 @NgModule({

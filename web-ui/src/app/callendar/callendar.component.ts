@@ -85,41 +85,23 @@ export class CallendarComponent {
     }
   }
 
-  timeClicked( time: Date ): void {
-    if (time.getHours() >= 8 && time.getHours() <= 18) {
-      this.clickedDate = time;
-      this.view = 'month';
-    }
-    else {
-      alert("Wybrano złą godzinę. Proszę wybrać godzinę między 8:00 a 19:00");
-    }
-  }
-
-  eventTimesChanged({
-    event,
-    newStart,
-  }: CalendarEventTimesChangedEvent): void {
-    event.start = newStart;
-    this.refresh.next();
+  timeClicked(time: Date): void {
+    this.clickedDate = time;
+    this.view = 'month';
   }
 
   handleEvent(action: string, event: CalendarEvent): void {
     this.modalData = { event, action };
     console.log(event);
+
+  }
+
+  onTreatChange(){
+
+  }
+
+  onDoctorChange(){
     
   }
 
-  addEvent(): void {
-    this.events.push({
-      title: 'New event',
-      start: this.clickedDate,
-      color: colors.red,
-      draggable: true,
-      resizable: {
-        beforeStart: true,
-        afterEnd: true
-      }
-    });
-    this.refresh.next();
-  }
 }

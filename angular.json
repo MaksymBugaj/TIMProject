@@ -5,7 +5,7 @@
   "projects": {
     "web-ui": {
       "root": "web-ui",
-      "sourceRoot": "src",
+      "sourceRoot": "web-ui/src",
       "projectType": "application",
       "prefix": "app",
       "schematics": {},

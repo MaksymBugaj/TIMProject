@@ -4,7 +4,7 @@
   "newProjectRoot": "projects",
   "projects": {
     "web-ui": {
-      "root": "",
+      "root": "web-ui",
       "sourceRoot": "src",
       "projectType": "application",
       "prefix": "app",

@@ -4,7 +4,7 @@
   "newProjectRoot": "projects",
   "projects": {
     "web-ui": {
-      "root": "web-ui",
+      "root": "",
       "sourceRoot": "src",
       "projectType": "application",
       "prefix": "app",
@@ -14,16 +14,16 @@
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "outputPath": "dist/web-ui",
-            "index": "web-ui/src/index.html",
-            "main": "web-ui/src/main.ts",
-            "polyfills": "web-ui/src/polyfills.ts",
-            "tsConfig": "web-ui/src/tsconfig.app.json",
+            "index": "src/index.html",
+            "main": "src/main.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "src/tsconfig.app.json",
             "assets": [
               "src/favicon.ico",
               "src/assets"
             ],
             "styles": [
-              "web-ui/src/styles.css"
+              "src/styles.css"
             ],
             "scripts": []
           },
@@ -31,8 +31,8 @@
             "production": {
               "fileReplacements": [
                 {
-                  "replace": "web-ui/src/environments/environment.ts",
-                  "with": "web-ui/src/environments/environment.prod.ts"
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
                 }
               ],
               "optimization": true,
@@ -85,8 +85,8 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "web-ui/src/tsconfig.app.json",
-              "web-ui/src/tsconfig.spec.json"
+              "src/tsconfig.app.json",
+              "src/tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"

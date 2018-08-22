@@ -5,7 +5,7 @@
   "projects": {
     "web-ui": {
       "root": "web-ui",
-      "sourceRoot": "web-ui/src",
+      "sourceRoot": "src",
       "projectType": "application",
       "prefix": "app",
       "schematics": {},
@@ -14,10 +14,10 @@
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "outputPath": "dist/web-ui",
-            "index": "src/index.html",
-            "main": "src/main.ts",
-            "polyfills": "src/polyfills.ts",
-            "tsConfig": "src/tsconfig.app.json",
+            "index": "web-ui/src/index.html",
+            "main": "web-ui/src/main.ts",
+            "polyfills": "web-ui/src/polyfills.ts",
+            "tsConfig": "web-ui/src/tsconfig.app.json",
             "assets": [
               "src/favicon.ico",
               "src/assets"

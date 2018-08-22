@@ -75,6 +75,8 @@ export class CallendarDocComponent {
 
   clickedDate: Date = new Date();
 
+  treatments: any;
+  choosenTreat: any;
 
   constructor(private modal: NgbModal) { }
 

@@ -23,7 +23,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "web-ui/src/styles.css"
             ],
             "scripts": []
           },

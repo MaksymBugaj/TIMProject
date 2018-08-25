@@ -20,6 +20,7 @@ import { CalendarModule } from 'angular-calendar';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap/modal/modal.module';
 import { SearchPipe } from './search.pipe';
 import { CallendarDocComponent } from './callendar-doc/callendar-doc.component';
+import { HttpModule } from '@angular/http';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { CallendarDocComponent } from './callendar-doc/callendar-doc.component';
     TreatListComponent,
     EditProfileComponent,
     SearchPipe,
-    CallendarDocComponent
+    CallendarDocComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -42,7 +44,8 @@ import { CallendarDocComponent } from './callendar-doc/callendar-doc.component';
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
-    CalendarModule.forRoot()
+    CalendarModule.forRoot(),
+    HttpModule
 
   ],
   providers: [],

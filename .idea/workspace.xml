@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cc8ff241-d0b0-49aa-8bd3-229f6b05849e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="cc8ff241-d0b0-49aa-8bd3-229f6b05849e" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -16,11 +14,12 @@
     <session id="269466384">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="3" />
+          <entry key="project.closed" value="4" />
           <entry key="project.open.time.0" value="1" />
           <entry key="project.open.time.12" value="1" />
           <entry key="project.open.time.13" value="1" />
-          <entry key="project.opened" value="3" />
+          <entry key="project.open.time.16" value="1" />
+          <entry key="project.opened" value="4" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
@@ -75,20 +74,10 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/maksy/Controller/UserController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="500">
+            <state relative-caret-position="408">
               <caret line="39" column="25" selection-start-line="39" selection-start-column="25" selection-end-line="39" selection-end-column="25" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#610#611#0" expanded="true" />
-                <element signature="e#658#659#0" expanded="true" />
-                <element signature="e#765#766#0" expanded="true" />
-                <element signature="e#798#799#0" expanded="true" />
-                <element signature="e#1020#1021#0" expanded="true" />
-                <element signature="e#1046#1047#0" expanded="true" />
-                <element signature="e#1199#1200#0" expanded="true" />
-                <element signature="e#1245#1246#0" expanded="true" />
-                <element signature="e#1252#1253#0" expanded="true" />
-                <element signature="e#1296#1297#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -97,20 +86,20 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/maksy/Service/UserService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="544">
+            <state relative-caret-position="534">
               <caret line="32" column="38" selection-start-line="32" selection-start-column="38" selection-end-line="32" selection-end-column="38" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#352#353#0" expanded="true" />
                 <element signature="e#396#397#0" expanded="true" />
                 <element signature="e#434#435#0" expanded="true" />
-                <element signature="e#470#471#0" expanded="true" />
+                <element signature="e#485#486#0" expanded="true" />
                 <element signature="e#527#528#0" expanded="true" />
-                <element signature="e#546#547#0" expanded="true" />
+                <element signature="e#574#575#0" expanded="true" />
                 <element signature="e#614#615#0" expanded="true" />
-                <element signature="e#633#634#0" expanded="true" />
+                <element signature="e#659#660#0" expanded="true" />
                 <element signature="e#700#701#0" expanded="true" />
-                <element signature="e#722#723#0" expanded="true" />
+                <element signature="e#745#746#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -119,16 +108,14 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/maksy/Dao/UserDao.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="432">
+            <state relative-caret-position="561">
               <caret line="45" column="42" selection-start-line="45" selection-start-column="42" selection-end-line="45" selection-end-column="42" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#742#743#0" expanded="true" />
-                <element signature="e#763#764#0" expanded="true" />
                 <element signature="e#821#822#0" expanded="true" />
-                <element signature="e#841#842#0" expanded="true" />
+                <element signature="e#858#859#0" expanded="true" />
                 <element signature="e#1113#1114#0" expanded="true" />
-                <element signature="e#1132#1133#0" expanded="true" />
+                <element signature="e#1162#1163#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -277,9 +264,9 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="AndroidView" />
       <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -338,16 +325,17 @@
       <workItem from="1535128244459" duration="611000" />
       <workItem from="1535130596457" duration="2556000" />
       <workItem from="1535190366732" duration="4361000" />
+      <workItem from="1535198839166" duration="857000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="7528000" />
+    <option name="totallyTimeSpent" value="8385000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18283582" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18496802" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -406,6 +394,30 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/maksy/Controller/UserController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="39" column="25" selection-start-line="39" selection-start-column="25" selection-end-line="39" selection-end-column="25" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/maksy/Dao/UserDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="561">
+          <caret line="45" column="42" selection-start-line="45" selection-start-column="42" selection-end-line="45" selection-end-column="42" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#821#822#0" expanded="true" />
+            <element signature="e#858#859#0" expanded="true" />
+            <element signature="e#1113#1114#0" expanded="true" />
+            <element signature="e#1162#1163#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/maksy/Entity/User.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
@@ -416,58 +428,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/maksy/Controller/UserController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="500">
-          <caret line="39" column="25" selection-start-line="39" selection-start-column="25" selection-end-line="39" selection-end-column="25" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#610#611#0" expanded="true" />
-            <element signature="e#658#659#0" expanded="true" />
-            <element signature="e#765#766#0" expanded="true" />
-            <element signature="e#798#799#0" expanded="true" />
-            <element signature="e#1020#1021#0" expanded="true" />
-            <element signature="e#1046#1047#0" expanded="true" />
-            <element signature="e#1199#1200#0" expanded="true" />
-            <element signature="e#1245#1246#0" expanded="true" />
-            <element signature="e#1252#1253#0" expanded="true" />
-            <element signature="e#1296#1297#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/maksy/Dao/UserDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="432">
-          <caret line="45" column="42" selection-start-line="45" selection-start-column="42" selection-end-line="45" selection-end-column="42" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#742#743#0" expanded="true" />
-            <element signature="e#763#764#0" expanded="true" />
-            <element signature="e#821#822#0" expanded="true" />
-            <element signature="e#841#842#0" expanded="true" />
-            <element signature="e#1113#1114#0" expanded="true" />
-            <element signature="e#1132#1133#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/maksy/Service/UserService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="544">
+        <state relative-caret-position="534">
           <caret line="32" column="38" selection-start-line="32" selection-start-column="38" selection-end-line="32" selection-end-column="38" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#352#353#0" expanded="true" />
             <element signature="e#396#397#0" expanded="true" />
             <element signature="e#434#435#0" expanded="true" />
-            <element signature="e#470#471#0" expanded="true" />
+            <element signature="e#485#486#0" expanded="true" />
             <element signature="e#527#528#0" expanded="true" />
-            <element signature="e#546#547#0" expanded="true" />
+            <element signature="e#574#575#0" expanded="true" />
             <element signature="e#614#615#0" expanded="true" />
-            <element signature="e#633#634#0" expanded="true" />
+            <element signature="e#659#660#0" expanded="true" />
             <element signature="e#700#701#0" expanded="true" />
-            <element signature="e#722#723#0" expanded="true" />
+            <element signature="e#745#746#0" expanded="true" />
           </folding>
         </state>
       </provider>

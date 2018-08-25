@@ -31,8 +31,7 @@
       <div class="list-group">
         <a class="list-group-item list-group-item-action flex-column align-items-start" *ngFor="let user of users">
           <div class="d-flex w-100 justify-content-between">
-            <h5 class="mb-1">{{user.firstName}} {{user.lastName}}</h5>
-            <h5>{{user}}</h5>
+            <h5 class="mb-1">{{user.name}} {{user.surname}}</h5>
           </div>
           <p class="mb-1">{{user.special}}</p>
           <small>{{user.desc}}</small>

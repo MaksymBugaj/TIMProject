@@ -2,6 +2,7 @@
     "/api": {
       "target": "https://backend-git.herokuapp.com/",
       "secure": false,
+      "changeOrigin": true,
       "pathRewrite": {
         "^/api": ""
       }

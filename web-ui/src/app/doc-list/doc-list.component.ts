@@ -17,7 +17,7 @@ export class DocListComponent implements OnInit {
   ];
   users: any;
 
-  private userUrl = 'https://backend-git.herokuapp.com/users';
+  private userUrl = 'https://backend-git.herokuapp.com/users/';
 
   filteredDocList: any;
 

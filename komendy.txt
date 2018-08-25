@@ -1,0 +1,2 @@
+Komenda do odpalenia FE na heroku
+git subtree push --prefix web-ui heroku master

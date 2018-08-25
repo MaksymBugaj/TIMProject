@@ -8,7 +8,7 @@ const app = express();
 
 // Serve only the static files form the dist directory
 app.use(express.static('./dist/web-ui'));
-app.use('/api', proxy(''));
+app.use('/api', proxy('https://backend-git.herokuapp.com/'));
 
 app.get('/*', function (req, res) {
     res.sendFile(path.join(__dirname, '/dist/web-ui/index.html'));

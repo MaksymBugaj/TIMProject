@@ -50,13 +50,16 @@
         <div class="col-md-2"></div>
         <div class="col-md-8">
           <div class="form-group">
-            <label for="birthDate">Data urodzenia</label>
+            <label for="PESEL">PESEL</label>
             <div class="input-group">
-              <input type="date" class="form-control" name="birthDate" id="birthDate" #birthDateRef="ngModel" [(ngModel)]="registerData.birthDate"
-                required>
+              <input type="PESEL" class="form-control" name="PESEL" id="PESEL" #PESELRef="ngModel" [(ngModel)]="registerData.PESEL"
+                required placeholder="Podaj swój PESEL" pattern="^\d{11}$">
             </div>
-            <div class="error form-control" *ngIf="formRef.submitted && birthDateRef.errors?.required">
+            <div class="error form-control" *ngIf="formRef.submitted && PESELRef.errors?.required">
               To pole jest obowiązkowe
+            </div>
+            <div class="error form-control" *ngIf="formRef.submitted && PESELRef.errors?.pattern">
+              Zły format
             </div>
           </div>
         </div>
@@ -100,6 +103,26 @@
             </div>
             <div class="error form-control" *ngIf="formRef.submitted && emailRef.errors?.pattern">
               Błędny E-Mail
+            </div>
+          </div>
+        </div>
+        <div class="col-md-2"></div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+          <div class="form-group">
+            <label for="phone">Numer telefonu</label>
+            <div class="input-group">
+              <input type="phone" class="form-control" name="phone" id="phone" #phoneRef="ngModel" [(ngModel)]="registerData.phone"
+                required placeholder="Podaj swój numer telefonu" pattern="^\d{11}$">
+            </div>
+            <div class="error form-control" *ngIf="formRef.submitted && phoneRef.errors?.required">
+              To pole jest obowiązkowe
+            </div>
+            <div class="error form-control" *ngIf="formRef.submitted && phoneRef.errors?.pattern">
+              Zły format
             </div>
           </div>
         </div>

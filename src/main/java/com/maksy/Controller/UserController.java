@@ -21,6 +21,12 @@ public class UserController {
         return userService.getAllUsers();
     }
 
+    @RequestMapping(value = "/doctors", method = RequestMethod.GET)
+    @CrossOrigin(exposedHeaders="Access-Control-Allow-Origin")
+    public Collection<User> getDoctors() {
+        return userService.getDoctors();
+    }
+
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @CrossOrigin(exposedHeaders="Access-Control-Allow-Origin")
     public User getUserById(@PathVariable("id") int id){

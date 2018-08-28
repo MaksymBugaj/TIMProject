@@ -19,7 +19,8 @@ import {
   startOfWeek,
   startOfMonth
 } from 'date-fns';
-import { Subject } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
+import { map } from "rxjs/operators";
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap/modal/modal.module';
 import {
   CalendarEvent,
@@ -30,6 +31,9 @@ import {
   CalendarMonthViewDay
 } from 'angular-calendar';
 import { CustomDateFormatter } from './custom-date-formatter.provider';
+import { Appointment } from '../_model/appointment';
+import { BEComService } from '../_service/becom.service';
+import 'rxjs/Rx';
 
 const colors: any = {
   red: {
@@ -37,12 +41,24 @@ const colors: any = {
     secondary: '#FAE3E3'
   },
   blue: {
-    primary: '#1e90ff',
+    primary: 'blue',
     secondary: '#D1E8FF'
   },
   yellow: {
     primary: '#e3bc08',
     secondary: '#FDF1BA'
+  },
+  green: {
+    primary: '#1dda17',
+    secondary: '#ceffcc'
+  },
+  cyan: {
+    primary: 'cyan',
+    secondary: '#D1E8FF'
+  },
+  black: {
+    primary: '#000000',
+    secondary: '#000000'
   }
 };
 
@@ -70,19 +86,29 @@ export class CallendarComponent {
     event: CalendarEvent;
   };
   refresh: Subject<any> = new Subject();
-  events: CalendarEvent[] = [];
   activeDayIsOpen: boolean = false;
-
   clickedDate: Date = new Date();
+
+  events$: Observable<Array<CalendarEvent<{ appointment: Appointment }>>>;
 
   treatments: any;
   choosenTreat: any;
   doctors: any;
   choosenDoctor: any;
-  
+  userEmail: String;
 
 
-  constructor(private modal: NgbModal) { }
+  constructor(
+    private modal: NgbModal,
+    private beCom: BEComService
+  ) {
+    this.events$ = this.beCom.getAppointments()
+      .map((appointments) => this.fromAppointmentsToEvents(appointments))
+
+
+    this.doctors = this.beCom.getDoctors();
+    this.treatments = this.beCom.getTreatments();
+  }
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
     if (isSameMonth(date, this.viewDate)) {
@@ -102,12 +128,85 @@ export class CallendarComponent {
 
   }
 
-  onTreatChange(){
-
+  onTreatChange() {
+    this.events$ = this.events$
+      .map((appointments) => {
+        if (this.choosenTreat == "") {
+          return appointments;
+        } else {
+          return appointments.filter((appointment) => this.choosenTreat == appointment.meta.appointment.treatName)
+        }
+      });
   }
 
-  onDoctorChange(){
-    
+  onDoctorChange() {
+    this.events$ = this.events$
+      .map((appointments) => {
+        if (this.choosenDoctor == "") {
+          return appointments;
+        } else {
+          return appointments.filter((appointment) => this.choosenDoctor == appointment.meta.appointment.doctorEmail)
+        }
+      });
   }
 
+  fromAppointmentsToEvents(appiontments: Appointment[]) {
+    return appiontments.map((appointment: Appointment) => {
+      if (appointment.flag == 0 && appointment.userEmail == "") {
+        return ({
+          title: appointment.treatName,
+          start: new Date(appointment.date),
+          color: colors.green,
+          meta: {
+            appointment
+          }
+        })
+      } else if (appointment.flag == 1 && appointment.userEmail == this.userEmail) {
+        return ({
+          title: appointment.treatName,
+          start: new Date(appointment.date),
+          color: colors.cyan,
+          meta: {
+            appointment
+          }
+        })
+      } else if (appointment.flag == 2 && appointment.userEmail == this.userEmail) {
+        return ({
+          title: appointment.treatName,
+          start: new Date(appointment.date),
+          color: colors.blue,
+          meta: {
+            appointment
+          }
+        })
+      } else if (appointment.flag == 1 && appointment.userEmail != this.userEmail) {
+        return ({
+          title: appointment.treatName,
+          start: new Date(appointment.date),
+          color: colors.yellow,
+          meta: {
+            appointment
+          }
+        })
+      } else if (appointment.flag == 2 && appointment.userEmail != this.userEmail) {
+        return ({
+          title: appointment.treatName,
+          start: new Date(appointment.date),
+          color: colors.red,
+          meta: {
+            appointment
+          }
+        })
+      } else {
+        return ({
+          title: appointment.treatName,
+          start: new Date(appointment.date),
+          color: colors.black,
+          meta: {
+            appointment
+          }
+        })
+      }
+    })
+  }
 }

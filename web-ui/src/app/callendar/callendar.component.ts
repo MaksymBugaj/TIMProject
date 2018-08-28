@@ -102,10 +102,7 @@ export class CallendarComponent {
     private modal: NgbModal,
     private beCom: BEComService
   ) {
-    this.events$ = this.beCom.getAppointments()
-      .map((appointments) => this.fromAppointmentsToEvents(appointments))
-
-
+    this.events$ = this.beCom.getAppointments();
     this.doctors = this.beCom.getDoctors();
     this.treatments = this.beCom.getTreatments();
   }

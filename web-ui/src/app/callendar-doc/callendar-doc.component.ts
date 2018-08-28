@@ -19,7 +19,7 @@ import {
   startOfWeek,
   startOfMonth
 } from 'date-fns';
-import { Subject } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap/modal/modal.module';
 import {
   CalendarEvent,
@@ -30,6 +30,9 @@ import {
   CalendarMonthViewDay
 } from 'angular-calendar';
 import { CustomDateFormatter } from './custom-date-formatter.provider';
+import { Appointment } from '../_model/appointment';
+import { BEComService } from '../_service/becom.service';
+import { RequestOptions, Headers, Http } from '@angular/http';
 
 const colors: any = {
   red: {
@@ -43,6 +46,10 @@ const colors: any = {
   yellow: {
     primary: '#e3bc08',
     secondary: '#FDF1BA'
+  },
+  green: {
+    primary: '#1dda17',
+    secondary: '#ceffcc'
   }
 };
 
@@ -70,26 +77,45 @@ export class CallendarDocComponent {
     event: CalendarEvent;
   };
   refresh: Subject<any> = new Subject();
-  events: CalendarEvent[] = [];
   activeDayIsOpen: boolean = false;
+  clickedDate: any;
+  clickedTime: any;
 
-  clickedDate: Date = new Date();
+  
+
+  events$: Observable<Array<CalendarEvent<{ appointment: Appointment }>>>;
+  event: any = {
+    date: "",
+    time: "",
+  }
 
   treatments: any;
   choosenTreat: any;
 
-  constructor(private modal: NgbModal) { }
+  email = "test";
+
+  constructor(
+    private modal: NgbModal,
+    private beCom: BEComService,
+    private http: Http
+  ) {
+    this.treatments = this.beCom.getTreatments();
+  }
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
     if (isSameMonth(date, this.viewDate)) {
       this.viewDate = date;
+      this.event.date = date;
       this.view = 'day';
     }
   }
 
-  timeClicked( time: Date ): void {
+  timeClicked(time: Date): void {
     if (time.getHours() >= 8 && time.getHours() <= 18) {
-      this.clickedDate = time;
+      this.clickedDate = time.getTime();
+      this.clickedTime = time.toLocaleTimeString();
+      this.event.date = time.toLocaleDateString();
+      this.event.time = time.toLocaleTimeString();
       this.view = 'month';
     }
     else {
@@ -108,15 +134,31 @@ export class CallendarDocComponent {
   handleEvent(action: string, event: CalendarEvent): void {
     this.modalData = { event, action };
     console.log(event);
-    
+
   }
 
   addEvent(): void {
-    this.events.push({
-      title: 'New event',
-      start: this.clickedDate,
-      color: colors.red
-    });
-    this.refresh.next();
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let options = new RequestOptions({ headers: headers });
+    var event = {
+      date: this.clickedDate,
+      time: this.clickedTime,
+      treatName: this.choosenTreat,
+      doctorEmail: this.email
+    }
+    console.log(event);
+
+    this.http.post("https://tim-front2.herokuapp.com/api/appointments/post", event, options)
+      .subscribe(
+        res => {
+          console.log(res);
+          if (res.ok) {
+            alert('Pomyślnie ustalono termin');
+          }
+        },
+        err => {
+          console.log(err);
+        }
+      );
   }
 }

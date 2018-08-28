@@ -100,70 +100,50 @@
   </mwl-calendar-day-view>
 </div>
 
-<br><br><hr>
+<br>
 
-<h3>
-  Zarządzanie wizytami
-  <button
-    class="btn btn-primary pull-right"
-    (click)="addEvent()">
-    Dodaj
-  </button>
-  <div class="clearfix"></div>
-</h3>
+<div class="container text-center">
+  <form class="form-appointment text-center" #formRef="ngForm" (ngSubmit)="addEvent(formRef)">
+    <div class="row">
+      <div class="col-md-4"></div>
+      <div class="col-md-4">
+        <div class="form-group text-center">
+          <label for="date">Data wizyty</label>
+          <div class="input-group text-center">
+            <input class="form-control" id="Date" name="Date" #dateRef="ngModel" type="calendarDate" [(ngModel)]="event.date" required
+              onkeydown="return false" readonly="readonly">
+          </div>
+          <div class="error form-control" *ngIf="formRef.submitted && dateRef.errors?.required">
+            To pole jest obowiązkowe
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4"></div>
+    </div>
+    <div class="row">
+      <div class="col-md-4"></div>
+      <div class="col-md-4">
+        <div class="form-group text-center">
+          <label for="time">Czas wizyty</label>
+          <div class="input-group text-center">
+            <input class="form-control" id="time" name="time" #timeRef="ngModel" type="calendartime" [(ngModel)]="event.time" required
+              onkeydown="return false" readonly="readonly">
+          </div>
+          <div class="error form-control" *ngIf="formRef.submitted && timeRef.errors?.required">
+            To pole jest obowiązkowe
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4"></div>
+    </div>
 
-<table class="table table-bordered">
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-8">
+        <button type="submit" class="btn btn-primary mr-2">Dodaj wizytę</button>
+      </div>
+      <div class="col-md-2"></div>
+    </div>
 
-  <thead>
-    <tr>
-      <th>Tytuł</th>
-      <th>Kolor aktywny</th>
-      <th>Kolor zakończony</th>
-      <th>Rozpoczęcie</th>
-      <th>Usuń</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <tr *ngFor="let event of events; let index = index">
-      <td>
-        <input
-          type="text"
-          class="form-control"
-          [(ngModel)]="event.title"
-          (keyup)="refresh.next()">
-      </td>
-      <td>
-        <input
-          type="color"
-          [(ngModel)]="event.color.primary"
-          (change)="refresh.next()">
-      </td>
-      <td>
-        <input
-          type="color"
-          [(ngModel)]="event.color.secondary"
-          (change)="refresh.next()">
-      </td>
-      <td>
-        <input
-          class="form-control"
-          type="text"
-          mwlFlatpickr
-          [(ngModel)]="event.start"
-          (ngModelChange)="refresh.next()"
-          dateFormat="Y-m-dTH:i"
-          altFormat="F j, Y H:i"
-          placeholder="Not set">
-      </td>
-      <td>
-        <button
-          class="btn btn-danger"
-          (click)="events.splice(index, 1); refresh.next()">
-          Delete
-        </button>
-      </td>
-    </tr>
-  </tbody>
-
-</table>
+  </form>
+</div>

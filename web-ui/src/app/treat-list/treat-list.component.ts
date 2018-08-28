@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Http } from "@angular/http";
 
 @Component({
   selector: 'app-treat-list',
@@ -8,16 +9,25 @@ import { Component, OnInit } from '@angular/core';
 export class TreatListComponent implements OnInit {
 
   query: any;
+  treatments: any;
   
-  treatList: any = [
-    {name: "Sprawdzenie jakości widzenia", docName:"Marcin Borowski", desc:"KRÓTKI OPIS ZABIEGU 1"},
-    {name: "Przegląd zębów", docName:"Maksym Bugaj", desc:"KRÓTKI OPIS ZABIEGU 2"},
-    {name: "Wizyta ogólna", docName:"Mariusz Byler", desc:"KRÓTKI OPIS ZABIEGU 3"}
-  ]
 
-  constructor() { }
+  private treatmentUrl = 'https://tim-front2.herokuapp.com/api/treatments/';
+
+  constructor(
+    private http: Http
+  ) { }
 
   ngOnInit() {
+    this.getTreatments();
+  }
+
+  getTreatments(): any {
+    return this.http.get(this.treatmentUrl).subscribe(res => {
+      this.treatments = res.json();
+      console.log(res);
+      console.log(this.treatments);
+    });
   }
 
 }

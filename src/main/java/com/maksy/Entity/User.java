@@ -10,7 +10,7 @@ public class User {
     private String email;
     private String phone;
     private String password;
-    private Steing type; 
+    private String type;
 
     public User(int id, String firstname, String surname, String PESEL, String sex, String email, String phone, String password, String type) {
         this.id = id;
@@ -90,11 +90,11 @@ public class User {
         this.password = password;
     }
     
-    public Steing getType() {
+    public String getType() {
         return this.type;
     }
 
-    public void setType(Steing type) {
+    public void setType(String type) {
         this.type = type;
     }
 }

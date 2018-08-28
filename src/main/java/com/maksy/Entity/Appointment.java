@@ -1,15 +1,17 @@
 package com.maksy.Entity;
 
+import java.util.Date;
+
 public class Appointment {
 
     private int id;
-    private int pateintID;
-    private int DoctorID;
+    private int patientID;
+    private int doctorID;
     private Date date;
 
     public Appointment(int id, int pateintID, int doctorID, Date date) {
         this.id = id;
-        this.pateintID = pateintID;
+        this.patientID = pateintID;
         this.doctorID = doctorID;
         this.date = date;
     }
@@ -24,12 +26,12 @@ public class Appointment {
         this.id = id;
     }
 
-    public int getPateintID() {
-        return pateintID;
+    public int getPatientID() {
+        return patientID;
     }
 
-    public void setPateintID(int pateintID) {
-        this.pateintID = pateintID;
+    public void setPatientID(int pateintID) {
+        this.patientID = pateintID;
     }
 
     public int getDoctorID() {

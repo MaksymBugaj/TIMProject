@@ -32,4 +32,8 @@ public class UserService {
     public void insertUser(User user) {
         this.userDao.insertUser(user);
     }
+
+    public Collection<User> getDoctors() {
+        return userDao.getDoctors();
+    }
 }

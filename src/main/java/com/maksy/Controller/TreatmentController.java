@@ -39,6 +39,6 @@ public class TreatmentController {
 
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public void insertTreatment(@RequestBody Treatment treatment){
-        TreatmentService.insertTreatment(treatment);
+        treatmentService.insertTreatment(treatment);
     }
 }

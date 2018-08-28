@@ -39,6 +39,6 @@ public class AppointmentController {
 
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public void insertAppointment(@RequestBody Appointment appointment){
-        AppointmentService.insertAppointment(appointment);
+        appointmentService.insertAppointment(appointment);
     }
 }

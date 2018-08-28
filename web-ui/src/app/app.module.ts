@@ -18,7 +18,7 @@ import { TreatListComponent } from './treat-list/treat-list.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { CalendarModule } from 'angular-calendar';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap/modal/modal.module';
-import { SearchPipe } from './search.pipe';
+import { SearchPipe } from './_pipe/search.pipe';
 import { CallendarDocComponent } from './callendar-doc/callendar-doc.component';
 import { HttpModule } from '@angular/http';
 

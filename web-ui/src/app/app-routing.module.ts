@@ -8,7 +8,7 @@ import { DocListComponent } from './doc-list/doc-list.component';
 import { TreatListComponent } from './treat-list/treat-list.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { CallendarDocComponent } from './callendar-doc/callendar-doc.component';
-import { AuthGuard } from './auth.guard';
+import { AuthGuard } from './_guard/auth.guard';
 
 const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full' },

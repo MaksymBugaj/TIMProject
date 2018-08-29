@@ -11,7 +11,7 @@ export class DocListComponent implements OnInit {
   query: any;
   doctors: any;
 
-  private doctorUrl = 'https://tim-front2.herokuapp.com/api/users/doctors';
+  private doctorUrl = 'https://tim-front2.herokuapp.com/api/users/';
 
   constructor(private http: Http) { }
 

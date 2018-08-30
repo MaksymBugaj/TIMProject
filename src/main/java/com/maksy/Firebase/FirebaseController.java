@@ -1,4 +1,4 @@
-package com.maksy.Controller;
+package com.maksy.Firebase;
 
 import com.maksy.Firebase.FirebasePush;
 import org.json.JSONException;

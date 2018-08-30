@@ -36,4 +36,8 @@ public class UserService {
     public Collection<User> getDoctors() {
         return userDao.getDoctors();
     }
+
+    public User getUserByEmail(String email) {
+        return this.userDao.getUserByEmail(email);
+    }
 }

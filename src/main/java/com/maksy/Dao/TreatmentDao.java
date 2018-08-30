@@ -12,6 +12,15 @@ public class TreatmentDao {
 
     private static Map<Integer, Treatment> treatments;
 
+    static {
+        treatments = new HashMap<Integer, Treatment>(){
+            {
+                put(1, new Treatment(1,"Wycięcie zęba",2));
+
+            }
+        };
+    }
+
     public Collection<Treatment> getAllTreatments(){
         return this.treatments.values();
     }

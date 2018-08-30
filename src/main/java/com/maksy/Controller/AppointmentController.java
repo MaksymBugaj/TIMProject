@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Collection;
 
 @RestController
-@RequestMapping("/Appointments")
+@RequestMapping("/appointments")
 public class AppointmentController {
 
     @Autowired
@@ -27,6 +27,7 @@ public class AppointmentController {
         return appointmentService.getAppointmentById(id);
     }
 
+    //////////////////////////////////////////////////
     @RequestMapping(value = "/{id}",method = RequestMethod.DELETE)
     public void deleteAppointmentById(@PathVariable("id") int id){
         appointmentService.removeAppointmentById(id);

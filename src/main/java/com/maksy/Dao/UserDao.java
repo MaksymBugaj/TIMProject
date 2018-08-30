@@ -3,9 +3,7 @@ package com.maksy.Dao;
 import com.maksy.Entity.User;
 import org.springframework.stereotype.Repository;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 @Repository
 public class UserDao {
@@ -19,6 +17,7 @@ public class UserDao {
                 put(2, new User(2,"Maksym","Bugaj","PESEL2","male","email2","phone2","password2","1"));
                 put(3, new User(3,"Mariusz","Byler","PESEL3","male","email3","phone3","password3","0"));
                 put(4, new User(4,"Łukasz","Budner","PESEL4","male","email4","phone4","password4","0"));
+                put(5, new User(404,"Łukasz","Budner","PESEL5","female","email5","phone5","password5","1"));
             }
         };
     }
@@ -28,7 +27,14 @@ public class UserDao {
     }
 
     public Collection<User> getDoctors(){
-        return this.users.values();
+        List<User> tempUser = new ArrayList<>();
+        for(User user : users.values()){
+            if(user.getType().equals("1")){
+                tempUser.add(user);
+            }
+        }
+        return  tempUser;
+
     }
 
     public User getUserById(int id){
@@ -54,5 +60,15 @@ public class UserDao {
 
     public void insertUser(User user) {
         this.users.put(user.getId(),user);
+    }
+
+    public User getUserByEmail(String email) {
+        User tempUser = new User();
+        for(User user : users.values()){
+            if(user.getEmail().equals(email)){
+                tempUser = user;
+            }
+        }
+        return  tempUser;
     }
 }

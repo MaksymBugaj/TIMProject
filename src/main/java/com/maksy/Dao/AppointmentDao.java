@@ -4,6 +4,7 @@ import com.maksy.Entity.Appointment;
 import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -12,11 +13,23 @@ public class AppointmentDao {
 
     private static Map<Integer, Appointment> appointments;
 
+    static {
+        appointments = new HashMap<Integer, Appointment>(){
+            {
+                put(1, new Appointment(1,3,1,new Date()));
+                put(2, new Appointment(2,4,2,new Date()));
+                put(3, new Appointment(3,3,5,new Date()));
+
+            }
+        };
+    }
+
     public Collection<Appointment> getAllAppointments(){
         return this.appointments.values();
     }
 
     public Appointment getAppointmentById(int id){
+
         return this.appointments.get(id);
     }
 

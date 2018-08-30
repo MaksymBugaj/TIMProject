@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Http } from "@angular/http";
+import { BEComService } from '../_service/becom.service';
 
 @Component({
   selector: 'app-treat-list',
@@ -15,15 +16,12 @@ export class TreatListComponent implements OnInit {
   private treatmentUrl = 'https://tim-front2.herokuapp.com/api/treatments/';
 
   constructor(
-    private http: Http
+    private http: Http,
+    private beCom: BEComService
   ) { }
 
   ngOnInit() {
-    this.getTreatments();
-  }
-
-  getTreatments(): any {
-    return this.http.get(this.treatmentUrl).subscribe(res => {
+    this.beCom.getTreatments().subscribe(res => {
       this.treatments = res.json();
       console.log(res);
       console.log(this.treatments);

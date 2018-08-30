@@ -91,9 +91,9 @@ export class CallendarComponent {
 
   events$: Observable<Array<CalendarEvent<{ appointment: Appointment }>>>;
 
-  treatments: any;
+  treatments: any = [{}];
   choosenTreat: any;
-  doctors: any;
+  doctors: any = [{}];
   choosenDoctor: any;
   userEmail: String;
 
@@ -102,9 +102,19 @@ export class CallendarComponent {
     private modal: NgbModal,
     private beCom: BEComService
   ) {
-    this.events$ = this.beCom.getAppointments();
-    this.doctors = this.beCom.getDoctors();
-    this.treatments = this.beCom.getTreatments();
+
+    this.beCom.getDoctors().subscribe(res => {
+      this.doctors = res.json();
+      console.log(res);
+      console.log(this.doctors);
+    });
+
+    this.beCom.getTreatments().subscribe(res => {
+      this.treatments = res.json();
+      console.log(res);
+      console.log(this.treatments);
+    });
+    
   }
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {

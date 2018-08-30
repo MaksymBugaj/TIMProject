@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Http } from "@angular/http";
+import { BEComService } from '../_service/becom.service';
 
 @Component({
   selector: 'app-doc-list',
@@ -11,19 +12,20 @@ export class DocListComponent implements OnInit {
   query: any;
   doctors: any;
 
-  private doctorUrl = 'https://tim-front2.herokuapp.com/api/users/';
 
-  constructor(private http: Http) { }
+  constructor(
+    private http: Http,
+    private beCom: BEComService  
+  ) { }
 
   ngOnInit() {
-    this.getDoctors();
-  }
-
-  getDoctors(): any {
-    return this.http.get(this.doctorUrl).subscribe(res => {
+    this.beCom.getDoctors().subscribe(res => {
       this.doctors = res.json();
       console.log(res);
       console.log(this.doctors);
     });
+  
+    console.log(this.beCom.getDoctors());
+    
   }
 }

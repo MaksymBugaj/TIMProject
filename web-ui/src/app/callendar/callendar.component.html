@@ -66,14 +66,14 @@
     <div class="btn-group m-1">
       <select class="btn btn-primary m-1" id="TreatName" name="TreatName" #TreatNameRef="ngModel" [(ngModel)]="choosenTreat" (change)="onTreatChange()">
         <option [value]="" selected>Wybierz Zabieg</option>
-        <option [value]="treat.name" *ngFor="let treat of treatments | async">
+        <option [value]="treat.name" *ngFor="let treat of treatments ">
           {{treat.name}}
         </option>
       </select>
       <select class="btn btn-primary m-1" id="Doctor" name="Doctor" #DoctorRef="ngModel" [(ngModel)]="choosenDoctor" (change)="onDoctorChange()">
         <option [value]="" selected>Wybierz Lekarza</option>
-        <option [value]="doctor.email" *ngFor="let doctor of doctors | async">
-          {{doctor.firstname}} {{doctor.lastname}}
+        <option [value]="doctor.email" *ngFor="let doctor of doctors ">
+          {{doctor.firstname}} {{doctor.surname}}
         </option>
       </select>
     </div>

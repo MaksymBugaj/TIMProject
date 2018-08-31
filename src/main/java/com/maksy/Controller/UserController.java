@@ -41,16 +41,19 @@ public class UserController {
     }
 
     @RequestMapping(value = "/{id}",method = RequestMethod.DELETE)
+    @CrossOrigin(exposedHeaders="Access-Control-Allow-Origin")
     public void deleteUserById(@PathVariable("id") int id){
         userService.removeUserById(id);
     }
 
     @RequestMapping(method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @CrossOrigin(exposedHeaders="Access-Control-Allow-Origin")
     public void updateUser(@RequestBody User user){
         userService.updateUser(user);
     }
 
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @CrossOrigin(exposedHeaders="Access-Control-Allow-Origin")
     public void insertUser(@RequestBody User user){
         userService.insertUser(user);
     }

@@ -29,16 +29,19 @@ public class AppointmentController {
 
     //////////////////////////////////////////////////
     @RequestMapping(value = "/{id}",method = RequestMethod.DELETE)
+    @CrossOrigin(exposedHeaders="Access-Control-Allow-Origin")
     public void deleteAppointmentById(@PathVariable("id") int id){
         appointmentService.removeAppointmentById(id);
     }
 
     @RequestMapping(method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @CrossOrigin(exposedHeaders="Access-Control-Allow-Origin")
     public void updateAppointment(@RequestBody Appointment appointment){
         appointmentService.updateAppointment(appointment);
     }
 
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @CrossOrigin(exposedHeaders="Access-Control-Allow-Origin")
     public void insertAppointment(@RequestBody Appointment appointment){
         appointmentService.insertAppointment(appointment);
     }

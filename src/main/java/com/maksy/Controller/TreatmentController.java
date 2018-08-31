@@ -23,13 +23,13 @@ public class TreatmentController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @CrossOrigin(exposedHeaders="Access-Control-Allow-Origin")
-    public Treatment getTreatmentById(@PathVariable("id") int id){
+    public Treatment getTreatmentById(@PathVariable("id") String id){
         return treatmentService.getTreatmentById(id);
     }
 
     @RequestMapping(value = "/{id}",method = RequestMethod.DELETE)
     @CrossOrigin(exposedHeaders="Access-Control-Allow-Origin")
-    public void deleteTreatmentById(@PathVariable("id") int id){
+    public void deleteTreatmentById(@PathVariable("id") String id){
         treatmentService.removeTreatmentById(id);
     }
 
@@ -39,7 +39,7 @@ public class TreatmentController {
         treatmentService.updateTreatment(treatment);
     }
 
-    @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/createdTreatment",method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @CrossOrigin(exposedHeaders="Access-Control-Allow-Origin")
     public void insertTreatment(@RequestBody Treatment treatment){
         treatmentService.insertTreatment(treatment);

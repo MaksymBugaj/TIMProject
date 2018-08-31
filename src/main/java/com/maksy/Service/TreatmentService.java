@@ -17,11 +17,11 @@ public class TreatmentService {
         return treatmentDao.getAllTreatments();
     }
 
-    public Treatment getTreatmentById(int id){
+    public Treatment getTreatmentById(String id){
         return this.treatmentDao.getTreatmentById(id);
     }
 
-    public void removeTreatmentById(int id) {
+    public void removeTreatmentById(String id) {
         this.treatmentDao.removeTreatmentById(id);
     }
 

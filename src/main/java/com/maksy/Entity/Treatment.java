@@ -2,23 +2,24 @@ package com.maksy.Entity;
 
 public class Treatment {
 
-    private int id;
+    private String id;
     private String name;
-    private int doctorID;
+    private String doctorId;
 
-    public Treatment(int id, String name, int doctorID) {
+    public Treatment(String id, String name, String doctorId) {
         this.id = id;
         this.name = name;
-        this.doctorID = doctorID;
+        this.doctorId = doctorId;
     }
 
-    public Treatment(){}
+    public Treatment() {
+    }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -30,11 +31,11 @@ public class Treatment {
         this.name = name;
     }
 
-    public int getDoctorID() {
-        return doctorID;
+    public String getDoctorId() {
+        return doctorId;
     }
 
-    public void setDoctorID(int doctorID) {
-        this.doctorID = doctorID;
+    public void setDoctorId(String doctorId) {
+        this.doctorId = doctorId;
     }
 }

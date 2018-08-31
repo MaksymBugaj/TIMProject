@@ -23,7 +23,7 @@ public class AppointmentController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @CrossOrigin(exposedHeaders="Access-Control-Allow-Origin")
-    public Appointment getAppointmentById(@PathVariable("id") int id){
+    public Appointment getAppointmentById(@PathVariable("id") String id){
         return appointmentService.getAppointmentById(id);
     }
 
@@ -40,7 +40,7 @@ public class AppointmentController {
         appointmentService.updateAppointment(appointment);
     }
 
-    @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/createdAppointment",method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     @CrossOrigin(exposedHeaders="Access-Control-Allow-Origin")
     public void insertAppointment(@RequestBody Appointment appointment){
         appointmentService.insertAppointment(appointment);

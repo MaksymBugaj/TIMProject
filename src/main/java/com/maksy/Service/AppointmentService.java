@@ -17,7 +17,7 @@ public class AppointmentService {
         return appointmentDao.getAllAppointments();
     }
 
-    public Appointment getAppointmentById(int id){
+    public Appointment getAppointmentById(String id){
         return this.appointmentDao.getAppointmentById(id);
     }
 

@@ -5,15 +5,48 @@ import java.util.Date;
 public class Appointment {
 
     private String id;
-    private String patientID;
-    private String doctorID;
+    private String name;
+    private String patientId;
+    private String doctorId;
+    private String doctorName;
+    private String doctorSurname;
     private String date;
 
-    public Appointment(String id, String patientID, String doctorID, String date) {
+    public Appointment() {
+    }
+
+    public Appointment(String id, String name, String patientId, String doctorId, String doctorName, String doctorSurname, String date) {
         this.id = id;
-        this.patientID = patientID;
-        this.doctorID = doctorID;
+        this.name = name;
+        this.patientId = patientId;
+        this.doctorId = doctorId;
+        this.doctorName = doctorName;
+        this.doctorSurname = doctorSurname;
         this.date = date;
+    }
+
+    public String getDoctorName() {
+        return doctorName;
+    }
+
+    public void setDoctorName(String doctorName) {
+        this.doctorName = doctorName;
+    }
+
+    public String getDoctorSurname() {
+        return doctorSurname;
+    }
+
+    public void setDoctorSurname(String doctorSurname) {
+        this.doctorSurname = doctorSurname;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getId() {
@@ -25,19 +58,19 @@ public class Appointment {
     }
 
     public String getPatientID() {
-        return patientID;
+        return patientId;
     }
 
     public void setPatientID(String patientID) {
-        this.patientID = patientID;
+        this.patientId = patientID;
     }
 
     public String getDoctorID() {
-        return doctorID;
+        return doctorId;
     }
 
     public void setDoctorID(String doctorID) {
-        this.doctorID = doctorID;
+        this.doctorId = doctorID;
     }
 
     public String getDate() {

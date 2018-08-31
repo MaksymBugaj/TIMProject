@@ -10,7 +10,7 @@ export class HomeComponent implements OnInit {
   userData: any = {
     firstName: "NameExample", lastName: "LastNameExample"
   }
-  userType: number = 0;
+  userType: number = 1;
 
   constructor() { }
 

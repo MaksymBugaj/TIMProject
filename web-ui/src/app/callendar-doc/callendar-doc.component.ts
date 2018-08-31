@@ -81,9 +81,10 @@ export class CallendarDocComponent {
   clickedDate: any;
   clickedTime: any;
 
-  
+
 
   events$: Observable<Array<CalendarEvent<{ appointment: Appointment }>>>;
+  events: any;
   event: any = {
     date: "",
     time: "",
@@ -99,7 +100,15 @@ export class CallendarDocComponent {
     private beCom: BEComService,
     private http: Http
   ) {
-    this.treatments = this.beCom.getTreatments();
+    this.beCom.getAppointments().subscribe(res => {
+      this.events = res.json()
+      this.events$ = this.events
+        .map((appointment) => this.fromAppointmentsToEvents(appointment));
+    });
+
+    this.beCom.getTreatments().subscribe(res => {
+      this.treatments = res.json();
+    });
   }
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
@@ -137,7 +146,7 @@ export class CallendarDocComponent {
 
   }
 
-  addEvent(): void {
+  addEvent(form): void {
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
     var event = {
@@ -148,17 +157,66 @@ export class CallendarDocComponent {
     }
     console.log(event);
 
-    this.http.post("https://tim-front2.herokuapp.com/api/appointments/post", event, options)
-      .subscribe(
-        res => {
-          console.log(res);
-          if (res.ok) {
-            alert('Pomyślnie ustalono termin');
-          }
-        },
-        err => {
-          console.log(err);
+    if (form.valid) {
+      if (this.choosenTreat == null) {
+        console.log("błąd, brak zabiegu");
+      } else {
+        this.http.post("https://tim-front2.herokuapp.com/api/appointments", event, options)
+          .subscribe(
+            res => {
+              console.log(res);
+              if (res.ok) {
+                alert('Pomyślnie ustalono termin');
+              }
+            },
+            err => {
+              console.log(err);
+            }
+          );
+      }
+    }
+    else {
+      console.log("Błąd");
+    }
+  }
+
+  fromAppointmentsToEvents(appiontment: Appointment) {
+    if (appiontment.flag == 0) {
+      return ({
+        title: appiontment.treatName,
+        start: new Date(appiontment.date),
+        color: colors.green,
+        meta: {
+          appiontment
         }
-      );
+      })
+    } else if (appiontment.flag == 1) {
+      return ({
+        title: appiontment.treatName,
+        start: new Date(appiontment.date),
+        color: colors.yellow,
+        meta: {
+          appiontment
+        }
+      })
+    } else if (appiontment.flag == 2) {
+      return ({
+        title: appiontment.treatName,
+        start: new Date(appiontment.date),
+        color: colors.red,
+        meta: {
+          appiontment
+        }
+      })
+    } else {
+      return ({
+        title: "test",
+        start: new Date(appiontment.date),
+        color: colors.blue,
+        meta: {
+          appiontment
+        }
+      })
+    }
   }
 }

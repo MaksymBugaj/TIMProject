@@ -64,8 +64,8 @@
     <h5>Wybierz Zabieg</h5>
     <div class="btn-group">
       <select class="btn btn-primary" id="treatName" name="treatName" #treatNameRef="ngModel" [(ngModel)]="choosenTreat">
-        <option [value]="">Wybierz zabieg</option>
-        <option [value]="treat.name" *ngFor="let treat of treatments | async">
+        <option [value]="" selected>Wybierz zabieg</option>
+        <option [value]="treat.name" *ngFor="let treat of treatments">
           {{treat.name}}
         </option>
       </select>
@@ -78,7 +78,7 @@
   <mwl-calendar-month-view
     *ngSwitchCase="'month'"
     [viewDate]="viewDate"
-    [events]="events"
+    [events]="events$"
     [weekStartsOn]="weekStartsOn"
     [weekendDays]="weekendDays"
     [refresh]="refresh"
@@ -91,7 +91,7 @@
   <mwl-calendar-day-view
     *ngSwitchCase="'day'"
     [viewDate]="viewDate"
-    [events]="events"
+    [events]="events$"
     [refresh]="refresh"
     [locale]="locale"
     (hourSegmentClicked)="timeClicked($event.date)"

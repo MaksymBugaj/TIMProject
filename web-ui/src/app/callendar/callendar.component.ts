@@ -98,6 +98,9 @@ export class CallendarComponent {
   choosenDoctor: any;
   userEmail: String;
 
+  modalHeader: string;
+  modalBody: string;
+  closeResult: string;
 
   constructor(
     private modal: NgbModal,

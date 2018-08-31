@@ -4,6 +4,5 @@ export class Appointment {
     flag: number;
     treatName: string;
     doctorEmail: string;
-    patientEmail: string;
     userEmail: string;
   }

@@ -25,11 +25,7 @@ export class BEComService {
   }
 
   getAppointments(): any {
-    return this.http.get(this.appointmentUrl).subscribe(res => {
-      console.log(res);
-      console.log(res.json());
-      return res.json();
-    });
+    return this.http.get(this.appointmentUrl);
   }
 
 }

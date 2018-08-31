@@ -24,8 +24,5 @@ export class DocListComponent implements OnInit {
       console.log(res);
       console.log(this.doctors);
     });
-  
-    console.log(this.beCom.getDoctors());
-    
   }
 }

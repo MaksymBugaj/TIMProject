@@ -90,6 +90,7 @@ export class CallendarComponent {
   clickedDate: Date = new Date();
 
   events$: Observable<Array<CalendarEvent<{ appointment: Appointment }>>>;
+  events: any;
 
   treatments: any = [{}];
   choosenTreat: any;
@@ -102,19 +103,21 @@ export class CallendarComponent {
     private modal: NgbModal,
     private beCom: BEComService
   ) {
+    this.beCom.getAppointments().subscribe(res => {
+      this.events = res.json()
+      this.events$ = this.events
+        .map((appointment) => this.fromAppointmentsToEvents(appointment));
+    });
+
 
     this.beCom.getDoctors().subscribe(res => {
       this.doctors = res.json();
-      console.log(res);
-      console.log(this.doctors);
     });
 
     this.beCom.getTreatments().subscribe(res => {
       this.treatments = res.json();
-      console.log(res);
-      console.log(this.treatments);
     });
-    
+
   }
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
@@ -157,63 +160,61 @@ export class CallendarComponent {
       });
   }
 
-  fromAppointmentsToEvents(appiontments: Appointment[]) {
-    return appiontments.map((appointment: Appointment) => {
-      if (appointment.flag == 0 && appointment.userEmail == "") {
-        return ({
-          title: appointment.treatName,
-          start: new Date(appointment.date),
-          color: colors.green,
-          meta: {
-            appointment
-          }
-        })
-      } else if (appointment.flag == 1 && appointment.userEmail == this.userEmail) {
-        return ({
-          title: appointment.treatName,
-          start: new Date(appointment.date),
-          color: colors.cyan,
-          meta: {
-            appointment
-          }
-        })
-      } else if (appointment.flag == 2 && appointment.userEmail == this.userEmail) {
-        return ({
-          title: appointment.treatName,
-          start: new Date(appointment.date),
-          color: colors.blue,
-          meta: {
-            appointment
-          }
-        })
-      } else if (appointment.flag == 1 && appointment.userEmail != this.userEmail) {
-        return ({
-          title: appointment.treatName,
-          start: new Date(appointment.date),
-          color: colors.yellow,
-          meta: {
-            appointment
-          }
-        })
-      } else if (appointment.flag == 2 && appointment.userEmail != this.userEmail) {
-        return ({
-          title: appointment.treatName,
-          start: new Date(appointment.date),
-          color: colors.red,
-          meta: {
-            appointment
-          }
-        })
-      } else {
-        return ({
-          title: appointment.treatName,
-          start: new Date(appointment.date),
-          color: colors.black,
-          meta: {
-            appointment
-          }
-        })
-      }
-    })
+  fromAppointmentsToEvents(appiontment: Appointment) {
+    if (appiontment.flag == 0 && appiontment.userEmail == "") {
+      return ({
+        title: appiontment.treatName,
+        start: new Date(appiontment.date),
+        color: colors.green,
+        meta: {
+          appiontment
+        }
+      })
+    } else if (appiontment.flag == 1 && appiontment.userEmail == this.userEmail) {
+      return ({
+        title: appiontment.treatName,
+        start: new Date(appiontment.date),
+        color: colors.cyan,
+        meta: {
+          appiontment
+        }
+      })
+    } else if (appiontment.flag == 2 && appiontment.userEmail == this.userEmail) {
+      return ({
+        title: appiontment.treatName,
+        start: new Date(appiontment.date),
+        color: colors.blue,
+        meta: {
+          appiontment
+        }
+      })
+    } else if (appiontment.flag == 1 && appiontment.userEmail != this.userEmail) {
+      return ({
+        title: appiontment.treatName,
+        start: new Date(appiontment.date),
+        color: colors.yellow,
+        meta: {
+          appiontment
+        }
+      })
+    } else if (appiontment.flag == 2 && appiontment.userEmail != this.userEmail) {
+      return ({
+        title: appiontment.treatName,
+        start: new Date(appiontment.date),
+        color: colors.red,
+        meta: {
+          appiontment
+        }
+      })
+    } else {
+      return ({
+        title: "test",
+        start: new Date(appiontment.date),
+        color: colors.black,
+        meta: {
+          appiontment
+        }
+      })
+    }
   }
 }

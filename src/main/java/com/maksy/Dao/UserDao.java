@@ -1,7 +1,6 @@
 package com.maksy.Dao;
 
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.*;
 import com.maksy.Entity.User;
 import org.springframework.stereotype.Repository;
 
@@ -10,23 +9,44 @@ import java.util.*;
 @Repository
 public class UserDao {
 
-    private static Map<Integer, User> users;
     private DatabaseReference databaseReference;
     private FirebaseDatabase firebaseDatabase;
-//fixme kick this shit out
-    static {
-        users = new HashMap<Integer, User>(){
-            {
-                put(1, new User(1,"Marcin","Borowski","PESEL1","male","email1","phone1","password1","1"));
-                put(2, new User(2,"Maksym","Bugaj","PESEL2","male","email2","phone2","password2","1"));
-                put(3, new User(3,"Mariusz","Byler","PESEL3","male","email3","phone3","password3","0"));
-                put(4, new User(4,"Łukasz","Budner","PESEL4","male","email4","phone4","password4","0"));
-                put(5, new User(404,"Łukasz","Budner","PESEL5","female","email5","phone5","password5","1"));
+    private Map<String,User> users = new HashMap<String,User>();
+    public UserDao() {
+
+    }
+
+    private void initUsers(){
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference("users");
+
+        Query query = databaseReference.orderByChild("email");
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+                    String id = (String) dataSnapshot1.child("id").getValue();
+                    String firstname = (String) dataSnapshot1.child("firstname").getValue();
+                    String surname = (String) dataSnapshot1.child("surname").getValue();
+                    String PESEL = (String) dataSnapshot1.child("pesel").getValue();
+                    String sex = (String) dataSnapshot1.child("sex").getValue();
+                    String email = (String) dataSnapshot1.child("email").getValue();
+                    String phone = (String) dataSnapshot1.child("phone").getValue();
+                    String password = (String) dataSnapshot1.child("password").getValue();
+                    String type = (String) dataSnapshot1.child("type").getValue();
+                    User user = new User(id,firstname,surname,PESEL,sex,email,phone,password,type);
+                    users.put(user.getId(),user);
+                }
             }
-        };
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 
     public Collection<User> getAllUsers(){
+        initUsers();
         return this.users.values();
     }
 
@@ -41,16 +61,16 @@ public class UserDao {
 
     }
 
-    public User getUserById(int id){
+    public User getUserById(String id){
         return this.users.get(id);
     }
 
-    public void removeUserById(int id) {
+    public void removeUserById(String id) {
         this.users.remove(id);
     }
 
     public void updateUser(User user){
-        User user1 = users.get(user.getId());
+       /* User user1 = users.get(user.getId());
         user1.setFirstname(user.getFirstname());
         user1.setSurname(user.getSurname());
         user1.setPESEL(user.getPESEL());
@@ -59,14 +79,13 @@ public class UserDao {
         user1.setPhone(user.getPhone());
         user1.setPassword(user.getPassword());
         user1.setType(user.getType());
-        users.put(user.getId(),user);
+        users.put(user.getId(),user);*/
     }
 
     public void insertUser(User user) {
-        firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference("users");
-        User user1 = new User(user.getId(),user.getFirstname(),user.getSurname(),user.getPESEL(),user.getSex(),user.getEmail(),user.getPhone(),user.getPassword(),user.getType());
-        databaseReference.setValue(user1);
+        String userId = databaseReference.push().getKey();
+        User user1 = new User(userId,user.getFirstname(),user.getSurname(),user.getPESEL(),user.getSex(),user.getEmail(),user.getPhone(),user.getPassword(),user.getType());
+        databaseReference.child(userId).setValue(user1);
     }
 
     public User getUserByEmail(String email) {

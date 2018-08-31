@@ -2,7 +2,7 @@ package com.maksy.Entity;
 
 public class User {
 
-    private int id;
+    private String id;
     private String firstname;
     private String surname;
     private String PESEL;
@@ -12,7 +12,7 @@ public class User {
     private String password;
     private String type;
 
-    public User(int id, String firstname, String surname, String PESEL, String sex, String email, String phone, String password, String type) {
+    public User(String id, String firstname, String surname, String PESEL, String sex, String email, String phone, String password, String type) {
         this.id = id;
         this.firstname = firstname;
         this.surname = surname;
@@ -26,11 +26,11 @@ public class User {
 
     public User(){}
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

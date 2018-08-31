@@ -31,7 +31,7 @@ public class UserController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @CrossOrigin(exposedHeaders="Access-Control-Allow-Origin")
-    public User getUserById(@PathVariable("id") int id){
+    public User getUserById(@PathVariable("id") String id){
         return userService.getUserById(id);
     }
 
@@ -43,7 +43,7 @@ public class UserController {
 
     @RequestMapping(value = "/{id}",method = RequestMethod.DELETE)
     @CrossOrigin(exposedHeaders="Access-Control-Allow-Origin")
-    public void deleteUserById(@PathVariable("id") int id){
+    public void deleteUserById(@PathVariable("id") String id){
         userService.removeUserById(id);
     }
 

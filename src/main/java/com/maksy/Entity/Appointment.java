@@ -4,49 +4,47 @@ import java.util.Date;
 
 public class Appointment {
 
-    private int id;
-    private int patientID;
-    private int doctorID;
-    private Date date;
+    private String id;
+    private String patientID;
+    private String doctorID;
+    private String date;
 
-    public Appointment(int id, int pateintID, int doctorID, Date date) {
+    public Appointment(String id, String patientID, String doctorID, String date) {
         this.id = id;
-        this.patientID = pateintID;
+        this.patientID = patientID;
         this.doctorID = doctorID;
         this.date = date;
     }
 
-    public Appointment(){}
-
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public int getPatientID() {
+    public String getPatientID() {
         return patientID;
     }
 
-    public void setPatientID(int pateintID) {
-        this.patientID = pateintID;
+    public void setPatientID(String patientID) {
+        this.patientID = patientID;
     }
 
-    public int getDoctorID() {
+    public String getDoctorID() {
         return doctorID;
     }
 
-    public void setDoctorID(int doctorID) {
+    public void setDoctorID(String doctorID) {
         this.doctorID = doctorID;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 }

@@ -17,11 +17,11 @@ public class UserService {
         return userDao.getAllUsers();
     }
 
-    public User getUserById(int id){
+    public User getUserById(String id){
         return this.userDao.getUserById(id);
     }
 
-    public void removeUserById(int id) {
+    public void removeUserById(String id) {
         this.userDao.removeUserById(id);
     }
 

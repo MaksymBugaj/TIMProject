@@ -1,5 +1,7 @@
 package com.maksy.Dao;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.maksy.Entity.Appointment;
 import org.springframework.stereotype.Repository;
 
@@ -11,9 +13,11 @@ import java.util.Map;
 @Repository
 public class AppointmentDao {
 
-    private static Map<Integer, Appointment> appointments;
+    private DatabaseReference databaseReference;
+    private FirebaseDatabase firebaseDatabase;
+    private static Map<String, Appointment> appointments = new HashMap<String,Appointment>();
 
-    static {
+    /*static {
         appointments = new HashMap<Integer, Appointment>(){
             {
                 put(1, new Appointment(1,3,1,new Date()));
@@ -22,8 +26,11 @@ public class AppointmentDao {
 
             }
         };
-    }
+    }*/
 
+    private void initAppointments(){
+
+    }
     public Collection<Appointment> getAllAppointments(){
         return this.appointments.values();
     }
@@ -46,6 +53,7 @@ public class AppointmentDao {
     }
 
     public void insertAppointment(Appointment appointment) {
+        String appointmentId = databaseReference.push().getKey();
         this.appointments.put(appointment.getId(),appointment);
     }
 }

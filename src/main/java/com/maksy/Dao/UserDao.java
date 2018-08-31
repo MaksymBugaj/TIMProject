@@ -1,5 +1,7 @@
 package com.maksy.Dao;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.maksy.Entity.User;
 import org.springframework.stereotype.Repository;
 
@@ -9,6 +11,8 @@ import java.util.*;
 public class UserDao {
 
     private static Map<Integer, User> users;
+    private DatabaseReference databaseReference;
+    private FirebaseDatabase firebaseDatabase;
 //fixme kick this shit out
     static {
         users = new HashMap<Integer, User>(){
@@ -59,7 +63,10 @@ public class UserDao {
     }
 
     public void insertUser(User user) {
-        this.users.put(user.getId(),user);
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference("users");
+        User user1 = new User(user.getId(),user.getFirstname(),user.getSurname(),user.getPESEL(),user.getSex(),user.getEmail(),user.getPhone(),user.getPassword(),user.getType());
+        databaseReference.setValue(user1);
     }
 
     public User getUserByEmail(String email) {

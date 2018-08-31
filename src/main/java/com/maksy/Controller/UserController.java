@@ -3,6 +3,7 @@ package com.maksy.Controller;
 import com.maksy.Entity.User;
 import com.maksy.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
@@ -52,8 +53,9 @@ public class UserController {
         userService.updateUser(user);
     }
 
-    @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/userCreated",method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @CrossOrigin(exposedHeaders="Access-Control-Allow-Origin")
+    @ResponseStatus(HttpStatus.CREATED)
     public void insertUser(@RequestBody User user){
         userService.insertUser(user);
     }

@@ -185,8 +185,6 @@ export class CallendarDocComponent {
   }
 
   addEvent(form): void {
-    let headers = new Headers({ 'Content-Type': 'application/json' });
-    let options = new RequestOptions({ headers: headers });
     var event = {
       date: this.clickedDate,
       time: this.clickedTime,
@@ -199,18 +197,7 @@ export class CallendarDocComponent {
       if (this.choosenTreat == null) {
         console.log("błąd, brak zabiegu");
       } else {
-        this.http.post("https://tim-front2.herokuapp.com/api/appointments", event, options)
-          .subscribe(
-            res => {
-              console.log(res);
-              if (res.ok) {
-                alert('Pomyślnie ustalono termin');
-              }
-            },
-            err => {
-              console.log(err);
-            }
-          );
+        this.beCom.createAppointment(event);
       }
     }
     else {

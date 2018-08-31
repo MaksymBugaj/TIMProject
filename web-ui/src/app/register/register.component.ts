@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '../../../node_modules/@angular/router';
+import { BEComService } from '../_service/becom.service';
 
 @Component({
   selector: 'app-register',
@@ -10,7 +11,10 @@ export class RegisterComponent implements OnInit {
 
   registerData: any = {};
 
-  constructor(private router: Router) { }
+  constructor(
+    private router: Router,
+    private beCom: BEComService
+  ) { }
 
   ngOnInit() {
   }
@@ -18,6 +22,6 @@ export class RegisterComponent implements OnInit {
   register(form)
   {
     console.log(form.value);
-    this.router.navigate(["/home"]);
+    this.beCom.createUser(form.value)
   }
 }

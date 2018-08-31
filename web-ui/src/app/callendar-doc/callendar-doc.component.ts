@@ -20,7 +20,7 @@ import {
   startOfMonth
 } from 'date-fns';
 import { Subject, Observable } from 'rxjs';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap/modal/modal.module';
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap/modal/modal.module';
 import {
   CalendarEvent,
   CalendarEventAction,
@@ -95,6 +95,10 @@ export class CallendarDocComponent {
 
   email = "test";
 
+  modalHeader: string;
+  modalBody: string;
+  closeResult: string;
+
   constructor(
     private modal: NgbModal,
     private beCom: BEComService,
@@ -140,10 +144,44 @@ export class CallendarDocComponent {
     this.refresh.next();
   }
 
-  handleEvent(action: string, event: CalendarEvent): void {
+  handleEvent(action: string, event: CalendarEvent, content): void {
     this.modalData = { event, action };
     console.log(event);
+    this.modalHeader = "Wizyta dnia " + event.start.toLocaleDateString() + " o godzinie " + event.meta.appointment.time + " na zabieg: " + event.meta.appointment.treatName;
+    if (event.meta.appointment.flag == 0) {
+      this.modalBody = "Czy chcesz usunąć wizitę?"
+      this.openModal(content);
+    } else if (event.meta.appointment.flag == 1) {
+      this.modalBody = "Czy chcesz przyjąć rezerwacje?"
+      this.openModal(content);
+    } else if (event.meta.appointment.flag == 2) {
+      this.modalBody = "Czy chcesz odwołać przyjęcie rezerwacji?"
+      this.openModal(content);
+    }
+  }
 
+  openModal(content) {
+    this.modal.open(content, { centered: true } )
+  }
+
+  manageEvent(){
+    if (this.modalData.event.meta.appointment.flag == 0) {
+      this.beCom.deleteAppointment(this.modalData.event.meta.appointment.key);
+    } else if (this.modalData.event.meta.appointment.flag == 1) {
+      this.beCom.acceptAppointment(this.modalData.event.meta.appointment.key);
+    } else if (this.modalData.event.meta.appointment.flag == 2) {
+      this.beCom.rejectAppointment(this.modalData.event.meta.appointment.key);
+    }
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return  `with: ${reason}`;
+    }
   }
 
   addEvent(form): void {
@@ -219,4 +257,5 @@ export class CallendarDocComponent {
       })
     }
   }
+
 }

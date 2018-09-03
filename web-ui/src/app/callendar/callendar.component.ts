@@ -2,7 +2,8 @@ import {
   Component,
   ChangeDetectionStrategy,
   ViewChild,
-  TemplateRef
+  TemplateRef,
+  ChangeDetectorRef
 } from '@angular/core';
 import {
   startOfDay,
@@ -64,7 +65,6 @@ const colors: any = {
 
 @Component({
   selector: 'app-callendar',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './callendar.component.html',
   styleUrls: ['./callendar.component.css'],
   providers: [
@@ -79,7 +79,7 @@ export class CallendarComponent {
   view: string = 'month';
   locale: string = 'pl';
   weekStartsOn: number = DAYS_OF_WEEK.MONDAY;
-  weekendDays: number[] = [DAYS_OF_WEEK.FRIDAY, DAYS_OF_WEEK.SATURDAY];
+  weekendDays: number[] = [DAYS_OF_WEEK.SATURDAY, DAYS_OF_WEEK.SUNDAY];
   viewDate: Date = new Date();
   modalData: {
     action: string;
@@ -104,7 +104,8 @@ export class CallendarComponent {
 
   constructor(
     private modal: NgbModal,
-    private beCom: BEComService
+    private beCom: BEComService,
+    private changeDetectorRef: ChangeDetectorRef
   ) {
     this.beCom.getAppointments().subscribe(res => {
       this.events = res.json()

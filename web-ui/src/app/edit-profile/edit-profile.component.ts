@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { BEComService } from '../_service/becom.service';
 
 @Component({
   selector: 'app-edit-profile',
@@ -9,7 +10,9 @@ export class EditProfileComponent implements OnInit {
 
   editData: any = {};
 
-  constructor() { }
+  constructor(
+    private beCom: BEComService
+  ) { }
 
   ngOnInit() {
   }
@@ -17,6 +20,10 @@ export class EditProfileComponent implements OnInit {
   edit(form)
   {
     console.log(form.value);
-    
+    if (form.valid) {
+      this.beCom.editUser(form.value);
+    } else {
+      console.log("Błędne wypełnienie");
+    }
   }
 }

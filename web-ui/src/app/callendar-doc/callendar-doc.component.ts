@@ -55,7 +55,6 @@ const colors: any = {
 
 @Component({
   selector: 'app-callendar-doc',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './callendar-doc.component.html',
   styleUrls: ['./callendar-doc.component.css'],
   providers: [
@@ -70,7 +69,7 @@ export class CallendarDocComponent {
   view: string = 'month';
   locale: string = 'pl';
   weekStartsOn: number = DAYS_OF_WEEK.MONDAY;
-  weekendDays: number[] = [DAYS_OF_WEEK.FRIDAY, DAYS_OF_WEEK.SATURDAY];
+  weekendDays: number[] = [DAYS_OF_WEEK.SATURDAY, DAYS_OF_WEEK.SUNDAY];
   viewDate: Date = new Date();
   modalData: {
     action: string;
@@ -171,16 +170,6 @@ export class CallendarDocComponent {
       this.beCom.acceptAppointment(this.modalData.event.meta.appointment.key);
     } else if (this.modalData.event.meta.appointment.flag == 2) {
       this.beCom.rejectAppointment(this.modalData.event.meta.appointment.key);
-    }
-  }
-
-  private getDismissReason(reason: any): string {
-    if (reason === ModalDismissReasons.ESC) {
-      return 'by pressing ESC';
-    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return 'by clicking on a backdrop';
-    } else {
-      return  `with: ${reason}`;
     }
   }
 

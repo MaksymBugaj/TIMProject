@@ -1,4 +1,5 @@
 <resources>
+    <string name="stop">2:40</string>
     <string name="app_name">TIMProject</string>
     <string name="welcome_text">Opis</string>
     <string name="login_class">Login</string>
@@ -21,4 +22,9 @@
     <string name="doctors">Doctors</string>
     <string name="available_doctors">Available Doctors</string>
     <string name="retrofit">Retrofit</string>
+    <string name="hint_pesel">Pesel</string>
+    <string name="hint_man">Man</string>
+    <string name="hint_woman">Woman</string>
+    <string name="my_patients">My Patients</string>
+    <string name="add_termins">Add termins</string>
 </resources>

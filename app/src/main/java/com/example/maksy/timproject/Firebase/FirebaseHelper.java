@@ -42,10 +42,10 @@ public class FirebaseHelper {
 
     }
 
-    public void createUser(String name, String surname, String email, String phone, String login, String password) {
+    public void createUser(String name, String surname,String pesel,String sex, String email, String phone, String password,String type,String specialization) {
         userId = mDatabaseReference.push().getKey();
 
-        User user = new User(userId, name, surname, email, phone, login, password, false);
+        User user = new User(userId, name, surname,pesel,sex, email, phone, password, type,specialization);
         mDatabaseReference.child(userId).setValue(user);
         auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {

@@ -11,6 +11,9 @@ import android.widget.TextView;
 
 import com.example.maksy.timproject.R;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -23,6 +26,7 @@ public class CalendarChooseDate extends AppCompatActivity {
     private String day,month,year;
     private Unbinder unbinder;
 
+    private List<Visit> visits = new ArrayList<>();
     private RecyclerView recyclerView;
     private CalendarAdapter calendarAdapter;
 
@@ -37,7 +41,7 @@ public class CalendarChooseDate extends AppCompatActivity {
         getData();
         setTextView();
 
-        calendarAdapter = new CalendarAdapter();
+        calendarAdapter = new CalendarAdapter(visits);
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
@@ -52,6 +56,8 @@ public class CalendarChooseDate extends AppCompatActivity {
     }
 
     private void getData() {
+        Visit visit = new Visit("Eberhard Mock","Morderstwo");
+        visits.add(visit);
         Intent intent = getIntent();
         this.day=intent.getStringExtra("day");
         this.month=intent.getStringExtra("month");

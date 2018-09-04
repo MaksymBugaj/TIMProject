@@ -1,35 +1,53 @@
 package com.example.maksy.timproject.User;
 
-public class User {
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
+public class User {
+    @SerializedName("id")
+    @Expose
     private String id;
-    private String name;
-    private String surname;
+    @SerializedName("firstName")
+    @Expose
+    private String firstName;
+    @SerializedName("lastName")
+    @Expose
+    private String lastName;
+    @SerializedName("PESEL")
+    @Expose
+    private String PESEL;
+    @SerializedName("sex")
+    @Expose
+    private String sex;
+    @SerializedName("email")
+    @Expose
     private String email;
+    @SerializedName("phone")
+    @Expose
     private String phone;
-    private String login;
+    @SerializedName("password")
+    @Expose
     private String password;
-    private boolean doctor;
+    @SerializedName("type")
+    @Expose
+    private String type;
+    @SerializedName("specialization")
+    @Expose
+    private String specialization;
 
     public User(){}
 
-    public User(String id, String name, String surname, String email, String phone, String login, String password, boolean doctor) {
+    public User(String id, String firstName, String lastName, String PESEL, String sex, String email, String phone, String password, String type, String specialization) {
         this.id = id;
-        this.name = name;
-        this.surname = surname;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.PESEL = PESEL;
+        this.sex = sex;
         this.email = email;
         this.phone = phone;
-        this.login = login;
         this.password = password;
-        this.doctor = doctor;
-    }
-
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
+        this.type = type;
+        this.specialization = specialization;
     }
 
     public String getId() {
@@ -40,20 +58,36 @@ public class User {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getSurname() {
-        return surname;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setSurname(String surname) {
-        this.surname = surname;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getPESEL() {
+        return PESEL;
+    }
+
+    public void setPESEL(String PESEL) {
+        this.PESEL = PESEL;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
     }
 
     public String getEmail() {
@@ -72,19 +106,27 @@ public class User {
         this.phone = phone;
     }
 
-    public boolean isDoctor() {
-        return doctor;
-    }
-
-    public void setDoctor(boolean doctor) {
-        this.doctor = doctor;
-    }
-
     public String getPassword() {
         return password;
     }
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getSpecialization() {
+        return specialization;
+    }
+
+    public void setSpecialization(String specialization) {
+        this.specialization = specialization;
     }
 }

@@ -5,6 +5,7 @@ import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.widget.CheckBox;
 import android.widget.Toast;
 
 import com.example.maksy.timproject.Firebase.FirebaseHelper;
@@ -25,8 +26,9 @@ public class CreateAccount extends AppCompatActivity {
     TextInputEditText name;
     @BindView(R.id.textInputEditTextSurname)
     TextInputEditText surname;
-    @BindView(R.id.textInputEditTextLogin)
-    TextInputEditText login;
+    @BindView(R.id.checkBoxSexMale)
+    CheckBox male;
+    @BindView(R.id.checkBoxSexFemale) CheckBox female;
     @BindView(R.id.textInputEditTextPhone)
     TextInputEditText phone;
     @BindView(R.id.textInputEditTextEmail)
@@ -35,6 +37,8 @@ public class CreateAccount extends AppCompatActivity {
     TextInputEditText password;
     @BindView(R.id.textInputEditTextConfirmPassword)
     TextInputEditText passwordConfirm;
+    @BindView(R.id.textInputEditTextPesel)
+    TextInputEditText pesel;
 
     private FirebaseHelper firebaseHelper;
     private Unbinder unbinder;
@@ -57,7 +61,12 @@ public class CreateAccount extends AppCompatActivity {
         String editPassword = password.getText().toString().trim();
         String editPasswordConfirm = passwordConfirm.getText().toString().trim();
         String editPhone = phone.getText().toString().trim();
-        String editLogin = login.getText().toString().trim();
+        String editPesel = pesel.getText().toString().trim();
+        String sex = "none";
+
+        if(male.isChecked()){
+            sex = "male";
+        } else sex = "female";
 
         if (TextUtils.isEmpty(editName)) {
             Toast.makeText(getApplicationContext(), "Name field cannot be empty!", Toast.LENGTH_LONG).show();
@@ -100,21 +109,33 @@ public class CreateAccount extends AppCompatActivity {
             return;
         }
 
-        if (TextUtils.isEmpty(editLogin)) {
-            Toast.makeText(getApplicationContext(), "Login field cannot be empty!", Toast.LENGTH_LONG).show();
+        if(sex.equals("none")){
+            Toast.makeText(getApplicationContext(), "Set sex!", Toast.LENGTH_SHORT).show();
             return;
         }
 
+       /* if (TextUtils.isEmpty(editLogin)) {
+            Toast.makeText(getApplicationContext(), "Login field cannot be empty!", Toast.LENGTH_LONG).show();
+            return;
+        }*/
+
         String initFirebase = "users";
         firebaseHelper = new FirebaseHelper(initFirebase, this);
-        firebaseHelper.createUser(editName, editSurname, editEmail, editPhone, editLogin, editPassword);
+        firebaseHelper.createUser(editName, editSurname,editPesel,sex, editEmail, editPhone,editPassword,"0","0");
         Toast.makeText(getApplicationContext(), "Account created!", Toast.LENGTH_SHORT).show();
         startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+        finish();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         unbinder.unbind();
+    }
+
+    @OnClick(R.id.appCompatTextViewLoginLink)
+    public void onHaveAccountClick(){
+        startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+        finish();
     }
 }

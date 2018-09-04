@@ -34,4 +34,6 @@
     <color name="colorRed_900">#B71C1C</color>
     <!-- ./ 4th Gradient color -->
 
+    <color name="transparent">#80B71C1C</color>
+
 </resources>

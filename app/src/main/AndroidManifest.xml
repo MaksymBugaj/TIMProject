@@ -11,7 +11,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AppCompat.DayNight.DarkActionBar">
+        android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
             android:screenOrientation="portrait">
@@ -42,7 +42,9 @@
             android:parentActivityName=".Calendar.CalendarActivity"
             android:screenOrientation="portrait" />
         <activity android:name=".API.APIExample" />
-        <activity android:name=".API.APIRetrofit"></activity>
+        <activity android:name=".API.APIRetrofit" />
+        <activity android:name=".Appointments.CreateAppointment" />
+        <activity android:name=".Calendar.CalendarTestSpinner"></activity>
     </application>
 
 </manifest>

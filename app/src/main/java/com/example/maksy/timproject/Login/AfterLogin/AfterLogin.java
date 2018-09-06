@@ -10,6 +10,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.maksy.timproject.Appointments.CreateAppointment;
 import com.example.maksy.timproject.Calendar.CalendarActivity;
 import com.example.maksy.timproject.Calendar.CalendarChooseDate;
 import com.example.maksy.timproject.R;
@@ -36,10 +37,12 @@ public class AfterLogin extends AppCompatActivity {
     Button buttonDoctors;
     @BindView(R.id.afterLoginPatients)
     Button buttonPatients;
-    @BindView(R.id.afterLoginAddTermins)
+    @BindView(R.id.afterLoginAddTreatments)
     Button buttonAddTermins;
     @BindView(R.id.progressBar)
     ProgressBar progressBar;
+    @BindView(R.id.afterLoginAddAppointments)
+    Button buttonAddAppointments;
 
     private Unbinder unbinder;
     private FirebaseAuth firebaseAuth;
@@ -62,6 +65,7 @@ public class AfterLogin extends AppCompatActivity {
         buttonDoctors.setVisibility(View.INVISIBLE);
         buttonPatients.setVisibility(View.INVISIBLE);
         buttonVisits.setVisibility(View.INVISIBLE);
+        buttonAddAppointments.setVisibility(View.INVISIBLE);
         if (firebaseAuth.getCurrentUser() != null) {
             UserChangeListener(firebaseAuth.getCurrentUser().getEmail());
         }
@@ -72,8 +76,8 @@ public class AfterLogin extends AppCompatActivity {
         startActivity(new Intent(getApplicationContext(), CalendarActivity.class));
     }
 
-    @OnClick(R.id.afterLoginAddTermins)
-    public void onAddTerminsButtonClick(){
+    @OnClick(R.id.afterLoginAddTreatments)
+    public void onAddTreatmentsButtonClick(){
 
     }
 
@@ -82,6 +86,12 @@ public class AfterLogin extends AppCompatActivity {
 
     }
 
+    @OnClick(R.id.afterLoginAddAppointments)
+    public void onAddAppointmentsButtonClick(){
+        startActivity(new Intent(getApplicationContext(), CreateAppointment.class));
+    }
+
+    //pacjent
     @OnClick(R.id.afterLoginDoctors)
     public void onDoctorsButtonClick(){
 
@@ -117,6 +127,7 @@ public class AfterLogin extends AppCompatActivity {
                             buttonDoctors.setVisibility(View.GONE);
                             buttonPatients.setVisibility(View.VISIBLE);
                             buttonVisits.setVisibility(View.GONE);
+                            buttonAddAppointments.setVisibility(View.VISIBLE);
                         } else {
                             progressBar.setVisibility(View.INVISIBLE);
                             buttonAddTermins.setVisibility(View.GONE);
@@ -124,6 +135,7 @@ public class AfterLogin extends AppCompatActivity {
                             buttonDoctors.setVisibility(View.VISIBLE);
                             buttonPatients.setVisibility(View.GONE);
                             buttonVisits.setVisibility(View.VISIBLE);
+                            buttonAddAppointments.setVisibility(View.INVISIBLE);
                         }
                     }
                     else {

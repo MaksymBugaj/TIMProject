@@ -8,44 +8,58 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.maksy.timproject.Appointments.Appointment;
 import com.example.maksy.timproject.R;
+import com.example.maksy.timproject.User.Doctor;
+import com.example.maksy.timproject.User.User;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
 
 public class CalendarAdapter extends RecyclerView.Adapter<CalendarAdapter.MyViewHolder> {
 
-    private List<Visit> visits;
-    public CalendarAdapter(List<Visit> visits) {
-        this.visits=visits;
-        Log.i("here?","construct");
+
+    private List<Doctor> doctors;
+
+    public CalendarAdapter(List<Doctor> doctors) {
+        this.doctors = doctors;
+        Log.i("here?", "construct");
     }
+
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView mDoctorName, mDoctorSpecialization;
+        public TextView mDoctorName,specialization;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             mDoctorName = (TextView) itemView.findViewById(R.id.doctor_name);
-            mDoctorSpecialization = (TextView) itemView.findViewById(R.id.doctor_hours);
+            specialization = (TextView) itemView.findViewById(R.id.doctor_specialization);
         }
     }
 
     @Override
-    public CalendarAdapter.MyViewHolder onCreateViewHolder( ViewGroup viewGroup, int i) {
+    public CalendarAdapter.MyViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View itemView = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.recycler_date_row, viewGroup, false);
-        Log.i("here?","oncreate");
+        Log.i("here?", "oncreate");
         return new CalendarAdapter.MyViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(CalendarAdapter.MyViewHolder myViewHolder, int position) {
-        myViewHolder.mDoctorName.setText(R.string.after_login_welcome);
-        myViewHolder.mDoctorSpecialization.setText(R.string.after_login_welcome);
-        Log.i("here?","onbind");
+    public void onBindViewHolder(final CalendarAdapter.MyViewHolder myViewHolder, int position) {
+        final Doctor doctor = doctors.get(position);
+        myViewHolder.mDoctorName.setText(doctor.getName());
+        myViewHolder.specialization.setText(doctor.getSpecialization());
+        Log.i("here?", "setText");
+
     }
 
     @Override
     public int getItemCount() {
-        return visits.size();
+        return doctors.size();
     }
 
 

@@ -18,7 +18,7 @@
     <string name="popup_available_termins">Available dates</string>
     <string name="calendar">Available dates</string>
     <string name="after_login_welcome">Choose option</string>
-    <string name="visits">My Visists</string>
+    <string name="appointments">My Visists</string>
     <string name="doctors">Doctors</string>
     <string name="available_doctors">Available Doctors</string>
     <string name="retrofit">Retrofit</string>
@@ -26,5 +26,23 @@
     <string name="hint_man">Man</string>
     <string name="hint_woman">Woman</string>
     <string name="my_patients">My Patients</string>
-    <string name="add_termins">Add termins</string>
+    <string name="add_termins">Add Treatments</string>
+    <string name="add_appointments">Add Appointments</string>
+    <string name="button_submit">Submit</string>
+
+
+    <string-array name="hours">
+        <item>8:00</item>
+        <item>9:00</item>
+        <item>10:00</item>
+        <item>11:00</item>
+        <item>12:00</item>
+        <item>13:00</item>
+        <item>14:00</item>
+        <item>15:00</item>
+        <item>16:00</item>
+    </string-array>
+
+    <string name="hours_prompt">Choose hour</string>
+
 </resources>

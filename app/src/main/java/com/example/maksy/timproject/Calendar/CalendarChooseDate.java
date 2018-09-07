@@ -45,7 +45,6 @@ public class CalendarChooseDate extends AppCompatActivity {
 
     private String day, month, year;
     private Unbinder unbinder;
-    private String doctorId;
 
     private List<Doctor> doctors = new ArrayList<>();
     private RecyclerView recyclerView;
@@ -79,7 +78,6 @@ public class CalendarChooseDate extends AppCompatActivity {
             @Override
             public void onClick(View view, int position) {
                 Doctor doctor = doctors.get(position);
-                Toast.makeText(getApplicationContext(), " is selected!", Toast.LENGTH_SHORT).show();
                 createAppointment(doctor);
             }
 

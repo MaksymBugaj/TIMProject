@@ -7,13 +7,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.maksy.timproject.Appointments.CreateAppointment;
+import com.example.maksy.timproject.Appointments.PatientAppointments;
 import com.example.maksy.timproject.Calendar.CalendarActivity;
-import com.example.maksy.timproject.Calendar.CalendarChooseDate;
 import com.example.maksy.timproject.R;
+import com.example.maksy.timproject.Treatments.PatientTreatment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -41,8 +40,7 @@ public class AfterLogin extends AppCompatActivity {
     Button buttonAddTermins;
     @BindView(R.id.progressBar)
     ProgressBar progressBar;
-    @BindView(R.id.afterLoginAddAppointments)
-    Button buttonAddAppointments;
+
 
     private Unbinder unbinder;
     private FirebaseAuth firebaseAuth;
@@ -65,7 +63,6 @@ public class AfterLogin extends AppCompatActivity {
         buttonDoctors.setVisibility(View.INVISIBLE);
         buttonPatients.setVisibility(View.INVISIBLE);
         buttonVisits.setVisibility(View.INVISIBLE);
-        buttonAddAppointments.setVisibility(View.INVISIBLE);
         if (firebaseAuth.getCurrentUser() != null) {
             UserChangeListener(firebaseAuth.getCurrentUser().getEmail());
         }
@@ -76,19 +73,11 @@ public class AfterLogin extends AppCompatActivity {
         startActivity(new Intent(getApplicationContext(), CalendarActivity.class));
     }
 
-    @OnClick(R.id.afterLoginAddTreatments)
-    public void onAddTreatmentsButtonClick(){
 
-    }
 
     @OnClick(R.id.afterLoginPatients)
     public void onPatientsButtonClick(){
 
-    }
-
-    @OnClick(R.id.afterLoginAddAppointments)
-    public void onAddAppointmentsButtonClick(){
-        startActivity(new Intent(getApplicationContext(), CreateAppointment.class));
     }
 
     //pacjent
@@ -99,7 +88,12 @@ public class AfterLogin extends AppCompatActivity {
 
     @OnClick(R.id.afterLoginVisits)
     public void onVisitsButtonClick(){
+        startActivity(new Intent(getApplicationContext(), PatientAppointments.class));
+    }
 
+    @OnClick(R.id.afterLoginAddTreatments)
+    public void onAddTreatmentsButtonClick(){
+        startActivity(new Intent(getApplicationContext(), PatientTreatment.class));
     }
 
     @Override
@@ -127,15 +121,13 @@ public class AfterLogin extends AppCompatActivity {
                             buttonDoctors.setVisibility(View.GONE);
                             buttonPatients.setVisibility(View.VISIBLE);
                             buttonVisits.setVisibility(View.GONE);
-                            buttonAddAppointments.setVisibility(View.VISIBLE);
                         } else {
                             progressBar.setVisibility(View.INVISIBLE);
-                            buttonAddTermins.setVisibility(View.GONE);
+                            buttonAddTermins.setVisibility(View.VISIBLE);
                             buttonCalendar.setVisibility(View.VISIBLE);
                             buttonDoctors.setVisibility(View.VISIBLE);
                             buttonPatients.setVisibility(View.GONE);
                             buttonVisits.setVisibility(View.VISIBLE);
-                            buttonAddAppointments.setVisibility(View.INVISIBLE);
                         }
                     }
                     else {
@@ -149,8 +141,5 @@ public class AfterLogin extends AppCompatActivity {
 
             }
         });
-
-        String uid = firebaseAuth.getCurrentUser().getUid();
-        Log.i("Muchos gracias hola", uid);
     }
 }

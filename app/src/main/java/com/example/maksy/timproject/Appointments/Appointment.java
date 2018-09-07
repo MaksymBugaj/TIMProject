@@ -27,6 +27,12 @@ public class Appointment {
     public Appointment() {
     }
 
+    public Appointment(String doctorName, String doctorSpecialization, String date) {
+        this.doctorName = doctorName;
+        this.doctorSpecialization = doctorSpecialization;
+        this.date = date;
+    }
+
     public String getDoctorName() {
         return doctorName;
     }

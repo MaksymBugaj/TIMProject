@@ -8,16 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.maksy.timproject.Appointments.Appointment;
 import com.example.maksy.timproject.R;
 import com.example.maksy.timproject.User.Doctor;
-import com.example.maksy.timproject.User.User;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
 
@@ -43,7 +35,7 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarAdapter.MyView
 
     @Override
     public CalendarAdapter.MyViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        View itemView = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.recycler_date_row, viewGroup, false);
+        View itemView = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.recycler_calendar_date_row, viewGroup, false);
         Log.i("here?", "oncreate");
         return new CalendarAdapter.MyViewHolder(itemView);
     }

@@ -58,7 +58,7 @@
         android:background="@drawable/btn_style_1"
         android:text="@string/add_termins" />
 
-    <android.support.v7.widget.AppCompatButton
+   <!-- <android.support.v7.widget.AppCompatButton
         android:id="@+id/afterLoginAddAppointments"
         android:drawableStart="@drawable/ic_donut_large_black_24dp"
         android:drawableLeft="@drawable/ic_donut_large_black_24dp"
@@ -66,7 +66,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:background="@drawable/btn_style_1"
-        android:text="@string/add_appointments" />
+        android:text="@string/add_appointments" />-->
 
 
     <android.support.v4.widget.ContentLoadingProgressBar

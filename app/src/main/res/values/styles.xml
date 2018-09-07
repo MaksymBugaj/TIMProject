@@ -16,7 +16,6 @@
     </style>
 
     <style name="AppTheme.Background" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="android:windowBackground">@drawable/background_hdpi</item>
         <item name="android:background">@android:color/transparent</item>
         <!-- <item name="colorBackground">@color/colorPrimary</item>-->
     </style>

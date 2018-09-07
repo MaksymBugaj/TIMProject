@@ -18,7 +18,7 @@
     <string name="popup_available_termins">Available dates</string>
     <string name="calendar">Available dates</string>
     <string name="after_login_welcome">Choose option</string>
-    <string name="appointments">My Visists</string>
+    <string name="appointments">My Appointments</string>
     <string name="doctors">Doctors</string>
     <string name="available_doctors">Available Doctors</string>
     <string name="retrofit">Retrofit</string>
@@ -44,5 +44,16 @@
     </string-array>
 
     <string name="hours_prompt">Choose hour</string>
+    <string name="treatment">Choose treatment</string>
+    <string name="patient_appointment">Your appointments</string>
+
+    <string-array name="treatments">
+        <item>Wizyta stomatologiczna</item>
+        <item>Wizyta endokrynologiczna</item>
+        <item>Wizyta ginegologiczna</item>
+        <item>Wizyta laryngologiczna </item>
+    </string-array>
+
+    <string name="treatments_visits">Available treatments</string>
 
 </resources>

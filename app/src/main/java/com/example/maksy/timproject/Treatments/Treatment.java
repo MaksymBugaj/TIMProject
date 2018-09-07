@@ -2,19 +2,40 @@ package com.example.maksy.timproject.Treatments;
 
 public class Treatment {
 
+    private String teatmentId;
     private String doctorName;
     private String doctorSpecialization;
-    private String teatmentId;
+    private String treatmentName;
     private String date;
+    private String patientEmail;
+
 
     public Treatment() {
     }
 
-    public Treatment(String doctorName, String doctorSpecialization, String teatmentId, String date) {
+    public Treatment(String teatmentId, String doctorName, String doctorSpecialization, String treatmentName, String date, String patientEmail) {
+        this.teatmentId = teatmentId;
         this.doctorName = doctorName;
         this.doctorSpecialization = doctorSpecialization;
-        this.teatmentId = teatmentId;
+        this.treatmentName = treatmentName;
         this.date = date;
+        this.patientEmail = patientEmail;
+    }
+
+    public String getPatientEmail() {
+        return patientEmail;
+    }
+
+    public void setPatientEmail(String patientEmail) {
+        this.patientEmail = patientEmail;
+    }
+
+    public String getTreatmentName() {
+        return treatmentName;
+    }
+
+    public void setTreatmentName(String treatmentName) {
+        this.treatmentName = treatmentName;
     }
 
     public String getDoctorName() {

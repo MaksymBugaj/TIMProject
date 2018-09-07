@@ -44,7 +44,8 @@
         <activity android:name=".API.APIExample" />
         <activity android:name=".API.APIRetrofit" />
         <activity android:name=".Appointments.CreateAppointment" />
-        <activity android:name=".Calendar.CalendarTestSpinner"></activity>
+        <activity android:name=".Appointments.PatientAppointments" />
+        <activity android:name=".Treatments.PatientTreatment"></activity>
     </application>
 
 </manifest>

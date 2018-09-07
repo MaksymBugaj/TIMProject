@@ -5,51 +5,36 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Calendar.CalendarTestSpinner">
-
+    tools:context=".Treatments.PatientTreatment">
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/hours_prompt"/>
+            android:id="@+id/patientTreatment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/treatment"/>
+
         <Spinner
-            android:id="@+id/spinnerHours"
+            android:id="@+id/spinnerTreatments"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:entries="@array/hours"
-            android:prompt="@string/hours_prompt"
+            android:entries="@array/treatments"
+            android:prompt="@string/treatments_visits"
             android:spinnerMode="dropdown">
 
         </Spinner>
 
     </LinearLayout>
 
-
-
-
-
     <Button
-        android:id="@+id/buttonSubmitDoctor"
+        android:id="@+id/buttonSubmitTreatment"
+        android:background="@drawable/btn_style_1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/button_submit"/>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-         <android.support.v7.widget.RecyclerView
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content">
-
-         </android.support.v7.widget.RecyclerView>
-
-
-    </LinearLayout>
 
 </LinearLayout>

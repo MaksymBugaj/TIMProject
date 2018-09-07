@@ -8,4 +8,5 @@ export class User {
     phone: string;
     password: string;
     type: string;
+    specialization: string;
 }

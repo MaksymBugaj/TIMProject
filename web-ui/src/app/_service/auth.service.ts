@@ -1,40 +1,146 @@
 import { Injectable } from '@angular/core';
-import { User } from '../_model/user';
-import { Http, Response } from '@angular/http';
 import { Router } from '@angular/router';
-import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { AngularFireObject, AngularFireDatabase } from '@angular/fire/database';
+import { AngularFireAuth } from '@angular/fire/auth';
+import * as firebase from 'firebase/app';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  private LoginUrl = 'https://tim-front2.herokuapp.com/api/users/login';
-
-  user: User = null;
+  authState: any = null;
+  userRef: AngularFireObject<any>; 
 
   constructor(
-    private http: Http,
-  ) { }  
-  
-  emailLogin(userInfo)
+    private afAuth: AngularFireAuth,
+    private db: AngularFireDatabase,
+    private router: Router
+  ) 
   {
-    return this.http.post(this.LoginUrl, userInfo)
-      .pipe(map(user => {
-        if (user) {
-          this.user = user.json();          
-        }
-        return user;
-      }))
+
+    this.afAuth.authState.subscribe((auth) => {
+      this.authState = auth
+      if(auth)
+      {
+      }
+    });
+
   }
 
-  userLogout()
-  {
-    this.user = null;
+  get authenticated$(): Observable<boolean> {
+    return this.afAuth.authState.map((user) => !!user);
   }
 
-  authenticated(): Boolean {
-    return this.user !== null;
+  get authenticated(): boolean {
+    return this.authState !== null;
   }
+
+  get currentUser(): any {
+    return this.authenticated ? this.authState : null;
+  }
+
+  get currentUserObservable(): any {
+    return this.afAuth.authState
+    
+  }
+
+  get currentUserId(): string {
+    return this.authenticated ? this.authState.uid : '';
+  }
+
+
+  get currentUserDisplayName(): string {
+    if (!this.authState) {
+      return 'Guest'
+    } else {
+      return this.authState['email'] || 'User without a Name'
+    }
+  }
+
+  emailSignUp(userInfo: any) {
+    const fbAuth = firebase.auth();
+    return this.afAuth.auth.setPersistence("local")
+    .then(() => {
+      this.afAuth.auth.createUserWithEmailAndPassword(userInfo.email, userInfo.password)
+      .then((user) => {
+        this.authState = user.user;
+        this.updateUserFullData(userInfo);
+        this.router.navigate(['']);
+      })
+      .catch(error => {
+        alert("Email jest już używany przez inną osobę");
+        console.log(error)
+      });
+    });
+  }
+
+  emailLogin(userInfo: any) {
+    return this.afAuth.auth.setPersistence("local")
+    .then(() => {this.afAuth.auth.signInWithEmailAndPassword(userInfo.email, userInfo.password)
+      .then((user) => {
+        this.authState = user.user;
+        this.updateUserData();
+        this.router.navigate(['']);
+      })
+      .catch(error => {
+        alert("Użytkownik o podanym adresie E-mail nie istnieje lub podane hasło jest blędne");
+        console.log(error)
+      });
+    });
+  }
+
+  resetPassword(email: string) {
+    const fbAuth = firebase.auth();
+
+    return fbAuth.sendPasswordResetEmail(email)
+      .then(() => console.log('email sent'))
+      .catch((error) => console.log(error))
+  }
+
+
+  signOut(): void {
+    this.afAuth.auth.signOut();
+    this.router.navigate(['/login'])
+    console.log("Wylogowanie");
+  }
+
+
+  private updateUserData(): void {
+    const path = `users/${this.currentUserId}`; 
+    const userRef: AngularFireObject<any> = this.db.object(path);
+
+    const data = {
+      email: this.authState.email,
+      name: this.authState.displayName,
+    }
+
+    userRef.update(data)
+      .catch(error => console.log(error));
+
+  }
+
+  updateUserFullData(userInfo): void {
+    const path = `users/${this.currentUserId}`;
+    const userRef: AngularFireObject<any> = this.db.object(path);
+
+    const data = {
+      pesel: userInfo.PESEL,
+      firstName: userInfo.firstName ,
+      lastName: userInfo.lastName ,
+      sex: userInfo.sex ,
+      email: userInfo.email,
+      password: userInfo.password,
+      phone: userInfo.phone,
+      type: 0,
+      specialization: "Brak"
+    }
+
+    userRef.set(data)
+      .catch(error => console.log(error));
+
+  }
+
+
 }

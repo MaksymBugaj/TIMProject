@@ -19,8 +19,9 @@ export class BEComService {
 
   private appointmentEditUrl = 'https://tim-front2.herokuapp.com/api/appointments';
   private userEditUrl = 'https://tim-front2.herokuapp.com/api/user';
+  private userByEmailUrl = 'https://tim-front2.herokuapp.com/api/users/u/';
+  private userUrl = 'https://tim-front2.herokuapp.com/api/users/';
 
-  private userLogin = 'https://tim-front2.herokuapp.com/api/userLogin'
 
 
   constructor(
@@ -31,6 +32,14 @@ export class BEComService {
 
   getDoctors(): any {
     return this.http.get(this.doctorUrl);
+  }
+
+  getUsers(): any {
+    return this.http.get(this.userUrl);
+  }
+
+  getUserByEmail(email): any {
+    return this.http.get(this.userByEmailUrl + email)
   }
 
   getTreatments(): any {
@@ -85,6 +94,6 @@ export class BEComService {
   }
 
   editUser(user): any {
-    return this.http.put(this.userEditUrl, user);
+    return this.http.put(this.userEditUrl, user, this.options);
   }
 }

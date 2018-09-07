@@ -105,6 +105,9 @@ export class CallendarDocComponent {
   ) {
     this.beCom.getAppointments().subscribe(res => {
       this.events = res.json()
+      console.log(this.events);
+      console.log(res);
+            
       this.events$ = this.events
         .map((appointment) => this.fromAppointmentsToEvents(appointment));
     });

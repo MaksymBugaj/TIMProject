@@ -18,27 +18,21 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.auth.userLogout();
+    this.auth.signOut();
   }
 
   login(form)
   {
     console.log(form.value);
-    if (form.valid) {
-      this.auth.emailLogin(form.value)
-      .pipe(first())
-      .subscribe(
-        data => {
-          this.router.navigate(['home'])
-          console.log(this.auth.user);
-        },
-        error => {
-          alert("Błąd logowania");
-          console.log(error);
-        }
-      )      
-    } else {
-      alert("Błąd logowania, uzupełnij dane poprawnie");
+    
+    if(form.valid)
+    {
+      this.auth.emailLogin(form.value);
+    }
+    else
+    {
+      console.log("Error");
+      alert("Błędnie podane hasło lub E-mail");
     }
   }
 }

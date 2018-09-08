@@ -38,7 +38,7 @@ export class EditProfileComponent implements OnInit {
   {
     console.log(form.value);
     if (form.valid) {
-      this.beCom.editUser(form.value);
+      this.dbService.updateUser(this.editData.key ,form.value);
     } else {
       console.log("Błędne wypełnienie");
     }

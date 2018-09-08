@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFireList, AngularFireDatabase, AngularFireObject } from '@angular/fire/database';
 import { Observable } from 'rxjs';
 import { AuthService } from './auth.service';
+import { User } from '../_model/user';
 
 @Injectable({
   providedIn: 'root'
@@ -46,16 +47,16 @@ export class DatabaseService {
   addUser(newName: string) {
     this.usersRef.push({ text: newName });
   }
-  updateUser(key: string, flag: number) {
-    if (flag==0) {
-      this.usersRef.update(key, { flag: 0 });
-    } else if (flag==1) {
-      this.usersRef.update(key, { flag: 1 });
-    } else if (flag==2) {
-      this.usersRef.update(key, { flag: 2 });
-    } else {
-      this.usersRef.update(key, { flag: 3 });
-    }
+  updateUser(key: string, user) {
+    this.usersRef.update(key, { 
+      email: user.email,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      password: user.password,
+      pesel: user.PESEL,
+      phone: user.phone,
+      sex: user.sex,
+    });
   }
   deleteUser(key: string) {
     this.usersRef.remove(key);

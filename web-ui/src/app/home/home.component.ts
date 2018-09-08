@@ -42,12 +42,15 @@ export class HomeComponent implements OnInit {
 
     this.users = this.dbService.getUsers();
     this.users.subscribe(x =>
-      x.forEach(element => {
+      x.forEach(element => {        
         if (this.authService.authState.email === element.email) {
           this.userType = element.type;
           this.user = element
+          console.log(element);
+          
         }
       }));
+      
   }
 
   logout() {

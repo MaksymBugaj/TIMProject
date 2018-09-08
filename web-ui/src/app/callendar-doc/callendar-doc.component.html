@@ -64,7 +64,7 @@
     <h5>Wybierz Zabieg</h5>
     <div class="btn-group">
       <select class="btn btn-primary m-1" id="TreatName" name="TreatName" #TreatNameRef="ngModel" [(ngModel)]="choosenTreat">
-        <option [value]="" selected>Wybierz Zabieg</option>
+        <option [value]="" selected></option>
         <option [value]="treat.name" *ngFor="let treat of treatments | async">
           {{treat.name}}
         </option>

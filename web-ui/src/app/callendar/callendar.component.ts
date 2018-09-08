@@ -209,8 +209,8 @@ export class CallendarComponent {
       });
   }
 
-  fromAppointmentsToEvents(appiontments: any[]) {
-    return appiontments.map((appointment: any) => {
+  fromAppointmentsToEvents(appiontments: Appointment[]) {
+    return appiontments.map((appointment: Appointment) => {
       console.log(appointment);
       
 

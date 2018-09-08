@@ -81,7 +81,6 @@ export class AuthService {
     .then(() => {this.afAuth.auth.signInWithEmailAndPassword(userInfo.email, userInfo.password)
       .then((user) => {
         this.authState = user.user;
-        this.updateUserData();
         this.router.navigate(['']);
       })
       .catch(error => {
@@ -113,7 +112,6 @@ export class AuthService {
 
     const data = {
       email: this.authState.email,
-      name: this.authState.displayName,
     }
 
     userRef.update(data)
@@ -122,7 +120,8 @@ export class AuthService {
   }
 
   updateUserFullData(userInfo): void {
-    const path = `users/${this.currentUserId}`;
+    const userID = this.db.createPushId();
+    const path = `users/${userID}`;
     const userRef: AngularFireObject<any> = this.db.object(path);
 
     const data = {

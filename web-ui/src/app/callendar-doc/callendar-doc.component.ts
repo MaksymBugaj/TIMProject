@@ -77,6 +77,7 @@ export class CallendarDocComponent {
     action: string;
     event: CalendarEvent;
   };
+  modalRef;
   refresh: Subject<any> = new Subject();
   activeDayIsOpen: boolean = false;
   clickedDate: any;
@@ -180,16 +181,19 @@ export class CallendarDocComponent {
   }
 
   openModal(content) {
-    this.modal.open(content, { centered: true } )
+    this.modalRef = this.modal.open(content, { centered: true } )
   }
 
   manageEvent(){
     if (this.modalData.event.meta.appointment.flag == 0) {
       this.dbService.deleteAppointment(this.modalData.event.meta.appointment.key);
+      this.modalRef.close();
     } else if (this.modalData.event.meta.appointment.flag == 1) {
       this.dbService.acceptAppointment(this.modalData.event.meta.appointment.key);
+      this.modalRef.close();
     } else if (this.modalData.event.meta.appointment.flag == 2) {
       this.dbService.updateAppointment(this.modalData.event.meta.appointment.key, "");
+      this.modalRef.close();
     }
   }
 

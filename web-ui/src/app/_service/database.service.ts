@@ -71,11 +71,8 @@ export class DatabaseService {
   getZabiegi() {
     return this.zabiegi;
   }
-  addZabieg(newName: string) {
-    this.zabiegiRef.push({ text: newName });
-  }
   updateZabieg(key: string, newText: string) {
-    this.zabiegiRef.update(key, { text: newText });
+    this.zabiegiRef.update(key, { name: newText });
   }
   deleteZabieg(key: string) {
     this.zabiegiRef.remove(key);
@@ -87,14 +84,11 @@ export class DatabaseService {
   getAppointments() {
     return this.appointments;
   }
-  addAppointment(newName: string) {
-    this.appointmentsRef.push({ text: newName });
-  }
   updateAppointment(key: string, newText: string) {
     if (newText == "") {
-      this.appointmentsRef.update(key, { userEmail: newText, flag: 0 });
+      this.appointmentsRef.update(key, { patientEmail: "", flag: 0 });
     } else {
-      this.appointmentsRef.update(key, { userEmail: newText, flag: 1 });
+      this.appointmentsRef.update(key, { patientEmail: newText, flag: 1 });
     }
   }
   acceptAppointment(key: string) {

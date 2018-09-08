@@ -103,6 +103,7 @@ export class CallendarComponent {
   modalHeader: string;
   modalBody: string;
   closeResult: string;
+  modalRef;
 
   constructor(
     private modal: NgbModal,
@@ -145,10 +146,45 @@ export class CallendarComponent {
     this.view = 'month';
   }
 
-  handleEvent(action: string, event: CalendarEvent): void {
+  handleEvent(action: string, event: CalendarEvent, content): void {
     this.modalData = { event, action };
-    console.log(event);
+    this.modalHeader = "Wizyta dnia " + event.start.toLocaleDateString() + " o godzinie " + event.meta.appointment.time + " na zabieg: " + event.meta.appointment.treatName;
+    if (event.meta.appointment.flag == 0) {
+      this.modalBody = "Czy chcesz się zapisać na ten termin wizyty?"
+      this.openModal(content);
+    } else if (event.meta.appointment.flag == 1 && event.meta.appointment.patientEmail == this.authService.currentUserDisplayName) {
+      this.modalBody = "Czy chcesz odwołać wizytę?"
+      this.openModal(content);
+    } else if (event.meta.appointment.flag == 2 && event.meta.appointment.patientEmail != this.authService.currentUserDisplayName) {
+      this.modalBody = "Termin zajęty"
+      this.openModal(content);
+    } else if (event.meta.appointment.flag == 2 && event.meta.appointment.patientEmail == this.authService.currentUserDisplayName) {
+      this.modalBody = "Twoja rezerwacja została potwierdzona"
+      this.openModal(content);
+    } else {
+      this.modalBody = "Termin zarezerwowany"
+      this.openModal(content);
+    }
+  }
 
+  openModal(content) {
+    this.modalRef = this.modal.open(content, { centered: true } )
+  }
+
+  manageEvent(){
+    if (this.modalData.event.meta.appointment.flag == 0) {
+      this.dbService.updateAppointment(this.modalData.event.meta.appointment.key, this.authService.currentUserDisplayName);
+      this.modalRef.close();
+    } else if (this.modalData.event.meta.appointment.flag == 1 && this.modalData.event.meta.appointment.patientEmail == this.authService.currentUserDisplayName) {
+      this.dbService.updateAppointment(this.modalData.event.meta.appointment.key, "");
+      this.modalRef.close();
+    } else if (this.modalData.event.meta.appointment.flag == 2 && this.modalData.event.meta.appointment.patientEmail == this.authService.currentUserDisplayName) {
+      this.modalRef.close();
+      alert("Termin zajęty przez Ciebie")
+    } else {
+      this.modalRef.close();
+      alert("Termin zarezerwowany")
+    }
   }
 
   onTreatChange() {

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../_service/auth.service';
 import { BEComService } from '../_service/becom.service';
+import { DatabaseService } from '../_service/database.service';
 
 @Component({
   selector: 'app-home',
@@ -9,16 +10,17 @@ import { BEComService } from '../_service/becom.service';
 })
 export class HomeComponent implements OnInit {
 
+  users: any;
   user: any = [
-    {firstName: "test"},
-    {firstName: "test"}
-  ];
+    {firstName: "test", lastName: "test"}
+  ] ;
   userType: number;
 
 
   constructor(
     private authService: AuthService,
-    private beCom: BEComService
+    private beCom: BEComService,
+    private dbService: DatabaseService
   ) { }
 
   ngOnInit() {
@@ -29,14 +31,23 @@ export class HomeComponent implements OnInit {
     //   console.log(this.authService.authState);
     // });
 
-    this.beCom.getUsers().subscribe (res => {
-      this.user = res.json();
-      this.user.forEach(element => {
-        if (this.authService.authState.email == element.email) {
-          this.userType = element.type
+    // this.beCom.getUsers().subscribe (res => {
+    //   this.user = res.json();
+    //   this.user.forEach(element => {
+    //     if (this.authService.authState.email == element.email) {
+    //       this.userType = element.type
+    //     }
+    //   });
+    // })
+
+    this.users = this.dbService.getUsers();
+    this.users.subscribe(x =>
+      x.forEach(element => {
+        if (this.authService.authState.email === element.email) {
+          this.userType = element.type;
+          this.user = element
         }
-      });
-    })
+      }));
   }
 
   logout() {

@@ -33,6 +33,8 @@ import { CustomDateFormatter } from './custom-date-formatter.provider';
 import { Appointment } from '../_model/appointment';
 import { BEComService } from '../_service/becom.service';
 import { RequestOptions, Headers, Http } from '@angular/http';
+import { DatabaseService } from '../_service/database.service';
+import { AuthService } from '../_service/auth.service';
 
 const colors: any = {
   red: {
@@ -101,20 +103,35 @@ export class CallendarDocComponent {
   constructor(
     private modal: NgbModal,
     private beCom: BEComService,
-    private http: Http
+    private dbService: DatabaseService,
+    private authService: AuthService
   ) {
-    this.beCom.getAppointments().subscribe(res => {
-      this.events = res.json()
-      console.log(this.events);
-      console.log(res);
+    // this.beCom.getAppointments().subscribe(res => {
+    //   this.events = res.json()
+    //   console.log(this.events);
+    //   console.log(res);
             
-      this.events$ = this.events
-        .map((appointment) => this.fromAppointmentsToEvents(appointment));
-    });
+    //   this.events$ = this.events
+    //     .map((appointment) => this.fromAppointmentsToEvents(appointment));
+    // });
 
-    this.beCom.getTreatments().subscribe(res => {
-      this.treatments = res.json();
-    });
+    // this.beCom.getTreatments().subscribe(res => {
+    //   this.treatments = res.json();
+    // });
+
+    this.events$ = this.dbService.getUsers()
+    .map((users) =>
+      users.filter((user) => this.authService.authState.email == user.email)[0]
+    )
+    .map((user) => user.flag)
+    .switchMap((userType) =>
+      userType == 0
+        ? this.dbService.userAppointments
+        : this.dbService.userAppointments
+    )
+    .map(this.fromAppointmentsToEvents);
+
+  this.treatments = this.dbService.getZabiegi();
   }
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
@@ -168,11 +185,11 @@ export class CallendarDocComponent {
 
   manageEvent(){
     if (this.modalData.event.meta.appointment.flag == 0) {
-      this.beCom.deleteAppointment(this.modalData.event.meta.appointment.key);
+      this.dbService.deleteAppointment(this.modalData.event.meta.appointment.key);
     } else if (this.modalData.event.meta.appointment.flag == 1) {
-      this.beCom.acceptAppointment(this.modalData.event.meta.appointment.key);
+      this.dbService.acceptAppointment(this.modalData.event.meta.appointment.key);
     } else if (this.modalData.event.meta.appointment.flag == 2) {
-      this.beCom.rejectAppointment(this.modalData.event.meta.appointment.key);
+      this.dbService.updateAppointment(this.modalData.event.meta.appointment.key, "");
     }
   }
 
@@ -181,7 +198,7 @@ export class CallendarDocComponent {
       date: this.clickedDate,
       time: this.clickedTime,
       treatName: this.choosenTreat,
-      doctorEmail: this.email
+      doctorEmail: this.authService.authState.email
     }
     console.log(event);
 
@@ -189,7 +206,8 @@ export class CallendarDocComponent {
       if (this.choosenTreat == null) {
         console.log("błąd, brak zabiegu");
       } else {
-        this.beCom.createAppointment(event);
+        this.dbService.newAppointment(event);
+        alert("Ustaliłeś wolny termin na " + this.event.date + " o godzinie " + this.clickedTime);
       }
     }
     else {
@@ -197,44 +215,47 @@ export class CallendarDocComponent {
     }
   }
 
-  fromAppointmentsToEvents(appiontment: Appointment) {
-    if (appiontment.flag == 0) {
-      return ({
-        title: appiontment.treatName,
-        start: new Date(appiontment.date),
-        color: colors.green,
-        meta: {
-          appiontment
-        }
-      })
-    } else if (appiontment.flag == 1) {
-      return ({
-        title: appiontment.treatName,
-        start: new Date(appiontment.date),
-        color: colors.yellow,
-        meta: {
-          appiontment
-        }
-      })
-    } else if (appiontment.flag == 2) {
-      return ({
-        title: appiontment.treatName,
-        start: new Date(appiontment.date),
-        color: colors.red,
-        meta: {
-          appiontment
-        }
-      })
-    } else {
-      return ({
-        title: "test",
-        start: new Date(appiontment.date),
-        color: colors.blue,
-        meta: {
-          appiontment
-        }
-      })
-    }
-  }
+  fromAppointmentsToEvents(appiontments: Appointment[]) {
+    return appiontments.map((appointment: Appointment) => {
+      if (appointment.flag == 0) {
+        return ({
+          title: appointment.treatName,
+          start: new Date(appointment.date),
+          color: colors.green,
+          meta: {
+            appointment
+          }
+        })
+      } else if (appointment.flag == 1) {
+        return ({
+          title: appointment.treatName,
+          start: new Date(appointment.date),
+          color: colors.yellow,
+          meta: {
+            appointment
+          }
+        })
+      } else if (appointment.flag == 2) {
+        return ({
+          title: appointment.treatName,
+          start: new Date(appointment.date),
+          color: colors.red,
+          meta: {
+            appointment
+          }
+        })
+      } else {
+        return ({
+          title: appointment.treatName,
+          start: new Date(appointment.date),
+          color: colors.blue,
+          meta: {
+            appointment
+          }
+        })
+      }
 
+    })
+  }
 }
+

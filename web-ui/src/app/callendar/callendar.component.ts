@@ -35,6 +35,8 @@ import { CustomDateFormatter } from './custom-date-formatter.provider';
 import { Appointment } from '../_model/appointment';
 import { BEComService } from '../_service/becom.service';
 import 'rxjs/Rx';
+import { DatabaseService } from '../_service/database.service';
+import { AuthService } from '../_service/auth.service';
 
 const colors: any = {
   red: {
@@ -89,7 +91,7 @@ export class CallendarComponent {
   activeDayIsOpen: boolean = false;
   clickedDate: Date = new Date();
 
-  events$: Observable<Array<CalendarEvent<{ appointment: Appointment }>>>;
+  events$: Observable<Array<CalendarEvent<{ appointment: any }>>>;
   events: any;
 
   treatments: any = [{}];
@@ -105,23 +107,30 @@ export class CallendarComponent {
   constructor(
     private modal: NgbModal,
     private beCom: BEComService,
-    private changeDetectorRef: ChangeDetectorRef
+    private dbService: DatabaseService,
+    private authService: AuthService
   ) {
-    this.beCom.getAppointments().subscribe(res => {
-      this.events = res.json()
-      this.events$ = this.events
-        .map((appointment) => this.fromAppointmentsToEvents(appointment));
-    });
+    // this.beCom.getAppointments().subscribe(res => {
+    //   this.events = res.json()
+    //   this.events$ = this.events
+    //     .map((appointment) => this.fromAppointmentsToEvents(appointment));
+    // });
+
+    // this.beCom.getDoctors().subscribe(res => {
+    //   this.doctors = res.json();
+    // });
+
+    // this.beCom.getTreatments().subscribe(res => {
+    //   this.treatments = res.json();
+    // });
 
 
-    this.beCom.getDoctors().subscribe(res => {
-      this.doctors = res.json();
-    });
+    this.events$ = this.dbService.getAppointments()
+      .map((appointments) => this.fromAppointmentsToEvents(appointments))
 
-    this.beCom.getTreatments().subscribe(res => {
-      this.treatments = res.json();
-    });
-
+    this.doctors = this.dbService.getDoctors();
+    this.treatments = this.dbService.getZabiegi();
+    this.userEmail = this.authService.authState.email;
   }
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
@@ -164,61 +173,67 @@ export class CallendarComponent {
       });
   }
 
-  fromAppointmentsToEvents(appiontment: Appointment) {
-    if (appiontment.flag == 0 && appiontment.userEmail == "") {
-      return ({
-        title: appiontment.treatName,
-        start: new Date(appiontment.date),
-        color: colors.green,
-        meta: {
-          appiontment
-        }
-      })
-    } else if (appiontment.flag == 1 && appiontment.userEmail == this.userEmail) {
-      return ({
-        title: appiontment.treatName,
-        start: new Date(appiontment.date),
-        color: colors.cyan,
-        meta: {
-          appiontment
-        }
-      })
-    } else if (appiontment.flag == 2 && appiontment.userEmail == this.userEmail) {
-      return ({
-        title: appiontment.treatName,
-        start: new Date(appiontment.date),
-        color: colors.blue,
-        meta: {
-          appiontment
-        }
-      })
-    } else if (appiontment.flag == 1 && appiontment.userEmail != this.userEmail) {
-      return ({
-        title: appiontment.treatName,
-        start: new Date(appiontment.date),
-        color: colors.yellow,
-        meta: {
-          appiontment
-        }
-      })
-    } else if (appiontment.flag == 2 && appiontment.userEmail != this.userEmail) {
-      return ({
-        title: appiontment.treatName,
-        start: new Date(appiontment.date),
-        color: colors.red,
-        meta: {
-          appiontment
-        }
-      })
-    } else {
-      return ({
-        title: "test",
-        start: new Date(appiontment.date),
-        color: colors.black,
-        meta: {
-          appiontment
-        }
-      })
-    }
+  fromAppointmentsToEvents(appiontments: any[]) {
+    return appiontments.map((appointment: any) => {
+      console.log(appointment);
+      
+
+      if (appointment.flag == 0 && appointment.patientEmail == "") {
+        return ({
+          title: appointment.treatName,
+          start: new Date(appointment.date),
+          color: colors.green,
+          meta: {
+            appointment
+          }
+        })
+      } else if (appointment.flag == 1 && appointment.patientEmail == this.userEmail) {
+        return ({
+          title: appointment.treatName,
+          start: new Date(appointment.date),
+          color: colors.cyan,
+          meta: {
+            appointment
+          }
+        })
+      } else if (appointment.flag == 2 && appointment.patientEmail == this.userEmail) {
+        return ({
+          title: appointment.treatName,
+          start: new Date(appointment.date),
+          color: colors.blue,
+          meta: {
+            appointment
+          }
+        })
+      } else if (appointment.flag == 1 && appointment.patientEmail != this.userEmail) {
+        return ({
+          title: appointment.treatName,
+          start: new Date(appointment.date),
+          color: colors.yellow,
+          meta: {
+            appointment
+          }
+        })
+      } else if (appointment.flag == 2 && appointment.patientEmail != this.userEmail) {
+        return ({
+          title: appointment.treatName,
+          start: new Date(appointment.date),
+          color: colors.red,
+          meta: {
+            appointment
+          }
+        })
+      } else {
+        return ({
+          title: appointment.treatName,
+          start: new Date(appointment.date),
+          color: colors.black,
+          meta: {
+            appointment
+          }
+        })
+      }
+
+    })
   }
 }

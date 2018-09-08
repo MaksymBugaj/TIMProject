@@ -6,12 +6,12 @@
     </div>
     <div class="col-md-8">
       <div class="list-group">
-        <a class="list-group-item list-group-item-action flex-column align-items-start" *ngFor="let doc of doctors | search:'firstname,surname,phone': query">
+        <a class="list-group-item list-group-item-action flex-column align-items-start" *ngFor="let doc of doctors | async | search:'firstName,lastName,phone': query" >
           <div class="d-flex w-100 justify-content-between">
-            <h5 class="mb-1">{{doc.firstname}} {{doc.surname}}</h5>
+            <h5 class="mb-1">{{doc.firstName}} {{doc.lastName}}</h5>
           </div>
           <p class="mb-1">{{doc.phone}}</p>
-          <small>{{doc.desc}}</small>
+          <small>{{doc.specialization}}</small>
         </a>
       </div>
     </div>

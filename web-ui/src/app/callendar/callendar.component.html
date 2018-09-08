@@ -66,14 +66,14 @@
     <div class="btn-group m-1">
       <select class="btn btn-primary m-1" id="TreatName" name="TreatName" #TreatNameRef="ngModel" [(ngModel)]="choosenTreat" (change)="onTreatChange()">
         <option [value]="" selected>Wybierz Zabieg</option>
-        <option [value]="treat.name" *ngFor="let treat of treatments ">
+        <option [value]="treat.name" *ngFor="let treat of treatments | async">
           {{treat.name}}
         </option>
       </select>
       <select class="btn btn-primary m-1" id="Doctor" name="Doctor" #DoctorRef="ngModel" [(ngModel)]="choosenDoctor" (change)="onDoctorChange()">
         <option [value]="" selected>Wybierz Lekarza</option>
-        <option [value]="doctor.email" *ngFor="let doctor of doctors ">
-          {{doctor.firstname}} {{doctor.surname}}
+        <option [value]="doctor.email" *ngFor="let doctor of doctors | async ">
+          {{doctor.firstName}} {{doctor.lastName}}
         </option>
       </select>
     </div>
@@ -85,7 +85,7 @@
   <mwl-calendar-month-view
     *ngSwitchCase="'month'"
     [viewDate]="viewDate"
-    [events]="events$"
+    [events]="events$ | async"
     [weekStartsOn]="weekStartsOn"
     [weekendDays]="weekendDays"
     [refresh]="refresh"
@@ -98,7 +98,7 @@
   <mwl-calendar-day-view
     *ngSwitchCase="'day'"
     [viewDate]="viewDate"
-    [events]="events$"
+    [events]="events$ | async"
     [refresh]="refresh"
     [locale]="locale"
     (hourSegmentClicked)="timeClicked($event.date)"

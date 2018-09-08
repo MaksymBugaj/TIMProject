@@ -6,7 +6,7 @@
     </div>
     <div class="col-md-8">
       <div class="list-group">
-        <a class="list-group-item list-group-item-action flex-column align-items-start" *ngFor="let treat of treatments | search:'name,docName': query">
+        <a class="list-group-item list-group-item-action flex-column align-items-start" *ngFor="let treat of treatments | async | search:'name,docName': query">
           <div class="d-flex w-100 justify-content-between">
             <h5 class="mb-1">{{treat.name}}</h5>
           </div>
@@ -19,5 +19,75 @@
       <label for="search">Wyszukaj zabieg</label>
       <input type="text" class="form-control" name="search" id="search" placeholder="" [(ngModel)]="query">
     </div>
+  </div>
+</div>
+
+<div class="container" [ngSwitch]="userType">
+  <h1 class="text-center m-4" *ngSwitchCase="1">Dodaj zabieg</h1>
+  <div class="row" *ngSwitchCase="1">
+    <div class="container">
+      <form class="form-treatment" #formRef="ngForm" (ngSubmit)="treatment(formRef)">
+        <div class="row">
+          <div class="col-md-2"></div>
+          <div class="col-md-8">
+            <div class="form-group">
+              <label for="name">Nazwa zabiegu</label>
+              <div class="input-group">
+                <input type="name" class="form-control" name="name" id="name" #nameRef="ngModel" [(ngModel)]="treatmentData.name"
+                  placeholder="Podaj nazwę zabiegu" required>
+              </div>
+              <div class="error form-control" *ngIf="formRef.submitted && nameRef.errors?.required">
+                To pole jest obowiązkowe
+              </div>
+            </div>
+          </div>
+          <div class="col-md-2"></div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-2"></div>
+          <div class="col-md-8">
+            <div class="form-group">
+              <label for="docName">Imie i nazwisko lekarza</label>
+              <div class="input-group">
+                <input type="docName" class="form-control" name="docName" id="docName" #docNameRef="ngModel"
+                  [(ngModel)]="treatmentData.docName" placeholder="Podaj imię i nazwisko lekarza" required>
+              </div>
+              <div class="error form-control" *ngIf="formRef.submitted && docNameRef.errors?.required">
+                To pole jest obowiązkowe
+              </div>
+            </div>
+          </div>
+          <div class="col-md-2"></div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-2"></div>
+          <div class="col-md-8">
+            <div class="form-group">
+              <label for="desc">Opis</label>
+              <div class="input-group">
+                <input type="desc" class="form-control" name="desc" id="desc" #descRef="ngModel"
+                  [(ngModel)]="treatmentData.desc" placeholder="Podaj opis" required>
+              </div>
+              <div class="error form-control" *ngIf="formRef.submitted && descRef.errors?.required">
+                To pole jest obowiązkowe
+              </div>
+            </div>
+          </div>
+          <div class="col-md-2"></div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-2"></div>
+          <div class="col-md-8">
+            <button type="submit" class="btn btn-primary mr-2">Dodaj zabieg</button>
+          </div>
+          <div class="col-md-2"></div>
+        </div>
+
+      </form>
+    </div>
+    <div class="col-md-2"></div>
   </div>
 </div>

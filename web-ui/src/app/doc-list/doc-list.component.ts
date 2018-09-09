@@ -28,7 +28,5 @@ export class DocListComponent implements OnInit {
     // });
 
     this.doctors = this.dbService.getDoctors();
-    console.log(this.doctors);
-    
   }
 }

@@ -166,7 +166,6 @@ export class CallendarDocComponent {
 
   handleEvent(action: string, event: CalendarEvent, content): void {
     this.modalData = { event, action };
-    console.log(event);
     this.modalHeader = "Wizyta dnia " + event.start.toLocaleDateString() + " o godzinie " + event.meta.appointment.time + " na zabieg: " + event.meta.appointment.treatName;
     if (event.meta.appointment.flag == 0) {
       this.modalBody = "Czy chcesz usunąć wizitę?"
@@ -204,18 +203,17 @@ export class CallendarDocComponent {
       treatName: this.choosenTreat,
       doctorEmail: this.authService.authState.email
     }
-    console.log(event);
 
     if (form.valid) {
       if (this.choosenTreat == null) {
-        console.log("błąd, brak zabiegu");
+        alert("Błąd, brak zabiegu");
       } else {
         this.dbService.newAppointment(event);
         alert("Ustaliłeś wolny termin na " + this.event.date + " o godzinie " + this.clickedTime);
       }
     }
     else {
-      console.log("Błąd");
+      alert("Błąd, wybierz termin");
     }
   }
 

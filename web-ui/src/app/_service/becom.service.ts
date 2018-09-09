@@ -66,7 +66,6 @@ export class BEComService {
     this.http.post(this.createAppointmentUrl, event, this.options)
       .subscribe(
         res => {
-          console.log(res);
           if (res.ok) {
             alert('Pomyślnie ustalono termin');
           }
@@ -81,7 +80,6 @@ export class BEComService {
     return this.http.post(this.createUserUrl, user, this.options)
       .subscribe(
         res => {
-          console.log(res);
           if (res.ok) {
             alert('Pomyślnie dodano użytkownika');
             this.router.navigate(["/home"]);

@@ -23,8 +23,6 @@ export class LoginComponent implements OnInit {
 
   login(form)
   {
-    console.log(form.value);
-    
     if(form.valid)
     {
       this.auth.emailLogin(form.value);

@@ -211,9 +211,6 @@ export class CallendarComponent {
 
   fromAppointmentsToEvents(appiontments: Appointment[]) {
     return appiontments.map((appointment: Appointment) => {
-      console.log(appointment);
-      
-
       if (appointment.flag == 0 && appointment.patientEmail == "") {
         return ({
           title: appointment.treatName,

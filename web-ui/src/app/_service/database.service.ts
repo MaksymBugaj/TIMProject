@@ -43,7 +43,6 @@ export class DatabaseService {
   }
 
   getUsers() {
-    console.log("Pobrano Użytkowników");
     return this.users;
   }
   addUser(newName: string) {
@@ -121,9 +120,6 @@ export class DatabaseService {
       doctorEmail: appointmentInfo.doctorEmail,
       patientEmail: ""
     }
-
-    console.log(data);
-    
 
     appointmentRef.set(data)
       .catch(error => console.log(error));

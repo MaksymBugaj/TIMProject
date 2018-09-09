@@ -45,9 +45,7 @@ export class HomeComponent implements OnInit {
       x.forEach(element => {        
         if (this.authService.authState.email === element.email) {
           this.userType = element.type;
-          this.user = element
-          console.log(element);
-          
+          this.user = element          
         }
       }));
       

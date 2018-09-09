@@ -36,11 +36,10 @@ export class EditProfileComponent implements OnInit {
 
   edit(form)
   {
-    console.log(form.value);
     if (form.valid) {
       this.dbService.updateUser(this.editData.key ,form.value);
     } else {
-      console.log("Błędne wypełnienie");
+      alert("Błędne wypełnienie");
     }
   }
 }

@@ -23,7 +23,7 @@
 </div>
 
 <div class="container" [ngSwitch]="userType">
-  <h1 class="text-center m-4" *ngSwitchCase="1">Dodaj zabieg</h1>
+  <h1 class="text-center m-4" *ngSwitchCase="1" >Dodaj zabieg</h1>
   <div class="row" *ngSwitchCase="1">
     <div class="container">
       <form class="form-treatment" #formRef="ngForm" (ngSubmit)="treatment(formRef)">

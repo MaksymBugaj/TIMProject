@@ -24,6 +24,7 @@ import { HttpModule } from '@angular/http';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuth } from "@angular/fire/auth";
 import { AngularFireDatabase } from "@angular/fire/database";
+import { EditUsersComponent } from './edit-users/edit-users.component';
 export const firebaseConfig = {
   apiKey: "AIzaSyCbGHOGk7WaAKTUXC9Zan81cT9rwDhnMBI",
   authDomain: "timproject-290e2.firebaseapp.com",
@@ -45,6 +46,7 @@ export const firebaseConfig = {
     EditProfileComponent,
     SearchPipe,
     CallendarDocComponent,
+    EditUsersComponent,
 
   ],
   imports: [

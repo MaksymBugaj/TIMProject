@@ -9,6 +9,7 @@ import { User } from '../_model/user';
 })
 export class DatabaseService {
 
+
   appointmentsRef: AngularFireList<any>;
   userAppointmentsRef: AngularFireList<any>;
   usersRef: AngularFireList<any>;
@@ -58,6 +59,9 @@ export class DatabaseService {
       phone: user.phone,
       sex: user.sex,
     });
+  }  
+  changeFlag(key: any, flag: string): any {
+    this.usersRef.update(key, {type: parseInt(flag)});
   }
   deleteUser(key: string) {
     this.usersRef.remove(key);

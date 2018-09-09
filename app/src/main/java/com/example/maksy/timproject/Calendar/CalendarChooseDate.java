@@ -1,7 +1,6 @@
 package com.example.maksy.timproject.Calendar;
 
 import android.content.Intent;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -9,17 +8,14 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.maksy.timproject.Appointments.Appointment;
 import com.example.maksy.timproject.R;
 import com.example.maksy.timproject.RecyclerTouchListener;
 import com.example.maksy.timproject.User.Doctor;
-import com.example.maksy.timproject.User.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -146,8 +142,8 @@ public class CalendarChooseDate extends AppCompatActivity {
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference("appointments");
         appoId = databaseReference.push().getKey();
-        Appointment appointment = new Appointment(appoId,doctor.getName(), doctor.getSpecialization(), day+"." + month+"." + year+" hour: " + hour, firebaseAuth.getCurrentUser().getEmail());
-        databaseReference.child(appoId).setValue(appointment);
+        //Appointment appointment = new Appointment(appoId,doctor.getName(), doctor.getSpecialization(), day+"." + month+"." + year+" hour: " + hour, firebaseAuth.getCurrentUser().getEmail());
+      //  databaseReference.child(appoId).setValue(appointment);
         Toast.makeText(this, "Created Appointmnet", Toast.LENGTH_SHORT).show();
         finish();
     }

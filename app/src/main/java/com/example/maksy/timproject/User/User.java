@@ -30,14 +30,14 @@ public class User {
     private String password;
     @SerializedName("type")
     @Expose
-    private String type;
+    private int type;
     @SerializedName("specialization")
     @Expose
     private String specialization;
 
     public User(){}
 
-    public User(String id, String firstName, String lastName, String PESEL, String sex, String email, String phone, String password, String type, String specialization) {
+    public User(String id, String firstName, String lastName, String PESEL, String sex, String email, String phone, String password, int type, String specialization) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -114,11 +114,11 @@ public class User {
         this.password = password;
     }
 
-    public String getType() {
+    public int getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(int type) {
         this.type = type;
     }
 

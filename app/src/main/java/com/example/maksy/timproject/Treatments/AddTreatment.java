@@ -1,5 +1,6 @@
 package com.example.maksy.timproject.Treatments;
 
+import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Button;
@@ -17,18 +18,19 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
-public class PatientTreatment extends AppCompatActivity {
+public class AddTreatment extends AppCompatActivity {
 
-    @BindView(R.id.spinnerTreatments)
-    Spinner patientTreatments;
-    @BindView(R.id.patientTreatment)
-    TextView patientTreatment;
+    @BindView(R.id.textInputEditTextTreatmentName)
+    TextInputEditText treatmentName;
+    @BindView(R.id.textInputEditTextTreatmentDoctor)
+    TextInputEditText treatmentDoctor;
+    @BindView(R.id.textInputEditTextTreatmentDescription)
+    TextInputEditText treatmentDescription;
     @BindView(R.id.buttonSubmitTreatment)
     Button buttonSubmit;
 
 
     private Unbinder unbinder;
-    private FirebaseAuth firebaseAuth;
     private DatabaseReference databaseReference;
     private FirebaseDatabase firebaseDatabase;
 
@@ -43,13 +45,11 @@ public class PatientTreatment extends AppCompatActivity {
 
     @OnClick(R.id.buttonSubmitTreatment)
     public void onSubmitClick(){
-        String toFill = "toFill";
         String treatId;
-        firebaseAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference("treatments");
         treatId= databaseReference.push().getKey();
-        Treatment treatment = new Treatment(treatId,toFill,toFill,patientTreatments.getSelectedItem().toString(),toFill,firebaseAuth.getCurrentUser().getEmail());
+        Treatment treatment = new Treatment(treatmentName.getText().toString(),treatmentDoctor.getText().toString(),treatmentDescription.getText().toString());
         databaseReference.child(treatId).setValue(treatment);
         Toast.makeText(this, "Created Treatment", Toast.LENGTH_SHORT).show();
         finish();

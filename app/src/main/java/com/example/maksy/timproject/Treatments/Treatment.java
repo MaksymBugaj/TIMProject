@@ -2,71 +2,40 @@ package com.example.maksy.timproject.Treatments;
 
 public class Treatment {
 
-    private String teatmentId;
-    private String doctorName;
-    private String doctorSpecialization;
-    private String treatmentName;
-    private String date;
-    private String patientEmail;
-
+    private String name;
+    private String docName;
+    private String desc;
 
     public Treatment() {
     }
 
-    public Treatment(String teatmentId, String doctorName, String doctorSpecialization, String treatmentName, String date, String patientEmail) {
-        this.teatmentId = teatmentId;
-        this.doctorName = doctorName;
-        this.doctorSpecialization = doctorSpecialization;
-        this.treatmentName = treatmentName;
-        this.date = date;
-        this.patientEmail = patientEmail;
+    public Treatment(String name, String docName, String desc) {
+        this.name = name;
+        this.docName = docName;
+        this.desc = desc;
     }
 
-    public String getPatientEmail() {
-        return patientEmail;
+    public String getName() {
+        return name;
     }
 
-    public void setPatientEmail(String patientEmail) {
-        this.patientEmail = patientEmail;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getTreatmentName() {
-        return treatmentName;
+    public String getDocName() {
+        return docName;
     }
 
-    public void setTreatmentName(String treatmentName) {
-        this.treatmentName = treatmentName;
+    public void setDocName(String docName) {
+        this.docName = docName;
     }
 
-    public String getDoctorName() {
-        return doctorName;
+    public String getDesc() {
+        return desc;
     }
 
-    public void setDoctorName(String doctorName) {
-        this.doctorName = doctorName;
-    }
-
-    public String getDoctorSpecialization() {
-        return doctorSpecialization;
-    }
-
-    public void setDoctorSpecialization(String doctorSpecialization) {
-        this.doctorSpecialization = doctorSpecialization;
-    }
-
-    public String getTeatmentId() {
-        return teatmentId;
-    }
-
-    public void setTeatmentId(String teatmentId) {
-        this.teatmentId = teatmentId;
-    }
-
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
+    public void setDesc(String desc) {
+        this.desc = desc;
     }
 }

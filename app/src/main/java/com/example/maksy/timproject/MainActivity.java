@@ -27,14 +27,6 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
                 startActivity(intent);
                 return true;
-            case R.id.retrofit_example:
-                Intent intent1 = new Intent(getApplicationContext(),APIExample.class);
-                startActivity(intent1);
-                return true;
-            case R.id.retrofit_example_2:
-                Intent intent2 = new Intent(getApplicationContext(),APIRetrofit.class);
-                startActivity(intent2);
-                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }

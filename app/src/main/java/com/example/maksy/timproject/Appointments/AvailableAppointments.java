@@ -1,18 +1,16 @@
 package com.example.maksy.timproject.Appointments;
 
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.example.maksy.timproject.Appointments.Appo.AppoDoc;
+import com.example.maksy.timproject.Appointments.Appo.Appointment;
 import com.example.maksy.timproject.R;
-import com.example.maksy.timproject.User.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -28,46 +26,42 @@ import java.util.List;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-public class PatientAppointments extends AppCompatActivity {
+public class AvailableAppointments extends AppCompatActivity {
 
     private List<AppoDoc> appointments = new ArrayList<>();
     private RecyclerView recyclerView;
-    private PatientAppointmentAdapter patientAppointmentAdapter;
+    private AvailableAppointmentsAdapter availableAppointmentsAdapter;
 
     private FirebaseAuth firebaseAuth;
     private DatabaseReference databaseReference;
     private FirebaseDatabase firebaseDatabase;
-    private String key;
 
     private Unbinder unbinder;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_patient_appointments);
+        setContentView(R.layout.activity_available_appointments);
 
         ButterKnife.bind(this);
         unbinder = ButterKnife.bind(this);
-        recyclerView = (RecyclerView) findViewById(R.id.recycler_view_appo);
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_view_available_appo);
 
         prepareData();
 
-        patientAppointmentAdapter = new PatientAppointmentAdapter(appointments, this);
+        availableAppointmentsAdapter = new AvailableAppointmentsAdapter(appointments,this);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
-        recyclerView.setAdapter(patientAppointmentAdapter);
-
-
+        recyclerView.setAdapter(availableAppointmentsAdapter);
     }
 
     private void prepareData() {
 
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference("appointments");
-        firebaseAuth = FirebaseAuth.getInstance();
-        String email = firebaseAuth.getCurrentUser().getEmail();
-        Query query = databaseReference.orderByChild("patientEmail").equalTo(email);
+        Query query = databaseReference.orderByChild("patientEmail").equalTo("");
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -82,8 +76,7 @@ public class PatientAppointments extends AppCompatActivity {
                     // setDoctorId(doctorId);
 //todo change this
                     String key = dataSnapshot1.getKey();
-                    setKey(key);
-                    getDoctorName(doctorEmail,treatName,date);
+                    getDoctorName(key,doctorEmail,treatName,date);
 
                 }
             }
@@ -96,7 +89,7 @@ public class PatientAppointments extends AppCompatActivity {
 
     }
 
-    private void getDoctorName(final String doctorEmail, final String treatName, final Long date) {
+    private void getDoctorName(final String key, final String doctorEmail, final String treatName, final Long date) {
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference("users");
 
@@ -112,7 +105,7 @@ public class PatientAppointments extends AppCompatActivity {
                     String dateString = dateFormat.format(date);
                     AppoDoc appointment = new AppoDoc(key,treatName,name, doctorEmail, dateString);
                     appointments.add(appointment);
-                    patientAppointmentAdapter.notifyDataSetChanged();
+                    availableAppointmentsAdapter.notifyDataSetChanged();
                 }
             }
 
@@ -123,16 +116,18 @@ public class PatientAppointments extends AppCompatActivity {
         });
     }
 
-    public void cancelPatient(){
+    public void signUp(int position){
+        firebaseAuth = FirebaseAuth.getInstance();
+        String email = firebaseAuth.getCurrentUser().getEmail();
+
+        final AppoDoc appoDoc = appointments.get(position);
+
+
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference("appointments");
-        databaseReference.child(key).child("patientEmail").setValue("");
-        databaseReference.child(key).child("flag").setValue(0);
-        Toast.makeText(this, "Appointment cancelled", Toast.LENGTH_SHORT).show();
+        databaseReference.child(appoDoc.getKey()).child("patientEmail").setValue(email);
+        databaseReference.child(appoDoc.getKey()).child("flag").setValue(1);
+        Toast.makeText(this, "Signed for Treatment", Toast.LENGTH_SHORT).show();
         finish();
-    }
-
-    public void setKey(String key) {
-        this.key = key;
     }
 }

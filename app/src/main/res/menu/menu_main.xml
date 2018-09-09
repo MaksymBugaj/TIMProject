@@ -4,13 +4,6 @@
         android:id="@+id/loginclass"
         android:title="@string/login_class"></item>
 
-    <item
-        android:id="@+id/retrofit_example"
-        android:title="retrofit example"></item>
-
-    <item
-        android:id="@+id/retrofit_example_2"
-        android:title="heroku example"></item>
 
 
 </menu>

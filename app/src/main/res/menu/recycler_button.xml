@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/resign"
+        android:title="Cancel the appointment" />
+    <item android:id="@+id/assignToMe"
+        android:title="Assign to me" />
+
+    <item android:id="@+id/signupForTreat"
+        android:title="Sign For treatment" />
+
+</menu>

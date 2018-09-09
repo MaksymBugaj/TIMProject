@@ -12,20 +12,20 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import com.example.maksy.timproject.Appointments.Appo.AppoDoc;
+import com.example.maksy.timproject.Appointments.Appo.Appointment;
 import com.example.maksy.timproject.R;
 
 import java.util.List;
 
-public class PatientAppointmentAdapter extends RecyclerView.Adapter<PatientAppointmentAdapter.MyViewHolder> {
+public class AvailableAppointmentsAdapter extends RecyclerView.Adapter<AvailableAppointmentsAdapter.MyViewHolder> {
 
     private List<AppoDoc> appointments;
     private Context context;
 
-    public PatientAppointmentAdapter(List<AppoDoc> appointments, Context context) {
+    public AvailableAppointmentsAdapter(List<AppoDoc> appointments, Context context) {
         this.appointments = appointments;
         this.context = context;
     }
-
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
@@ -34,9 +34,9 @@ public class PatientAppointmentAdapter extends RecyclerView.Adapter<PatientAppoi
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final MyViewHolder myViewHolder, int i) {
+    public void onBindViewHolder(@NonNull final MyViewHolder myViewHolder, final int i) {
         final AppoDoc appointment = appointments.get(i);
-        String info = appointment.getDate() + "\n" + "Doctor " + appointment.getDoctorName() + "\n" + appointment.getTreatName();
+        String info = appointment.getDate() + "\n" + "Doctor " + appointment.getDoctorName() +"\n" +appointment.getTreatName();
         myViewHolder.mAppoInfo.setText(info);
 
 
@@ -47,15 +47,15 @@ public class PatientAppointmentAdapter extends RecyclerView.Adapter<PatientAppoi
                 popupMenu.inflate(R.menu.recycler_button);
                 MenuItem menuItem = popupMenu.getMenu().findItem(R.id.assignToMe);
                 menuItem.setVisible(false);
-                MenuItem menuItem1 = popupMenu.getMenu().findItem(R.id.signupForTreat);
+                MenuItem menuItem1 = popupMenu.getMenu().findItem(R.id.resign);
                 menuItem1.setVisible(false);
                 popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem menuItem) {
                         switch (menuItem.getItemId()) {
-                            case R.id.resign:
-                                if (context instanceof PatientAppointments) {
-                                    ((PatientAppointments) context).cancelPatient();
+                            case R.id.signupForTreat:
+                                if (context instanceof AvailableAppointments) {
+                                    ((AvailableAppointments) context).signUp(i);
                                 }
                                 return true;
                             default:
@@ -73,7 +73,7 @@ public class PatientAppointmentAdapter extends RecyclerView.Adapter<PatientAppoi
         return appointments.size();
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+    public class MyViewHolder extends  RecyclerView.ViewHolder{
         public TextView mAppoInfo;
         public Button buttonRecyclerOptions;
 
@@ -81,9 +81,6 @@ public class PatientAppointmentAdapter extends RecyclerView.Adapter<PatientAppoi
             super(itemView);
             mAppoInfo = (TextView) itemView.findViewById(R.id.appo_info);
             buttonRecyclerOptions = (Button) itemView.findViewById(R.id.appo_button);
-
         }
     }
-
-
 }

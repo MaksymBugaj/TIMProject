@@ -42,7 +42,7 @@ public class FirebaseHelper {
 
     }
 
-    public void createUser(String name, String surname,String pesel,String sex, String email, String phone, String password,String type,String specialization) {
+    public void createUser(String name, String surname,String pesel,String sex, String email, String phone, String password,Integer type,String specialization) {
         userId = mDatabaseReference.push().getKey();
 
         User user = new User(userId, name, surname,pesel,sex, email, phone, password, type,specialization);
@@ -75,6 +75,7 @@ public class FirebaseHelper {
                             // there was an error
                             Toast.makeText(context.getApplicationContext(), "Authentication failed", Toast.LENGTH_LONG).show();
                         } else {
+
                             context.startActivity(new Intent(context, AfterLogin.class));
                         }
                     }

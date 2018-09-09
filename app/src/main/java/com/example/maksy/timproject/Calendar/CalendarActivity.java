@@ -17,6 +17,7 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
+import com.example.maksy.timproject.Appointments.CreateAppointment;
 import com.example.maksy.timproject.R;
 
 import butterknife.BindView;
@@ -45,7 +46,7 @@ public class CalendarActivity extends AppCompatActivity {
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView calendarView, int i, int i1, int i2) {
-                Intent intent = new Intent(getApplicationContext(), CalendarChooseDate.class);
+                Intent intent = new Intent(getApplicationContext(), CreateAppointment.class);
                 intent.putExtra("year",String.valueOf(i));
                 intent.putExtra("month",String.valueOf(i1 + 1));
                 intent.putExtra("day",String.valueOf(i2));
@@ -53,6 +54,7 @@ public class CalendarActivity extends AppCompatActivity {
 
             }
         });
+
 
     }
 

@@ -1,18 +1,19 @@
 package com.example.maksy.timproject.Login.AfterLogin;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
+import com.example.maksy.timproject.Appointments.AvailableAppointments;
 import com.example.maksy.timproject.Appointments.PatientAppointments;
 import com.example.maksy.timproject.Calendar.CalendarActivity;
 import com.example.maksy.timproject.R;
-import com.example.maksy.timproject.Treatments.PatientTreatment;
+import com.example.maksy.timproject.Treatments.AddTreatment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -32,14 +33,16 @@ public class AfterLogin extends AppCompatActivity {
     Button buttonCalendar;
     @BindView(R.id.afterLoginVisits)
     Button buttonVisits;
-    @BindView(R.id.afterLoginDoctors)
-    Button buttonDoctors;
+    @BindView(R.id.afterLoginAvailableAppoList)
+    Button availableAppointmentsButton;
     @BindView(R.id.afterLoginPatients)
     Button buttonPatients;
     @BindView(R.id.afterLoginAddTreatments)
     Button buttonAddTermins;
     @BindView(R.id.progressBar)
     ProgressBar progressBar;
+    @BindView(R.id.afterLoginShowOnMap)
+    Button map;
 
 
     private Unbinder unbinder;
@@ -57,12 +60,14 @@ public class AfterLogin extends AppCompatActivity {
 
         ButterKnife.bind(this);
         unbinder = ButterKnife.bind(this);
+
         progressBar.setVisibility(View.VISIBLE);
         buttonAddTermins.setVisibility(View.INVISIBLE);
         buttonCalendar.setVisibility(View.INVISIBLE);
-        buttonDoctors.setVisibility(View.INVISIBLE);
+        availableAppointmentsButton.setVisibility(View.INVISIBLE);
         buttonPatients.setVisibility(View.INVISIBLE);
         buttonVisits.setVisibility(View.INVISIBLE);
+        map.setVisibility(View.INVISIBLE);
         if (firebaseAuth.getCurrentUser() != null) {
             UserChangeListener(firebaseAuth.getCurrentUser().getEmail());
         }
@@ -81,9 +86,9 @@ public class AfterLogin extends AppCompatActivity {
     }
 
     //pacjent
-    @OnClick(R.id.afterLoginDoctors)
+    @OnClick(R.id.afterLoginAvailableAppoList)
     public void onDoctorsButtonClick(){
-
+        startActivity(new Intent(getApplicationContext(), AvailableAppointments.class));
     }
 
     @OnClick(R.id.afterLoginVisits)
@@ -93,7 +98,7 @@ public class AfterLogin extends AppCompatActivity {
 
     @OnClick(R.id.afterLoginAddTreatments)
     public void onAddTreatmentsButtonClick(){
-        startActivity(new Intent(getApplicationContext(), PatientTreatment.class));
+        startActivity(new Intent(getApplicationContext(), AddTreatment.class));
     }
 
     @Override
@@ -110,29 +115,26 @@ public class AfterLogin extends AppCompatActivity {
                /* User user = dataSnapshot.getValue(User.class);
                 String name = user.getName();*/
                 for(DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()){
-                    String type = (String) dataSnapshot1.child("type").getValue();
+                    long type = (Long) dataSnapshot1.child("type").getValue();
                     Log.i("NOELO", String.valueOf(type));
 
-                    if(type != null) {
-                        if (type.equals("1")) {
-                            progressBar.setVisibility(View.INVISIBLE);
-                            buttonAddTermins.setVisibility(View.VISIBLE);
-                            buttonCalendar.setVisibility(View.GONE);
-                            buttonDoctors.setVisibility(View.GONE);
-                            buttonPatients.setVisibility(View.VISIBLE);
-                            buttonVisits.setVisibility(View.GONE);
-                        } else {
+
+                        if (type == 1) {
                             progressBar.setVisibility(View.INVISIBLE);
                             buttonAddTermins.setVisibility(View.VISIBLE);
                             buttonCalendar.setVisibility(View.VISIBLE);
-                            buttonDoctors.setVisibility(View.VISIBLE);
+                            availableAppointmentsButton.setVisibility(View.GONE);
+                            buttonPatients.setVisibility(View.GONE);
+                            buttonVisits.setVisibility(View.GONE);
+                        } else if(type == 0){
+                            progressBar.setVisibility(View.INVISIBLE);
+                            buttonAddTermins.setVisibility(View.GONE);
+                            buttonCalendar.setVisibility(View.GONE);
+                            availableAppointmentsButton.setVisibility(View.VISIBLE);
                             buttonPatients.setVisibility(View.GONE);
                             buttonVisits.setVisibility(View.VISIBLE);
+                            map.setVisibility(View.VISIBLE);
                         }
-                    }
-                    else {
-                        Toast.makeText(AfterLogin.this, "Logout and try again!", Toast.LENGTH_SHORT).show();
-                    }
                 }
             }
 
@@ -142,4 +144,13 @@ public class AfterLogin extends AppCompatActivity {
             }
         });
     }
+
+    @OnClick(R.id.afterLoginShowOnMap)
+    public void showOnMap(){
+        String lat = "52.250570";
+        String lng = "20.895178";
+        String url = "http://maps.google.com/maps?addr=" + lat + "," + lng;
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("geo:<"+lat+">,<"+lng+">?q=<"+lat+">,<"+lng+">(Twoja+Przychodnia)"));
+        startActivity(intent);
+        }
 }

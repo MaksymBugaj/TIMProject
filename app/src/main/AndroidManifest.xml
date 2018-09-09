@@ -4,6 +4,8 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -45,7 +47,11 @@
         <activity android:name=".API.APIRetrofit" />
         <activity android:name=".Appointments.CreateAppointment" />
         <activity android:name=".Appointments.PatientAppointments" />
-        <activity android:name=".Treatments.PatientTreatment"></activity>
+        <activity android:name=".Treatments.AddTreatment" />
+        <activity android:name=".Location.Location" />
+        <activity android:name=".Calendar.CreateDoctorAppointment" />
+        <activity android:name=".Appointments.AvailableAppointments" />
+        <activity android:name=".Appointments.DoctorPatient.DoctorPatients"></activity>
     </application>
 
 </manifest>

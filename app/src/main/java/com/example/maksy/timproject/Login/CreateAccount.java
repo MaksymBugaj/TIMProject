@@ -121,7 +121,7 @@ public class CreateAccount extends AppCompatActivity {
 
         String initFirebase = "users";
         firebaseHelper = new FirebaseHelper(initFirebase, this);
-        firebaseHelper.createUser(editName, editSurname,editPesel,sex, editEmail, editPhone,editPassword,"0","0");
+        firebaseHelper.createUser(editName, editSurname,editPesel,sex, editEmail, editPhone,editPassword,0,"0");
         Toast.makeText(getApplicationContext(), "Account created!", Toast.LENGTH_SHORT).show();
         startActivity(new Intent(getApplicationContext(), LoginActivity.class));
         finish();

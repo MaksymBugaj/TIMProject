@@ -5,36 +5,62 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Treatments.PatientTreatment">
+    tools:context=".Treatments.AddTreatment">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/textInputLayoutTreatmentName"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_marginTop="20dp">
 
-        <TextView
-            android:id="@+id/patientTreatment"
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/textInputEditTextTreatmentName"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/treatment"/>
-
-        <Spinner
-            android:id="@+id/spinnerTreatments"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:entries="@array/treatments"
-            android:prompt="@string/treatments_visits"
-            android:spinnerMode="dropdown">
+            android:hint="@string/treatment_name"
+            android:inputType="text"
+            android:maxLines="1"
+            android:textColor="@android:color/black" />
+    </android.support.design.widget.TextInputLayout>
 
-        </Spinner>
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/textInputLayoutTreatmentDoctor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp">
 
-    </LinearLayout>
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/textInputEditTextTreatmentDoctor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/treatment_doc"
+            android:inputType="text"
+            android:maxLines="1"
+            android:textColor="@android:color/black" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/textInputLayoutTreatmentDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp">
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/textInputEditTextTreatmentDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/treatment_desc"
+            android:inputType="text"
+            android:maxLines="1"
+            android:textColor="@android:color/black" />
+    </android.support.design.widget.TextInputLayout>
 
     <Button
         android:id="@+id/buttonSubmitTreatment"
         android:background="@drawable/btn_style_1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
         android:text="@string/button_submit"/>
 
 </LinearLayout>

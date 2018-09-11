@@ -12,7 +12,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.maksy.timproject.Appointments.Appo.Appointment;
+import com.example.maksy.timproject.Entity.Appointment;
+import com.example.maksy.timproject.Firebase.FirebaseHelper;
 import com.example.maksy.timproject.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -46,59 +47,37 @@ public class CreateAppointment extends AppCompatActivity {
 
     private String day, month, year,dateString;
     private Unbinder unbinder;
-    private DatabaseReference databaseReference;
-    private FirebaseDatabase firebaseDatabase;
-    private FirebaseAuth firebaseAuth;
-    private List<String> treatmentsList = new ArrayList<>();
-    ArrayAdapter<String> adapter;
 
+    ArrayAdapter<String> adapter;
+    public FirebaseHelper firebaseHelper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_appointment);
-
-        getDataFromFirebase();
+        prepareFirebase();
+        firebaseHelper.getTreatmentsFromFirebase();
         getData();
         ButterKnife.bind(this);
         setTextView();
+
+    }
+    private void prepareFirebase() {
+        String initFirebase = "appointments";
+        firebaseHelper = new FirebaseHelper(initFirebase, this);
     }
 
     private void initSpinner() {
-        adapter = new ArrayAdapter<String>(CreateAppointment.this, android.R.layout.simple_spinner_dropdown_item, treatmentsList);
+        adapter = new ArrayAdapter<String>(CreateAppointment.this, android.R.layout.simple_spinner_dropdown_item, firebaseHelper.getTreatmentsList());
         spinner.setAdapter(adapter);
     }
 
-    private void getDataFromFirebase() {
-        firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference("treatments");
-        Query query = databaseReference.orderByChild("name");
-        query.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
 
-                for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
-                    String name = (String) dataSnapshot1.child("name").getValue();
-                    Log.i("CREATEAPPO", "name" + name);
-                    treatmentsList.add(name);
-                    //adapter.notifyDataSetChanged();
-                    initSpinner();
-                    adapter.notifyDataSetChanged();
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
-
+    public void notifyAdapter(){
+        initSpinner();
+        adapter.notifyDataSetChanged();
     }
 
-
     private void getData() {
-//        Appointment appointment = new Appointment("Eberhard Mock", "Morderstwo");
-        //      appointments.add(appointment);
         Intent intent = getIntent();
         this.day = intent.getStringExtra("day");
         this.month = intent.getStringExtra("month");
@@ -118,7 +97,6 @@ public class CreateAppointment extends AppCompatActivity {
     public void onSubmitButtonClick() {
         String hour = spinnerHours.getSelectedItem().toString();
         String treatname = spinner.getSelectedItem().toString();
-        String appoId;
         dateString = dateString +" "+ hour;
         Log.i("StringDate",dateString);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd HH:mm");
@@ -135,13 +113,10 @@ public class CreateAppointment extends AppCompatActivity {
 
         Long date2=date.getTime();
         Log.i("LongDate",date.toString());
-        firebaseAuth = FirebaseAuth.getInstance();
-        firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference("appointments");
-        appoId = databaseReference.push().getKey();
-        Appointment appointment = new Appointment(treatname,hour,firebaseAuth.getCurrentUser().getEmail(), date2,"",0);
-        databaseReference.child(appoId).setValue(appointment);
+        firebaseHelper.createAppointent(hour, treatname, date2);
         Toast.makeText(this, "Created Appointment", Toast.LENGTH_SHORT).show();
         finish();
     }
+
+
 }

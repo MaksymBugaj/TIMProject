@@ -1,4 +1,4 @@
-package com.example.maksy.timproject.User;
+package com.example.maksy.timproject.Entity;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

@@ -1,4 +1,4 @@
-package com.example.maksy.timproject.Appointments;
+package com.example.maksy.timproject.Adapters;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -11,7 +11,8 @@ import android.widget.Button;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 
-import com.example.maksy.timproject.Appointments.Appo.AppoDoc;
+import com.example.maksy.timproject.Entity.AppoDoc;
+import com.example.maksy.timproject.Appointments.PatientAppointments;
 import com.example.maksy.timproject.R;
 
 import java.util.List;
@@ -55,7 +56,7 @@ public class PatientAppointmentAdapter extends RecyclerView.Adapter<PatientAppoi
                         switch (menuItem.getItemId()) {
                             case R.id.resign:
                                 if (context instanceof PatientAppointments) {
-                                    ((PatientAppointments) context).cancelPatient();
+                                    ((PatientAppointments) context).firebaseHelper.cancelPatientAppointment(appointment.getKey(),"appointments");
                                 }
                                 return true;
                             default:

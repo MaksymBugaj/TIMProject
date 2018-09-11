@@ -39,17 +39,12 @@
             android:name=".Calendar.CalendarActivity"
             android:parentActivityName=".Login.AfterLogin.AfterLogin"
             android:screenOrientation="portrait" />
-        <activity
-            android:name=".Calendar.CalendarChooseDate"
-            android:parentActivityName=".Calendar.CalendarActivity"
-            android:screenOrientation="portrait" />
         <activity android:name=".API.APIExample" />
         <activity android:name=".API.APIRetrofit" />
         <activity android:name=".Appointments.CreateAppointment" />
         <activity android:name=".Appointments.PatientAppointments" />
         <activity android:name=".Treatments.AddTreatment" />
         <activity android:name=".Location.Location" />
-        <activity android:name=".Calendar.CreateDoctorAppointment" />
         <activity android:name=".Appointments.AvailableAppointments" />
         <activity android:name=".Appointments.DoctorPatient.DoctorPatients"></activity>
     </application>

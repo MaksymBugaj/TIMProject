@@ -1,4 +1,4 @@
-package com.example.maksy.timproject.Appointments.Appo;
+package com.example.maksy.timproject.Entity;
 
 import java.util.Date;
 

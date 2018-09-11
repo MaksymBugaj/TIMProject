@@ -8,8 +8,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
-import com.example.maksy.timproject.Appointments.Appo.AppoDoc;
-import com.example.maksy.timproject.Appointments.Appo.Appointment;
+import com.example.maksy.timproject.Adapters.AvailableAppointmentsAdapter;
+import com.example.maksy.timproject.Entity.AppoDoc;
+import com.example.maksy.timproject.Firebase.FirebaseHelper;
 import com.example.maksy.timproject.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -28,13 +29,11 @@ import butterknife.Unbinder;
 
 public class AvailableAppointments extends AppCompatActivity {
 
-    private List<AppoDoc> appointments = new ArrayList<>();
+
     private RecyclerView recyclerView;
     private AvailableAppointmentsAdapter availableAppointmentsAdapter;
 
-    private FirebaseAuth firebaseAuth;
-    private DatabaseReference databaseReference;
-    private FirebaseDatabase firebaseDatabase;
+    public FirebaseHelper firebaseHelper;
 
     private Unbinder unbinder;
 
@@ -43,23 +42,30 @@ public class AvailableAppointments extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_available_appointments);
 
-        ButterKnife.bind(this);
-        unbinder = ButterKnife.bind(this);
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view_available_appo);
 
-        prepareData();
+        prepareFirebase();
+        firebaseHelper.prepareDataForPatientAppointments(1);
 
-        availableAppointmentsAdapter = new AvailableAppointmentsAdapter(appointments,this);
+        availableAppointmentsAdapter = new AvailableAppointmentsAdapter(firebaseHelper.getAppointments(),this);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
         recyclerView.setAdapter(availableAppointmentsAdapter);
     }
+    public void notifyAdapter() {
+        availableAppointmentsAdapter.notifyDataSetChanged();
+    }
+    private void prepareFirebase() {
+        String initFirebase = "appointments";
+        firebaseHelper = new FirebaseHelper(initFirebase, this);
+    }
 
-    private void prepareData() {
 
-        firebaseDatabase = FirebaseDatabase.getInstance();
+    /*private void prepareDataForAdapters(String equalTo) {
+
+
         databaseReference = firebaseDatabase.getReference("appointments");
         Query query = databaseReference.orderByChild("patientEmail").equalTo("");
         query.addValueEventListener(new ValueEventListener() {
@@ -71,8 +77,8 @@ public class AvailableAppointments extends AppCompatActivity {
                     Long date = (Long) dataSnapshot1.child("date").getValue();
                     String treatName = (String) dataSnapshot1.child("treatName").getValue();
                     // String appointmentName = (String) dataSnapshot1.child("name").getValue();
-                    /*String date = (String) dataSnapshot1.child("date").getValue();
-                    String doctorId = (String) dataSnapshot1.child("doctorID").getValue();*/
+                    *//*String date = (String) dataSnapshot1.child("date").getValue();
+                    String doctorId = (String) dataSnapshot1.child("doctorID").getValue();*//*
                     // setDoctorId(doctorId);
 //todo change this
                     String key = dataSnapshot1.getKey();
@@ -115,8 +121,8 @@ public class AvailableAppointments extends AppCompatActivity {
             }
         });
     }
-
-    public void signUp(int position){
+*/
+    /*public void signUpForAppointment(int position){
         firebaseAuth = FirebaseAuth.getInstance();
         String email = firebaseAuth.getCurrentUser().getEmail();
 
@@ -129,5 +135,5 @@ public class AvailableAppointments extends AppCompatActivity {
         databaseReference.child(appoDoc.getKey()).child("flag").setValue(1);
         Toast.makeText(this, "Signed for Treatment", Toast.LENGTH_SHORT).show();
         finish();
-    }
+    }*/
 }

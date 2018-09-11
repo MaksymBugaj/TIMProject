@@ -1,4 +1,4 @@
-package com.example.maksy.timproject.Treatments;
+package com.example.maksy.timproject.Entity;
 
 public class Treatment {
 

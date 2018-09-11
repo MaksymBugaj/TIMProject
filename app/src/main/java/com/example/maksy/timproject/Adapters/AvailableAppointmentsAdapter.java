@@ -1,4 +1,4 @@
-package com.example.maksy.timproject.Appointments;
+package com.example.maksy.timproject.Adapters;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -11,8 +11,8 @@ import android.widget.Button;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 
-import com.example.maksy.timproject.Appointments.Appo.AppoDoc;
-import com.example.maksy.timproject.Appointments.Appo.Appointment;
+import com.example.maksy.timproject.Entity.AppoDoc;
+import com.example.maksy.timproject.Appointments.AvailableAppointments;
 import com.example.maksy.timproject.R;
 
 import java.util.List;
@@ -55,7 +55,7 @@ public class AvailableAppointmentsAdapter extends RecyclerView.Adapter<Available
                         switch (menuItem.getItemId()) {
                             case R.id.signupForTreat:
                                 if (context instanceof AvailableAppointments) {
-                                    ((AvailableAppointments) context).signUp(i);
+                                    ((AvailableAppointments) context).firebaseHelper.signUpForAppointment(i);
                                 }
                                 return true;
                             default:

@@ -30,9 +30,6 @@ public class CalendarActivity extends AppCompatActivity {
     @BindView(R.id.calendar_welcome_text)
     TextView calendarText;
 
-    private PopupWindow popupWindow;
-    private LinearLayout linearLayout;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +38,6 @@ public class CalendarActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
-        linearLayout = (LinearLayout) findViewById(R.id.activity_calendar);
 
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
@@ -58,13 +54,4 @@ public class CalendarActivity extends AppCompatActivity {
 
     }
 
-    private void init() {
-
-
-        LayoutInflater layoutInflater = (LayoutInflater) getBaseContext().getSystemService(LAYOUT_INFLATER_SERVICE);
-        @Nullable View view = layoutInflater.inflate(R.layout.popup_termin, null);
-
-        popupWindow = new PopupWindow(view, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT, true);
-        popupWindow.showAtLocation(linearLayout, Gravity.TOP, 0, 0);
-    }
 }

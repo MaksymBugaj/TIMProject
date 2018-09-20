@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".API.APIRetrofit">
+
+    <TextView
+        android:id="@+id/retro_test_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
+
+    <Button
+        android:id="@+id/retro_test_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
+
+    <EditText
+        android:id="@+id/editTextToPost"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Text to post"/>
+
+    <EditText
+        android:id="@+id/editTextIdToPost"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="ID to post"/>
+
+    <Button
+        android:id="@+id/postME"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="postME"/>
+
+</LinearLayout>

@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "927559001233",
+    "firebase_url": "https://timproject-290e2.firebaseio.com",
+    "project_id": "timproject-290e2",
+    "storage_bucket": "timproject-290e2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:927559001233:android:0ec5e8e2bc44d6b3",
+        "android_client_info": {
+          "package_name": "com.example.maksy.timproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "927559001233-crc53no3h2kqbqk36sc578ubrrplbm9h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCTswxakZAjlmMiH00yzgogb0aveuxdzrU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">TIMProject</string>
+    <string name="welcome_text">pfffff</string>
+    <string name="login_class">mig</string>
+    <string name="activity_main_description">dupa</string>
+    <string name="hint_login">Login</string>
+    <string name="hint_password">Password</string>
+    <string name="hint_name">Name</string>
+    <string name="hint_surname">Surname</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_confirm_password">Confirm Password</string>
+    <string name="hint_phone">Phone</string>
+    <string name="text_register">Register</string>
+    <string name="text_login">Login</string>
+    <string name="text_not_member">No account yet? Create new account</string>
+    <string name="activity_calendar_welcome_text">Choose suitable date</string>
+    <string name="popup_available_termins">Available dates</string>
+    <string name="calendar">Create appointments</string>
+    <string name="after_login_welcome">Choose option</string>
+    <string name="appointments">My Appointments</string>
+    <string name="doctors">Doctors</string>
+    <string name="available_doctors">Available Doctors</string>
+    <string name="retrofit">Retrofit</string>
+    <string name="hint_pesel">Pesel</string>
+    <string name="hint_man">Man</string>
+    <string name="hint_woman">Woman</string>
+    <string name="my_patients">My Patients</string>
+    <string name="add_termins">Add Treatments</string>
+    <string name="add_appointments">Show On Map</string>
+    <string name="button_submit">Submit</string>
+
+
+    <string-array name="hours">
+        <item>8:00</item>
+        <item>8:30</item>
+        <item>9:00</item>
+        <item>9:30</item>
+        <item>10:00</item>
+        <item>10:30</item>
+        <item>11:00</item>
+        <item>11:30</item>
+        <item>12:00</item>
+        <item>12:30</item>
+        <item>13:00</item>
+        <item>13:30</item>
+        <item>14:00</item>
+        <item>14:30</item>
+        <item>15:00</item>
+        <item>15:30</item>
+        <item>16:00</item>
+        <item>16:30</item>
+        <item>17:00</item>
+        <item>17:30</item>
+        <item>18:00</item>
+        <item>18:30</item>
+    </string-array>
+
+    <string name="hours_prompt">Choose hour</string>
+    <string name="treatment">Choose treatment</string>
+    <string name="patient_appointment">Your appointments</string>
+
+    <string-array name="treatments">
+        <item>Wizyta stomatologiczna</item>
+        <item>Wizyta endokrynologiczna</item>
+        <item>Wizyta ginegologiczna</item>
+        <item>Wizyta laryngologiczna </item>
+    </string-array>
+
+    <string name="treatments_visits">Available treatments</string>
+    <string name="treatment_name">Treatment name</string>
+    <string name="treatment_doc">Doctor name</string>
+    <string name="treatment_desc">Treatment description</string>
+    <string name="available_appointments">Available appointments</string>
+</resources>

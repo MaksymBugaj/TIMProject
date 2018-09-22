@@ -102,7 +102,6 @@ export class AuthService {
   signOut(): void {
     this.afAuth.auth.signOut();
     this.router.navigate(['/login'])
-    alert("Wylogowanie");
   }
 
 

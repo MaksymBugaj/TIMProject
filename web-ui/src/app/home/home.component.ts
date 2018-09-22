@@ -48,7 +48,6 @@ export class HomeComponent implements OnInit {
           this.user = element          
         }
       }));
-      
   }
 
   logout() {

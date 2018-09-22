@@ -92,7 +92,7 @@
     [locale]="locale"
     [activeDayIsOpen]="activeDayIsOpen"
     (dayClicked)="dayClicked($event.day)"
-    (eventClicked)="handleEvent('Clicked', $event.event, content)"
+    (eventClicked)="handleEvent('Clicked', $event.event, content, content2)"
     (eventTimesChanged)="eventTimesChanged($event)">
   </mwl-calendar-month-view>
   <mwl-calendar-day-view
@@ -102,7 +102,7 @@
     [refresh]="refresh"
     [locale]="locale"
     (hourSegmentClicked)="timeClicked($event.date)"
-    (eventClicked)="handleEvent('Clicked', $event.event, content)"
+    (eventClicked)="handleEvent('Clicked', $event.event, content, content2)"
     (eventTimesChanged)="eventTimesChanged($event)">
   </mwl-calendar-day-view>
 </div>
@@ -122,3 +122,18 @@
     <button type="button" class="btn btn-outline-dark" (click)="close()">Nie</button>
   </div>
 </ng-template>
+
+<ng-template #content2 let-modal let-close="close" let-dismiss="dismiss">
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">{{modalHeader}}</h4>
+      <button type="button" class="close" aria-label="Close" (click)="dismiss()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      {{modalBody}}
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="close()">Ok</button>
+    </div>
+  </ng-template>

@@ -81,4 +81,34 @@
     </form>
   </div>
 
+  <div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+      <a class="text-center m-1 btn" (click)="passwordModal(content)">Resetuj hasło</a> 
+    </div>
+    <div class="col-md-2"></div>
+  </div>
+
 </div>
+
+<ng-template #content let-modal let-close="close" let-dismiss="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Reset hasła</h4>
+    <button type="button" class="close" aria-label="Close" (click)="dismiss()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="form-group">
+      <label for="emailRem">E-Mail</label>
+      <div class="input-group">
+        <input type="emailRem" class="form-control" name="emailRem" id="emailRem" #emailRemRef="ngModel" [(ngModel)]="emailRem"
+          placeholder="Podaj adres e-mail" required pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$">
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="resetPass()">Resetuj</button>
+    <button type="button" class="btn btn-outline-dark" (click)="close()">Anuluj</button>
+  </div>
+</ng-template>

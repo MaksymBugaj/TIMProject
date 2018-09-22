@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '../../../node_modules/@angular/router';
 import { AuthService } from '../_service/auth.service';
-import { first } from 'rxjs/operators';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-login',
@@ -11,10 +11,13 @@ import { first } from 'rxjs/operators';
 export class LoginComponent implements OnInit {
 
   loginData: any = {};
+  
+  modalRef;
+  emailRem;
 
   constructor(
-    private router: Router,
-    private auth: AuthService
+    private auth: AuthService,
+    private modal: NgbModal
   ) { }
 
   ngOnInit() {
@@ -32,5 +35,16 @@ export class LoginComponent implements OnInit {
       console.log("Error");
       alert("Błędnie podane hasło lub E-mail");
     }
+  }
+
+  passwordModal(content)
+  {
+    this.modalRef = this.modal.open(content, { centered: true } )
+  }
+
+  resetPass() 
+  {
+    this.auth.resetPassword(this.emailRem);
+    this.modalRef.close();
   }
 }

@@ -146,7 +146,7 @@ export class CallendarComponent {
     this.view = 'month';
   }
 
-  handleEvent(action: string, event: CalendarEvent, content): void {
+  handleEvent(action: string, event: CalendarEvent, content, content2): void {
     this.modalData = { event, action };
     this.modalHeader = "Wizyta dnia " + event.start.toLocaleDateString() + " o godzinie " + event.meta.appointment.time + " na zabieg: " + event.meta.appointment.treatName;
     if (event.meta.appointment.flag == 0) {
@@ -157,13 +157,13 @@ export class CallendarComponent {
       this.openModal(content);
     } else if (event.meta.appointment.flag == 2 && event.meta.appointment.patientEmail != this.authService.currentUserDisplayName) {
       this.modalBody = "Termin zajęty"
-      this.openModal(content);
+      this.openModal(content2);
     } else if (event.meta.appointment.flag == 2 && event.meta.appointment.patientEmail == this.authService.currentUserDisplayName) {
       this.modalBody = "Twoja rezerwacja została potwierdzona"
-      this.openModal(content);
+      this.openModal(content2);
     } else {
       this.modalBody = "Termin zarezerwowany"
-      this.openModal(content);
+      this.openModal(content2);
     }
   }
 

@@ -3,9 +3,11 @@ package com.example.maksy.timproject.Firebase;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.example.maksy.timproject.AddOpinion;
 import com.example.maksy.timproject.Appointments.AvailableAppointments;
 import com.example.maksy.timproject.Appointments.CreateAppointment;
 import com.example.maksy.timproject.Appointments.DoctorPatient.DoctorPatients;
@@ -13,6 +15,7 @@ import com.example.maksy.timproject.Entity.AppoDoc;
 import com.example.maksy.timproject.Appointments.PatientAppointments;
 import com.example.maksy.timproject.Entity.Appointment;
 import com.example.maksy.timproject.Entity.DocPatient;
+import com.example.maksy.timproject.Entity.Opinions;
 import com.example.maksy.timproject.Entity.Treatment;
 import com.example.maksy.timproject.Login.AfterLogin.AfterLogin;
 import com.example.maksy.timproject.Login.LoginActivity;
@@ -21,6 +24,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -30,9 +34,11 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class FirebaseHelper {
+    private static final String TAG = FirebaseHelper.class.getName();
 
     private FirebaseAuth firebaseAuth;
     private DatabaseReference databaseReference;
@@ -43,6 +49,10 @@ public class FirebaseHelper {
     private List<AppoDoc> appointments = new ArrayList<>();
     private List<String> treatmentsList = new ArrayList<>();
     private List<DocPatient> doctorPatients = new ArrayList<>();
+    private List<Appointment> testList = new ArrayList<>();
+    private List<String> doctors = new ArrayList<>();
+    private List<Opinions> opinions = new ArrayList<>();
+    private List<Treatment> treatments = new ArrayList<>();
 
     public FirebaseHelper(String reference, Context context) {
         this.reference = reference;
@@ -111,6 +121,52 @@ public class FirebaseHelper {
         databaseReference.child(appoDoc.getKey()).child("flag").setValue(1);
     }
 
+    public void createOpinion(final FirebaseAddOpinionCallback firebaseAddOpinionCallback, String doctor, String doctorStars, String opinion) {
+        String opinionId;
+        firebaseAuth = FirebaseAuth.getInstance();
+        databaseReference = firebaseDatabase.getReference("opinion");
+        opinionId = databaseReference.push().getKey();
+        Opinions opinions = new Opinions(doctor, firebaseAuth.getCurrentUser().getEmail(), opinion, doctorStars);
+        databaseReference.child(opinionId).setValue(opinions);
+    }
+
+    public void getDoctors() {
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference("users");
+        Query query = databaseReference.orderByChild("type").equalTo(1);
+        query.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                HashMap<String, Object> value = (HashMap<String, Object>) dataSnapshot.getValue();
+                doctors.add(value.get("firstName").toString() + " " + value.get("lastName").toString());
+                if (context instanceof AddOpinion) {
+                    ((AddOpinion) context).notifyAdapter();
+                    Log.i("DoctorPatients", "DoctorPatients notify");
+                }
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
     public void prepareDataForAppointments(final int flag) {
         Query query;
         databaseReference = firebaseDatabase.getReference("appointments");
@@ -136,9 +192,9 @@ public class FirebaseHelper {
                     String treatName = (String) dataSnapshot1.child("treatName").getValue();
 
                     String key = dataSnapshot1.getKey();
-                    if(flag == 2){
+                    if (flag == 2) {
                         String patientEmail = (String) dataSnapshot1.child("patientEmail").getValue();
-                        getPatientName(key,patientEmail,treatName,date);
+                        getPatientName(key, patientEmail, treatName, date);
                     }
                     getDoctorName(key, doctorEmail, treatName, date);
 
@@ -214,6 +270,13 @@ public class FirebaseHelper {
         });
     }
 
+    public void createTreatmentProposition(String treatName,String treatDesc){
+        String treatId;
+        databaseReference = firebaseDatabase.getReference("treatmentsProposition");
+        treatId = databaseReference.push().getKey();
+        Treatment treatment = new Treatment(treatName, treatDesc);
+        databaseReference.child(treatId).setValue(treatment);
+    }
     public void createTreatment(String treatName, String treatDoc, String treatDesc) {
         String treatId;
         databaseReference = firebaseDatabase.getReference("treatments");
@@ -229,6 +292,7 @@ public class FirebaseHelper {
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                Log.d(TAG, dataSnapshot.toString());
 
                 for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
                     String name = (String) dataSnapshot1.child("name").getValue();
@@ -267,5 +331,191 @@ public class FirebaseHelper {
 
     public List<DocPatient> getDoctorPatients() {
         return doctorPatients;
+    }
+
+    public List<Opinions> getOpinions() {
+        return opinions;
+    }
+
+    public interface FirebaseCallback {
+        void onCallback(List<String> list);
+    }
+
+    public interface FirebaseAddOpinionCallback {
+        void onCallback(List<Opinions> list);
+    }
+
+    public interface FirebaseObjectCallback<T>{
+        void onCallback(List<T> list);
+    }
+
+    public void readData(final FirebaseCallback firebaseCallback) {
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference("treatments");
+        Query query = databaseReference.orderByChild("name");
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Log.d(TAG, dataSnapshot.toString());
+
+                for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+                    String name = (String) dataSnapshot1.child("name").getValue();
+                    Log.i("CREATEAPPO", "name" + name);
+                    treatmentsList.add(name);
+                    if (context instanceof CreateAppointment) {
+                        ((CreateAppointment) context).notifyAdapter();
+                        Log.i("PatientAppo", "Patientapp notify");
+                    }
+                }
+
+                firebaseCallback.onCallback(treatmentsList);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    public void getTreatmentProposition(final FirebaseObjectCallback firebaseCallback){
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference("treatmentsProposition");
+        Query query = databaseReference;
+        query.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                HashMap<String, Object> value = (HashMap<String, Object>) dataSnapshot.getValue();
+                treatments.add(new Treatment(value.get("name").toString(),value.get("desc").toString()));
+                firebaseCallback.onCallback(treatments);
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    public void getOpinion(final FirebaseAddOpinionCallback firebaseCallback) {
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference("opinion");
+        Query query = databaseReference;
+        query.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                HashMap<String, Object> value = (HashMap<String, Object>) dataSnapshot.getValue();
+                opinions.add(new Opinions(value.get("doctorName").toString(), value.get("patientName").toString(), value.get("opinion").toString(),
+                        value.get("rating").toString()));
+                firebaseCallback.onCallback(opinions);
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    public void testRetrieve() {
+        Query query;
+        databaseReference = firebaseDatabase.getReference("appointments");
+        query = databaseReference.orderByChild("patientEmail").equalTo("");
+        query.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                HashMap<String, Object> value = (HashMap<String, Object>) dataSnapshot.getValue();
+/*
+testList.add(new Appointment(value.get("treatment").toString(),value.get("time").toString(),value.get("doctorEmail").toString(),
+        (Long) value.get("date"),value.get("patientEmail").toString(),(int)value.get("flag")));
+*/
+                getDoctorName(dataSnapshot.getKey(), value.get("doctorEmail").toString(), value.get("treatName").toString(),
+                        (Long) value.get("date"));
+//Log.i("LISTALISTAHOPLISTA", (String) testList.get(testList.size()-1));
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+      /*  query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+                    String doctorEmail = (String) dataSnapshot1.child("doctorEmail").getValue();
+                    Long date = (Long) dataSnapshot1.child("date").getValue();
+                    String treatName = (String) dataSnapshot1.child("treatName").getValue();
+
+                    String key = dataSnapshot1.getKey();
+                    if(flag == 2){
+                        String patientEmail = (String) dataSnapshot1.child("patientEmail").getValue();
+                        getPatientName(key,patientEmail,treatName,date);
+                    }
+                    getDoctorName(key, doctorEmail, treatName, date);
+
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });*/
+
+    }
+
+    public List<String> getDoctorsList() {
+        return doctors;
+    }
+
+    public List<Treatment> getTreatments() {
+        return treatments;
     }
 }

@@ -10,12 +10,16 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 
+import com.example.maksy.timproject.AddOpinion;
 import com.example.maksy.timproject.Appointments.AvailableAppointments;
 import com.example.maksy.timproject.Appointments.DoctorPatient.DoctorPatients;
 import com.example.maksy.timproject.Appointments.PatientAppointments;
 import com.example.maksy.timproject.Calendar.CalendarActivity;
+import com.example.maksy.timproject.OpinionsActivity;
+import com.example.maksy.timproject.ProposeTreatment;
 import com.example.maksy.timproject.R;
 import com.example.maksy.timproject.Treatments.AddTreatment;
+import com.example.maksy.timproject.Treatments.ShowTreatmentProposition;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -41,10 +45,18 @@ public class AfterLogin extends AppCompatActivity {
     Button buttonPatients;
     @BindView(R.id.afterLoginAddTreatments)
     Button buttonAddTermins;
-    @BindView(R.id.progressBar)
+    @BindView(R.id.progresBar)
     ContentLoadingProgressBar progressBar;
     @BindView(R.id.afterLoginShowOnMap)
     Button map;
+    @BindView(R.id.opinionButton)
+    Button buttonOpinion;
+    @BindView(R.id.showOpinionButton)
+    Button buttonShowOpinions;
+    @BindView(R.id.addTreatmentPropositionButton)
+    Button buttonaddTreatmentPropo;
+    @BindView(R.id.showTreatmentPropositions)
+    Button buttonShowTreatPropo;
 
 
     private Unbinder unbinder;
@@ -70,6 +82,10 @@ public class AfterLogin extends AppCompatActivity {
         buttonPatients.setVisibility(View.INVISIBLE);
         buttonVisits.setVisibility(View.INVISIBLE);
         map.setVisibility(View.INVISIBLE);
+        buttonOpinion.setVisibility(View.INVISIBLE);
+        buttonShowOpinions.setVisibility(View.INVISIBLE);
+        buttonaddTreatmentPropo.setVisibility(View.INVISIBLE);
+        buttonShowTreatPropo.setVisibility(View.INVISIBLE);
         if (firebaseAuth.getCurrentUser() != null) {
             UserChangeListener(firebaseAuth.getCurrentUser().getEmail());
         }
@@ -103,11 +119,32 @@ public class AfterLogin extends AppCompatActivity {
         startActivity(new Intent(getApplicationContext(), AddTreatment.class));
     }
 
+    @OnClick(R.id.opinionButton)
+    public void onOpinionButtonClick(){
+        startActivity(new Intent(getApplicationContext(), AddOpinion.class));
+    }
+
+    @OnClick(R.id.showOpinionButton)
+    public void onShowOpinionClick(){
+        startActivity(new Intent(getApplicationContext(), OpinionsActivity.class));
+    }
+
+    @OnClick(R.id.addTreatmentPropositionButton)
+    public void onAddTreatmentPropositionClick(){
+        startActivity(new Intent(getApplicationContext(), ProposeTreatment.class));
+    }
+
+    @OnClick(R.id.showTreatmentPropositions)
+    public void onAShowTreatmentPropositionClick(){
+        startActivity(new Intent(getApplicationContext(), ShowTreatmentProposition.class));
+    }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
         unbinder.unbind();
     }
+
 
     private void UserChangeListener(String email) {
         Query query = databaseReference.orderByChild("email").equalTo(email);
@@ -121,21 +158,29 @@ public class AfterLogin extends AppCompatActivity {
                     Log.i("NOELO", String.valueOf(type));
 
 
-                        if (type == 1) {
-                            progressBar.setVisibility(View.INVISIBLE);
+                        if (type == 1 || type == 2) {
+                            progressBar.setVisibility(View.GONE);
                             buttonAddTermins.setVisibility(View.VISIBLE);
                             buttonCalendar.setVisibility(View.VISIBLE);
                             availableAppointmentsButton.setVisibility(View.GONE);
                             buttonPatients.setVisibility(View.VISIBLE);
                             buttonVisits.setVisibility(View.GONE);
+                            buttonOpinion.setVisibility(View.GONE);
+                            buttonShowOpinions.setVisibility(View.GONE);
+                            buttonaddTreatmentPropo.setVisibility(View.GONE);
+                            buttonShowTreatPropo.setVisibility(View.VISIBLE);
                         } else if(type == 0){
-                            progressBar.setVisibility(View.INVISIBLE);
+                            progressBar.setVisibility(View.GONE);
                             buttonAddTermins.setVisibility(View.GONE);
                             buttonCalendar.setVisibility(View.GONE);
                             availableAppointmentsButton.setVisibility(View.VISIBLE);
                             buttonPatients.setVisibility(View.GONE);
                             buttonVisits.setVisibility(View.VISIBLE);
                             map.setVisibility(View.VISIBLE);
+                            buttonOpinion.setVisibility(View.VISIBLE);
+                            buttonShowOpinions.setVisibility(View.VISIBLE);
+                            buttonaddTreatmentPropo.setVisibility(View.VISIBLE);
+                            buttonShowTreatPropo.setVisibility(View.GONE);
                         }
                 }
             }

@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.example.maksy.timproject.Adapters.AvailableAppointmentsAdapter;
+import com.example.maksy.timproject.Firebase.FirebaseDatabaseHelper;
 import com.example.maksy.timproject.Firebase.FirebaseHelper;
 import com.example.maksy.timproject.R;
 
@@ -20,6 +21,7 @@ public class AvailableAppointments extends AppCompatActivity {
     private AvailableAppointmentsAdapter availableAppointmentsAdapter;
 
     public FirebaseHelper firebaseHelper;
+    public FirebaseDatabaseHelper firebaseDatabaseHelper;
 
     private Unbinder unbinder;
 
@@ -32,6 +34,8 @@ public class AvailableAppointments extends AppCompatActivity {
 
         prepareFirebase();
         firebaseHelper.prepareDataForAppointments(1);
+        //firebaseHelper.testRetrieve();
+        //firebaseDatabaseHelper.retrieveDataFromFirebase(1,"appointments", "patientEmail");
 
         availableAppointmentsAdapter = new AvailableAppointmentsAdapter(firebaseHelper.getAppointments(),this);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
@@ -46,6 +50,11 @@ public class AvailableAppointments extends AppCompatActivity {
     private void prepareFirebase() {
         String initFirebase = "appointments";
         firebaseHelper = new FirebaseHelper(initFirebase, this);
+    }
+
+    private void prepareFirebaseDatabase() {
+        String initFirebase = "appointments";
+        firebaseDatabaseHelper = new FirebaseDatabaseHelper(initFirebase, this);
     }
 
 

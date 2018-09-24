@@ -46,7 +46,11 @@
         <activity android:name=".Treatments.AddTreatment" />
         <activity android:name=".Location.Location" />
         <activity android:name=".Appointments.AvailableAppointments" />
-        <activity android:name=".Appointments.DoctorPatient.DoctorPatients"></activity>
+        <activity android:name=".Appointments.DoctorPatient.DoctorPatients" />
+        <activity android:name=".AddOpinion" />
+        <activity android:name=".OpinionsActivity" />
+        <activity android:name=".ProposeTreatment"></activity>
+        <activity android:name=".Treatments.ShowTreatmentProposition"></activity>
     </application>
 
 </manifest>

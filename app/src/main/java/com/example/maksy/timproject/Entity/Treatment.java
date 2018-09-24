@@ -9,6 +9,11 @@ public class Treatment {
     public Treatment() {
     }
 
+    public Treatment(String name, String desc) {
+        this.name = name;
+        this.desc = desc;
+    }
+
     public Treatment(String name, String docName, String desc) {
         this.name = name;
         this.docName = docName;

@@ -1,6 +1,7 @@
 package com.example.maksy.timproject.Appointments;
 
 import android.content.Intent;
+import android.nfc.Tag;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
@@ -35,6 +36,7 @@ import butterknife.OnClick;
 import butterknife.Unbinder;
 
 public class CreateAppointment extends AppCompatActivity {
+    private static final String TAG = CreateAppointment.class.getName();
 
     @BindView(R.id.spinnerTreatments)
     Spinner spinner;
@@ -55,7 +57,13 @@ public class CreateAppointment extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_appointment);
         prepareFirebase();
-        firebaseHelper.getTreatmentsFromFirebase();
+        //firebaseHelper.getTreatmentsFromFirebase();
+        firebaseHelper.readData(new FirebaseHelper.FirebaseCallback() {
+            @Override
+            public void onCallback(List<String> list) {
+                Log.i(TAG,"halo xd");
+            }
+        });
         getData();
         ButterKnife.bind(this);
         setTextView();

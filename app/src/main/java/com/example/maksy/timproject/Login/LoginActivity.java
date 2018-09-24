@@ -7,7 +7,9 @@ import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.maksy.timproject.Calendar.CalendarActivity;
@@ -28,6 +30,8 @@ public class LoginActivity extends AppCompatActivity {
     TextInputEditText email;
     @BindView(R.id.textInputLoginPassword)
     TextInputEditText password;
+    @BindView(R.id.loginProgressBar)
+    ProgressBar progressBar;
 
     private NestedScrollView nestedScrollView;
     private AnimationDrawable animationDrawable;
@@ -41,6 +45,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         ButterKnife.bind(this);
+        progressBar.setVisibility(View.INVISIBLE);
         unbinder = ButterKnife.bind(this);
 
         nestedScrollView = (NestedScrollView) findViewById(R.id.nestedScrollView);
@@ -85,8 +90,9 @@ public class LoginActivity extends AppCompatActivity {
         }
         String initFirebase = "users";
         firebaseHelper = new FirebaseHelper(initFirebase, this);
+        progressBar.setVisibility(View.VISIBLE);
         firebaseHelper.loginToAccount(email.getText().toString(),password.getText().toString());
-
+        progressBar.setVisibility(View.INVISIBLE);
     }
 
     @OnClick(R.id.textViewLinkRegister)

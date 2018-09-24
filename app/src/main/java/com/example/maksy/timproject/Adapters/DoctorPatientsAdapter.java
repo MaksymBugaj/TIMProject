@@ -1,4 +1,4 @@
-package com.example.maksy.timproject.Appointments.DoctorPatient;
+package com.example.maksy.timproject.Adapters;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -11,9 +11,7 @@ import android.widget.Button;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 
-import com.example.maksy.timproject.Appointments.AvailableAppointments;
-import com.example.maksy.timproject.Appointments.PatientAppointments;
-import com.example.maksy.timproject.Entity.AppoDoc;
+import com.example.maksy.timproject.Appointments.DoctorPatient.DoctorPatients;
 import com.example.maksy.timproject.Entity.DocPatient;
 import com.example.maksy.timproject.R;
 

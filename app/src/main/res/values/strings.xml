@@ -60,12 +60,6 @@
     <string name="treatment">Choose treatment</string>
     <string name="patient_appointment">Your appointments</string>
 
-    <string-array name="treatments">
-        <item>Wizyta stomatologiczna</item>
-        <item>Wizyta endokrynologiczna</item>
-        <item>Wizyta ginegologiczna</item>
-        <item>Wizyta laryngologiczna </item>
-    </string-array>
 
     <string name="treatments_visits">Available treatments</string>
     <string name="treatment_name">Treatment name</string>
@@ -73,5 +67,25 @@
     <string name="treatment_desc">Treatment description</string>
     <string name="available_appointments">Available appointments</string>
     <string name="your_patients">Your patients</string>
+    <string name="doctor_stars">Rating</string>
+    <string-array name="stars">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+    </string-array>
+
+    <string name="create_opinion">Create opinion</string>
+    <string name="show_opinion">Show opinions</string>
+    <string name="opinions">Opinions</string>
+    <string name="add_treatment">Add treatment proposition</string>
+    <string name="show_treatments_proposition">Show treatments propositions</string>
 
 </resources>

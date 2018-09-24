@@ -1,4 +1,4 @@
-package com.example.maksy.timproject.Appointments.DoctorPatient;
+package com.example.maksy.timproject;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -6,46 +6,48 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.widget.TextView;
 
-import com.example.maksy.timproject.Adapters.DoctorPatientsAdapter;
+import com.example.maksy.timproject.Adapters.OpinionsAdapter;
+import com.example.maksy.timproject.Entity.Opinions;
 import com.example.maksy.timproject.Firebase.FirebaseHelper;
-import com.example.maksy.timproject.R;
 
-public class DoctorPatients extends AppCompatActivity {
+import java.util.List;
+
+public class OpinionsActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
-    private DoctorPatientsAdapter doctorPatientsAdapter;
-
+    private OpinionsAdapter opinionsAdapter;
     public FirebaseHelper firebaseHelper;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_patient_appointments);
-        TextView welcomeText = (TextView) findViewById(R.id.appointments);
-        welcomeText.setText(R.string.your_patients);
+        setContentView(R.layout.activity_opinions);
 
-        recyclerView = (RecyclerView) findViewById(R.id.recycler_view_appo);
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_view_opinions);
 
         prepareFirebase();
-        firebaseHelper.prepareDataForAppointments(2);
+        firebaseHelper.getOpinion(new FirebaseHelper.FirebaseAddOpinionCallback() {
+            @Override
+            public void onCallback(List<Opinions> list) {
+                notifyAdapter();
+            }
+        });
 
-        doctorPatientsAdapter = new DoctorPatientsAdapter(firebaseHelper.getDoctorPatients(), this);
+        opinionsAdapter = new OpinionsAdapter(firebaseHelper.getOpinions(),this);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
-        recyclerView.setAdapter(doctorPatientsAdapter);
-    }
-
-    public void notifyAdapter() {
-        doctorPatientsAdapter.notifyDataSetChanged();
+        recyclerView.setAdapter(opinionsAdapter);
     }
 
     private void prepareFirebase() {
-        String initFirebase = "doctorPatients";
+        String initFirebase = "opinions";
         firebaseHelper = new FirebaseHelper(initFirebase, this);
+    }
+    public void notifyAdapter(){
+        opinionsAdapter.notifyDataSetChanged();
     }
 }

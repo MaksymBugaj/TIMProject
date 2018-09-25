@@ -28,9 +28,9 @@ public class OpinionsActivity extends AppCompatActivity {
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view_opinions);
 
         prepareFirebase();
-        firebaseHelper.getOpinion(new FirebaseHelper.FirebaseAddOpinionCallback() {
+        firebaseHelper.getOpinion(new FirebaseHelper.FirebaseObjectCallback() {
             @Override
-            public void onCallback(List<Opinions> list) {
+            public void onCallback(List list) {
                 notifyAdapter();
             }
         });

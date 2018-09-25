@@ -33,7 +33,7 @@ public class ShowTreatmentProposition extends AppCompatActivity {
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view_available_appo);
         TextView textView = (TextView) findViewById(R.id.available_appointments);
-        textView.setText("Treatment propositions");
+        textView.setText(R.string.treatment_propositions);
         prepareFirebase();
         firebaseHelper.getTreatmentProposition(new FirebaseHelper.FirebaseObjectCallback() {
             @Override

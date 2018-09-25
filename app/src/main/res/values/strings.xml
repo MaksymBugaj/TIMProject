@@ -87,5 +87,6 @@
     <string name="opinions">Opinions</string>
     <string name="add_treatment">Add treatment proposition</string>
     <string name="show_treatments_proposition">Show treatments propositions</string>
+    <string name="treatment_propositions">Treatment propositions</string>
 
 </resources>

@@ -58,10 +58,11 @@ public class CreateAppointment extends AppCompatActivity {
         setContentView(R.layout.activity_create_appointment);
         prepareFirebase();
         //firebaseHelper.getTreatmentsFromFirebase();
-        firebaseHelper.readData(new FirebaseHelper.FirebaseCallback() {
+        firebaseHelper.readData(new FirebaseHelper.FirebaseObjectCallback() {
+
             @Override
-            public void onCallback(List<String> list) {
-                Log.i(TAG,"halo xd");
+            public void onCallback(List list) {
+                notifyAdapter();
             }
         });
         getData();

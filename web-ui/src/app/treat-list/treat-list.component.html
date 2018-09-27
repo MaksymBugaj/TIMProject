@@ -1,9 +1,19 @@
+<div class="row text-center">
+  <div class="col-md-2">
+    <div class="btn btn-secondary back m-4" routerLink="/home">
+      Powrót do ekranu głównego
+    </div>
+  </div>
+  <div class="col-md-8">
+    <app-home></app-home>
+  </div>
+  <div class="col-md-2"></div>
+</div>
+<hr>
 <div class="container">
   <h1 class="text-center m-4">Lista zabiegów</h1>
   <div class="row">
-    <div class="col-md-2">
-      <button routerLink="/home" type="button" class="btn btn-secondary">Powrót</button>
-    </div>
+    <div class="col-md-2"></div>
     <div class="col-md-8">
       <div class="list-group">
         <a class="list-group-item list-group-item-action flex-column align-items-start" *ngFor="let treat of treatments | async | search:'name,docName': query">
@@ -23,6 +33,7 @@
 </div>
 
 <div class="container" [ngSwitch]="userType">
+  <hr *ngSwitchCase="1">
   <h1 class="text-center m-4" *ngSwitchCase="1" >Dodaj zabieg</h1>
   <div class="row" *ngSwitchCase="1">
     <div class="container">
